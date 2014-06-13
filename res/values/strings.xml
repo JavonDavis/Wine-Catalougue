@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Wines Catalogue</string>
+    <string name="title_wine_detail">Wine Detail</string>
+    <string name="content_description">Place holder for picture if actual resource cannot be located</string>
+
+</resources>
