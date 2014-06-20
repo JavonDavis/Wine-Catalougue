@@ -2,13 +2,14 @@ package com.jwrayandnephew.winecatlog.fragments;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import com.jwrayandnephew.winecatlog.R;
 import com.jwrayandnephew.winecatlog.content.Wine;
 import com.jwrayandnephew.winecatlog.content.WineContent;
@@ -91,7 +92,6 @@ public class WineListFragment extends ListFragment {
 			{
 				obj.insert(wine);
 				wines.add(wine);
-				Log.e("inserting", wine.getName());
 			}
 			
 			names = WineContent.NAMES;
@@ -102,7 +102,7 @@ public class WineListFragment extends ListFragment {
 			for(Wine wine: wines)
 				names.add(wine.getName());
 		}
-
+		
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1,
 				android.R.id.text1, names));

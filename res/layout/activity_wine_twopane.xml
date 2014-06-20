@@ -6,6 +6,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:background="@drawable/road"
+    android:id="@+id/topLevel"
     android:paddingTop="?android:attr/actionBarSize"
     tools:context="com.jwrayandnephew.winecatlog.activities.WineListActivity" >
 

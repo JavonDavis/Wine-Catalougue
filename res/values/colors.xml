@@ -158,5 +158,5 @@
  <color name="Black">#000000</color>
  <color name="actionbar_text">@color/SpringGreen</color>
  <color name="actionbar_color">#00000000</color>
- <color name="general">@color/DodgerBlue</color>
+ <color name="general">@color/Snow</color>
 </resources>

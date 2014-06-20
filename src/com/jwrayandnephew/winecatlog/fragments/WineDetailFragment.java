@@ -2,6 +2,7 @@ package com.jwrayandnephew.winecatlog.fragments;
 
 import java.io.InputStream;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -34,13 +35,13 @@ import com.jwrayandnephew.winecatlog.database.DatabaseHandler;
  * contained in a {@link WineListActivity} in two-pane mode (on tablets) or a
  * {@link WineDetailActivity} on handsets.
  */
-public class WineDetailFragment extends Fragment {
-	
-
+public class WineDetailFragment extends Fragment 
+{
 	//database object
 	DatabaseHandler obj;
 	Context context;
 	ImageView image;
+	WineListActivity main;
 	
 	/**
 	 * The fragment argument representing the wine that this fragment
@@ -77,6 +78,12 @@ public class WineDetailFragment extends Fragment {
 	}
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		main = (WineListActivity) activity;
+	}
+	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_wine_detail,
@@ -84,9 +91,36 @@ public class WineDetailFragment extends Fragment {
 		
 		ImageView image = (ImageView) rootView.findViewById(R.id.image_view);
 		
+		LinearLayout topLevel = main.topLevel;
 		// Show the wine content as text in TextViews.
 		if (aWine != null) {
-
+			
+			switch(aWine.getCountry().trim())
+			{
+				case "France":
+					topLevel.setBackgroundResource(R.drawable.france);
+					break;
+				case "New Zealand":
+					topLevel.setBackgroundResource(R.drawable.new_zealand);
+					break;
+				case "Italy":
+					topLevel.setBackgroundResource(R.drawable.italy);
+					break;
+				case "Spain":
+					topLevel.setBackgroundResource(R.drawable.spain);
+					break;
+				case "California":
+					topLevel.setBackgroundResource(R.drawable.california);
+					break;
+				case "South Africa":
+					topLevel.setBackgroundResource(R.drawable.south_africa);
+					break;
+				default:
+					topLevel.setBackgroundResource(R.drawable.road);
+					break;
+			}
+			
+		
 			new DownloadImageTask(image)
             .execute("http://capeassistantbeta.eu5.org/id"+aWine.getId()+".png",aWine.getId()+"",aWine.getName());
 			
@@ -115,10 +149,6 @@ public class WineDetailFragment extends Fragment {
 			});
 			
 			Log.e("url", "http://capeassistantbeta.eu5.org/id"+aWine.getId());
-			/*
-			((TextView) rootView.findViewById(R.id.heading_view))
-					.setText(aWine.getName());
-			*/
 			getActivity().setTitle(aWine.getName());
 			
 			if(aWine.getAlcohol_level()!=0)
@@ -161,7 +191,7 @@ public class WineDetailFragment extends Fragment {
 			if(!aWine.getWineOfOrigin().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.wineOfOriginTitle))
-				.setText("Wine Of Origin");
+				.setText("Origin");
 				((TextView) rootView.findViewById(R.id.wineOfOriginContent))
 				.setText(aWine.getWineOfOrigin());
 			}

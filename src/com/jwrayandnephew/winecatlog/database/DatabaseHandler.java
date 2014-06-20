@@ -11,7 +11,7 @@ import com.jwrayandnephew.winecatlog.content.Wine;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 12;
+	private static final int DATABASE_VERSION = 22;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
@@ -93,7 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		List<Wine> wines = new ArrayList<Wine>();
 
 		//query
-		String query = "select * from "+TABLE_NAME;
+		String query = "select * from "+TABLE_NAME +" order by name asc";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
+import android.widget.LinearLayout;
 
 import com.jwrayandnephew.winecatlog.R;
 import com.jwrayandnephew.winecatlog.fragments.WineDetailFragment;
@@ -32,6 +33,7 @@ public class WineListActivity extends FragmentActivity implements
 	 * device.
 	 */
 	private boolean mTwoPane;
+	public LinearLayout topLevel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class WineListActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.activity_wine_list);
 
+		topLevel = (LinearLayout) findViewById(R.id.topLevel);
+		
 		if (findViewById(R.id.wine_detail_container) != null) {
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and

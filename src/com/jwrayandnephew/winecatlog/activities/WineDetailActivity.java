@@ -1,13 +1,13 @@
 package com.jwrayandnephew.winecatlog.activities;
 
-import com.jwrayandnephew.winecatlog.R;
-import com.jwrayandnephew.winecatlog.fragments.WineDetailFragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+
+import com.jwrayandnephew.winecatlog.R;
+import com.jwrayandnephew.winecatlog.fragments.WineDetailFragment;
 
 /**
  * An activity representing a single Wine detail screen. This activity is only
@@ -19,11 +19,12 @@ import android.view.MenuItem;
  */
 public class WineDetailActivity extends FragmentActivity {
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wine_detail);
-
+		
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
