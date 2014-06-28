@@ -1,28 +1,17 @@
 package com.jwrayandnephew.winecatlog.fragments;
 
-import java.io.InputStream;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jwrayandnephew.winecatlog.R;
 import com.jwrayandnephew.winecatlog.activities.WineDetailActivity;
@@ -41,18 +30,30 @@ public class WineDetailFragment extends Fragment
 	DatabaseHandler obj;
 	Context context;
 	ImageView image;
-	WineListActivity main;
+	Object main;
 	
 	/**
 	 * The fragment argument representing the wine that this fragment
 	 * represents.
 	 */
 	public static final String ARG_WINE_ID = "wine_id";
+	private static final String ARG_SECTION_NUMBER = "section_number";
 
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
 	private Wine aWine;
+	
+	public static Fragment newInstance(int sectionNumber,int id) {
+		if(sectionNumber ==2)
+			return ImageFragment.newInstance(sectionNumber,id);
+		WineDetailFragment fragment = new WineDetailFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		args.putInt(WineDetailFragment.ARG_WINE_ID, id);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,9 +62,11 @@ public class WineDetailFragment extends Fragment
 	public WineDetailFragment() {
 	}
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		obj = new DatabaseHandler(getActivity());
 		context = getActivity();
 		
@@ -80,8 +83,21 @@ public class WineDetailFragment extends Fragment
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		main = (WineListActivity) activity;
+		try
+		{
+			main = (WineListActivity) activity;
+		}
+		catch(java.lang.ClassCastException e)
+		{
+			main = (WineDetailActivity) activity;
+		}
+		catch(Exception e)
+		{
+			Toast.makeText(getActivity(), "Error 3", Toast.LENGTH_LONG).show();
+			
+		}
 	}
+
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,74 +105,83 @@ public class WineDetailFragment extends Fragment
 		View rootView = inflater.inflate(R.layout.fragment_wine_detail,
 				container, false);
 		
-		ImageView image = (ImageView) rootView.findViewById(R.id.image_view);
 		
-		LinearLayout topLevel = main.topLevel;
+		LinearLayout topLevel;
+		try
+		{
+			topLevel = ((WineListActivity) main).topLevel;
+		}
+		catch(java.lang.ClassCastException e)
+		{
+			topLevel = (LinearLayout) getActivity().findViewById(R.id.detail);
+		}
 		// Show the wine content as text in TextViews.
+		int rotation = getActivity().getWindow().getWindowManager().getDefaultDisplay().getRotation();
+		
 		if (aWine != null) {
 			
 			switch(aWine.getCountry().trim())
 			{
 				case "France":
-					topLevel.setBackgroundResource(R.drawable.france);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.france_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+		            	topLevel.setBackgroundResource(R.drawable.france_horizontal);
+		            }
+					
 					break;
 				case "New Zealand":
-					topLevel.setBackgroundResource(R.drawable.new_zealand);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.new_zealand_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+		            	topLevel.setBackgroundResource(R.drawable.new_zealand_horizontal);
+		            }
 					break;
 				case "Italy":
-					topLevel.setBackgroundResource(R.drawable.italy);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.italy_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+						topLevel.setBackgroundResource(R.drawable.italy_horizontal);
+		            }
 					break;
 				case "Spain":
-					topLevel.setBackgroundResource(R.drawable.spain);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.spain_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+		            	topLevel.setBackgroundResource(R.drawable.spain_horizontal);
+		            }					
 					break;
 				case "California":
-					topLevel.setBackgroundResource(R.drawable.california);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.cali_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+		            	topLevel.setBackgroundResource(R.drawable.cali_horizontal);
+		            }						
 					break;
 				case "South Africa":
-					topLevel.setBackgroundResource(R.drawable.south_africa);
+					if (rotation==Surface.ROTATION_0||rotation==Surface.ROTATION_180) {
+						topLevel.setBackgroundResource(R.drawable.south_africa_vertical);
+		            } else if (rotation==Surface.ROTATION_90||rotation==Surface.ROTATION_270) {
+		            	topLevel.setBackgroundResource(R.drawable.south_africa_horizontal);
+		            }						
 					break;
 				default:
-					topLevel.setBackgroundResource(R.drawable.road);
+					topLevel.setBackgroundResource(R.drawable.background);
 					break;
 			}
 			
-		
-			new DownloadImageTask(image)
-            .execute("http://capeassistantbeta.eu5.org/id"+aWine.getId()+".png",aWine.getId()+"",aWine.getName());
-			
-			image.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					
-					new AlertDialog.Builder(context)
-				    .setTitle("Save image")
-				    .setMessage("Do you want to save this image to your device ?")
-				    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				        	download("http://capeassistantbeta.eu5.org/id"+aWine.getId()+".png",aWine.getName(),"Wine");
-				        }
-				     })
-				    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				            // do nothing
-				        }
-				     })
-				    .setIcon(android.R.drawable.ic_dialog_alert)
-				     .show();
-					
-				}
-			});
-			
-			Log.e("url", "http://capeassistantbeta.eu5.org/id"+aWine.getId());
 			getActivity().setTitle(aWine.getName());
 			
+			//======================== Data Checks =============================== 
+			
+			//check for alcohol level
 			if(aWine.getAlcohol_level()!=0)
 			{
 				((TextView) rootView.findViewById(R.id.alcohol_view))
 				.setText("Alcohol Level:"+aWine.getAlcohol_level()+"%");
 			}
 			
+			//check for description
 			if(!aWine.getDescription().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.descriptionTitle))
@@ -167,6 +192,7 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.description)).removeAllViews();
 			
+			//check for serving suggestion
 			if(!aWine.getServingSuggestion().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.servingSuggestionTitle))
@@ -178,6 +204,7 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.servingSuggestion)).removeAllViews();
 			
+			//check for tasting notes
 			if(!aWine.getTastingNotes().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.tastingNotesTitle))
@@ -188,6 +215,8 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.tastingNotes)).removeAllViews();
 			
+			
+			//check for wine of origin
 			if(!aWine.getWineOfOrigin().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.wineOfOriginTitle))
@@ -198,6 +227,8 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.wineOfOrigin)).removeAllViews();
 			
+			
+			//check for cellaring potential
 			if(!aWine.getCellaringPotential().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.cellaringPotentialTitle))
@@ -208,6 +239,7 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.cellaringPotential)).removeAllViews();
 			
+			//check for maturation
 			if(!aWine.getMaturation().isEmpty() )
 			{
 				((TextView) rootView.findViewById(R.id.maturationTitle))
@@ -218,6 +250,7 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.maturation)).removeAllViews();
 			
+			//check for food pairing
 			if(!aWine.getFoodPairing().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.foodPairingTitle))
@@ -228,12 +261,13 @@ public class WineDetailFragment extends Fragment
 			else
 				((LinearLayout) rootView.findViewById(R.id.foodPairing)).removeAllViews();
 			
+			//check for winemaker's notes 
 			if(!aWine.getWinemakerNotes().isEmpty())
 			{
 				((TextView) rootView.findViewById(R.id.winemakerNotesTitle))
-				.setText("Food Pairing");
+				.setText("Winemaker's notes");
 				((TextView) rootView.findViewById(R.id.winemakerNotesContent))
-				.setText(aWine.getFoodPairing());
+				.setText(aWine.getWinemakerNotes());
 			}
 			else
 				((LinearLayout) rootView.findViewById(R.id.winemakerNotes)).removeAllViews();
@@ -241,54 +275,4 @@ public class WineDetailFragment extends Fragment
 
 		return rootView;
 	}
-	
-	
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-	    ImageView bmImage;
-
-	    public DownloadImageTask(ImageView bmImage) {
-	        this.bmImage = bmImage;
-	    }
-
-	    protected Bitmap doInBackground(String... urls) {
-	        String urldisplay = urls[0];
-	        Bitmap mIcon11 = null;
-	        try {
-	            InputStream in = new java.net.URL(urldisplay).openStream();
-	            mIcon11 = BitmapFactory.decodeStream(in);
-	            in.close();
-	            //saveImage(context,mIcon11,"id"+urls[1]);
-	        } catch (Exception e) {
-	            Log.e("Error", e.getMessage());
-	            e.printStackTrace();
-	        }
-	        return mIcon11;
-	    }
-
-	    protected void onPostExecute(final Bitmap result) {
-	    	if(result!=null)
-	    	{
-	    		bmImage.setImageBitmap(result);
-	    		
-	    	}
-	    }
-	}
-	
-    public void download(String file,String title,String description)
-    {
-    	String url = file;
-    	DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-    	request.setDescription(description);
-    	request.setTitle(title);
-    	// in order for this if to run, you must use the android 3.2 to compile your app
-    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-    	    request.allowScanningByMediaScanner();
-    	    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-    	}
-    	request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title+".ext");
-
-    	// get download service and enqueue file
-    	DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-    	manager.enqueue(request);
-    }
 }

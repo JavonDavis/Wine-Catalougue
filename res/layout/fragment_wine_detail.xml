@@ -1,18 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     	    android:layout_width="fill_parent"
-    	    android:layout_height="fill_parent"
+    	    android:layout_height="match_parent"
     	    android:layout_weight="2"
+    	    style="@style/CustomActionBarTheme"
     	    android:orientation="vertical">
-
-	            
-    <ImageView
-            android:id="@+id/image_view"
-            android:contentDescription="@string/content_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/noimg"
-            android:layout_weight="1"
-            android:layout_gravity="center" />
         
     <TextView
             android:id="@+id/alcohol_view"
@@ -23,7 +14,7 @@
 	<ScrollView 
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_weight="1" >
 	    	
     	<LinearLayout
@@ -46,6 +37,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/descriptionContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -67,6 +59,7 @@
 	            android:text="" />
 	
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/servingSuggestionContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -88,6 +81,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/tastingNotesContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -109,6 +103,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/wineOfOriginContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -130,6 +125,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/cellaringPotentialContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -151,6 +147,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/maturationContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -172,6 +169,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/foodPairingContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -193,6 +191,7 @@
 	            android:text="" />
 	        
 	        <TextView
+	            style="@style/customTextView2"
 	            android:id="@+id/winemakerNotesContent"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"

@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:paddingTop="?android:attr/actionBarSize"
-    android:background="@drawable/road2">
+    android:background="@drawable/background">
 
 <fragment 
     android:id="@+id/wine_list"
     android:name="com.jwrayandnephew.winecatlog.fragments.WineListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?android:attr/actionBarSize"
     tools:context="com.jwrayandnephew.winecatlog.WineListActivity"
     tools:layout="@android:layout/list_content" />
 

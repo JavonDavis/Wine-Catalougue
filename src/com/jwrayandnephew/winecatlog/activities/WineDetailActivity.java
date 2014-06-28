@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.Window;
 
 import com.jwrayandnephew.winecatlog.R;
 import com.jwrayandnephew.winecatlog.fragments.WineDetailFragment;
@@ -19,12 +22,13 @@ import com.jwrayandnephew.winecatlog.fragments.WineDetailFragment;
  */
 public class WineDetailActivity extends FragmentActivity {
 
-	
+	public static final String ARG_WINE_ID = "wine_id";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.activity_wine_detail);
-		
+
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
@@ -47,7 +51,30 @@ public class WineDetailActivity extends FragmentActivity {
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.wine_detail_container, fragment).commit();
+			
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem view;
+			
+		view = menu.add("View Image")
+				.setOnMenuItemClickListener(
+			new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent intent = new Intent(WineDetailActivity.this,ImageActivity.class);
+				intent.putExtra(ARG_WINE_ID,getIntent()
+						.getIntExtra(WineDetailFragment.ARG_WINE_ID,99) );
+				startActivity(intent);
+				return false;
+			}
+		});
+		view.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		view.setTitle("View Image");
+		return true;
 	}
 
 	@Override
@@ -66,6 +93,7 @@ public class WineDetailActivity extends FragmentActivity {
 					new Intent(this, WineListActivity.class));
 			return true;
 		}
+
 		return super.onOptionsItemSelected(item);
 	}
 }

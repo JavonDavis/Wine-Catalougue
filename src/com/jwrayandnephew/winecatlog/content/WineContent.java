@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -26,9 +28,11 @@ import android.widget.Toast;
 
 public class WineContent 
 {	
+	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
 	public static List<Wine> WINES = new ArrayList<Wine>();
 	public static List<String> NAMES = new ArrayList<String>();
 	
+	//hashmap used to match a wines' name to itself 
 	public static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();
 
 	
@@ -41,11 +45,11 @@ public class WineContent
 			caller.get();
 		} catch (InterruptedException e) 
 		{
-			e.printStackTrace();
+			Toast.makeText(context, "AsyncCaller Interrupted Exception", Toast.LENGTH_LONG).show();
 		} 
 		catch (ExecutionException e) 
 		{
-			e.printStackTrace();
+			Toast.makeText(context, "AsyncCaller Execution Exception", Toast.LENGTH_LONG).show();
 		}
 	}
 	
@@ -71,6 +75,7 @@ public class WineContent
 			InputStream is = null;
 	        StringBuilder sb=null;
 	        String result=null;
+	        Context context = params[0];
 	        
 	      //http post
 	        try{
@@ -83,6 +88,7 @@ public class WineContent
 	        catch(Exception e)
 	        {
 	            Log.e("log_tag", "Error in http connection"+e.toString());
+	            Toast.makeText(context, "Internet Connection error", Toast.LENGTH_LONG).show();
 	        }
 	        
 	        //convert response to string
@@ -102,10 +108,15 @@ public class WineContent
 	        }
 	        catch(Exception e){
 	            Log.e("log_tag", "Error converting result "+e.toString());
+	            Toast.makeText(context, "Error converting result from server", Toast.LENGTH_LONG).show();
 	        }
+	        
+	        
 			
 	      //paring data
-	        int id=0;
+	         @SuppressWarnings("unused")
+			 int id=0;
+	         
 	         String name= null;
 	    	 String country= null;
 	    	 String description= null;
@@ -120,76 +131,74 @@ public class WineContent
 	    	 String winemakerNotes= null;
 	    	
 	        try{
-	        JSONArray jArray = new JSONArray(result);
-	        JSONObject json_data=null;
-	         
-	        for(int i=0;i<jArray.length();i++){
-	                json_data = jArray.getJSONObject(i);
-	                
-	                id=json_data.getInt("id");
-	                name=json_data.getString("name");
-	                country=json_data.getString("country");
-	                alcohol_level=json_data.getDouble("alcohol_level");
-	                description=json_data.getString("description");
-	                wineOfOrigin=json_data.getString("wine_of_origin");
-	                maturation=json_data.getString("maturation");
-	                tastingNotes=json_data.getString("tasting_notes");
-	                foodPairing=json_data.getString("food_pairing");
-	                winemakerNotes=json_data.getString("winemaker_notes");
-	                cellaringPotential=json_data.getString("cellaring_potential");
-	                servingSuggestion=json_data.getString("serving_suggestion");
-	                
-	                name = removeBreaks(name);
-	                country = removeBreaks(country);
-	                description = removeBreaks(description);
-	                tastingNotes = removeBreaks(tastingNotes);
-	                servingSuggestion = removeBreaks(servingSuggestion);
-	                wineOfOrigin = removeBreaks(wineOfOrigin);
-	                cellaringPotential = removeBreaks(cellaringPotential);
-	                foodPairing = removeBreaks(foodPairing);
-	                winemakerNotes = removeBreaks(winemakerNotes);
-	                maturation = removeBreaks(maturation);
-	                
-	                
-	                Log.e("param1", id+"");
-		        	Log.e("param2", name);
-		        	Log.e("param3", alcohol_level+"");
-		        	Log.e("param4", country);
-		        	Log.e("param5", description);
-		        	Log.e("param6", maturation);
-		        	Log.e("param7", servingSuggestion);
-		        	Log.e("param8", cellaringPotential);
-		        	Log.e("param9", tastingNotes);
-		        	Log.e("param10", winemakerNotes);
-		        	Log.e("param11", foodPairing);
-		        	Log.e("param12", wineOfOrigin);
-		        	
-		        	Wine wine = new Wine();
-		        	wine.setName(name);
-		        	wine.setCountry(country);
-		        	wine.setDescription(description);
-		        	wine.setAlcohol_level(alcohol_level);
-		        	wine.setCellaringPotential(cellaringPotential);
-		        	wine.setFoodPairing(foodPairing);
-		        	wine.setMaturation(maturation);
-		        	wine.setServingSuggestion(servingSuggestion);
-		        	wine.setTastingNotes(tastingNotes);
-		        	wine.setWinemakerNotes(winemakerNotes);
-		        	wine.setWineOfOrigin(wineOfOrigin);
-		        	WINES.add(wine);
-		        	NAMES.add(wine.getName());
-		        	WINE_MAP.put(wine.getName(), wine);
-	                
-	        }
+		        JSONArray jArray = new JSONArray(result);
+		        JSONObject json_data=null;
+		         
+		        for(int i=0;i<jArray.length();i++){
+		                json_data = jArray.getJSONObject(i);
+		                
+		                id=json_data.getInt("id");
+		                name=json_data.getString("name");
+		                country=json_data.getString("country");
+		                alcohol_level=json_data.getDouble("alcohol_level");
+		                description=json_data.getString("description");
+		                wineOfOrigin=json_data.getString("wine_of_origin");
+		                maturation=json_data.getString("maturation");
+		                tastingNotes=json_data.getString("tasting_notes");
+		                foodPairing=json_data.getString("food_pairing");
+		                winemakerNotes=json_data.getString("winemaker_notes");
+		                cellaringPotential=json_data.getString("cellaring_potential");
+		                servingSuggestion=json_data.getString("serving_suggestion");
+		                
+		                name = removeBreaks(name);
+		                country = removeBreaks(country);
+		                description = removeBreaks(description);
+		                tastingNotes = removeBreaks(tastingNotes);
+		                servingSuggestion = removeBreaks(servingSuggestion);
+		                wineOfOrigin = removeBreaks(wineOfOrigin);
+		                cellaringPotential = removeBreaks(cellaringPotential);
+		                foodPairing = removeBreaks(foodPairing);
+		                winemakerNotes = removeBreaks(winemakerNotes);
+		                maturation = removeBreaks(maturation);
+			        	
+			        	Wine wine = new Wine();
+			        	wine.setName(name);
+			        	wine.setCountry(country);
+			        	wine.setDescription(description);
+			        	wine.setAlcohol_level(alcohol_level);
+			        	wine.setCellaringPotential(cellaringPotential);
+			        	wine.setFoodPairing(foodPairing);
+			        	wine.setMaturation(maturation);
+			        	wine.setServingSuggestion(servingSuggestion);
+			        	wine.setTastingNotes(tastingNotes);
+			        	wine.setWinemakerNotes(winemakerNotes);
+			        	wine.setWineOfOrigin(wineOfOrigin);
+			        	
+			        	String urldisplay = "http://capeassistantbeta.eu5.org/id"+wine.getId()+".png";
+				        Bitmap bitmap = null;
+				        try {
+				            InputStream in = new java.net.URL(urldisplay).openStream();
+				            bitmap = BitmapFactory.decodeStream(in);
+				            in.close();
+				        } catch (Exception e) {
+				        	Toast.makeText(context, "Error Downloading Image for "+wine.getName(), Toast.LENGTH_LONG).show();
+				        }
+				        wine.setBitmap(bitmap);
+			        	
+			        	WINES.add(wine);
+			        	NAMES.add(wine.getName());
+			        	WINE_MAP.put(wine.getName(), wine);
+			        		                
+		        }
 	         
 	        }catch(JSONException e1){
-	            Toast.makeText(params[0], "No wine Found", Toast.LENGTH_LONG).show();
+	            Toast.makeText(context, "No wine Found", Toast.LENGTH_LONG).show();
 	        }catch (ParseException e1){
-	            e1.printStackTrace();
+	        	Toast.makeText(context, "Parse Exception Identified", Toast.LENGTH_LONG).show();
 	        }
 	        catch(NullPointerException e)
 	        {
-	        	e.printStackTrace();
+	        	Toast.makeText(context, "Null Pointer Exception", Toast.LENGTH_LONG).show();
 	        }
 	        
 			return null;

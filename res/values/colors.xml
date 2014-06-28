@@ -156,7 +156,7 @@
  <color name="DarkBlue">#00008B</color>
  <color name="Navy">#000080</color>
  <color name="Black">#000000</color>
- <color name="actionbar_text">@color/SpringGreen</color>
+ <color name="actionbar_text">#FF0000</color>
  <color name="actionbar_color">#00000000</color>
- <color name="general">@color/Snow</color>
+ <color name="general">@color/DarkGray</color>
 </resources>

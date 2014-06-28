@@ -2,7 +2,13 @@
 <resources>
 
     <string name="app_name">Wines Catalogue</string>
-    <string name="title_wine_detail">Wine Detail</string>
+    <string name="title_wine_detail">cELLAR</string>
     <string name="content_description">Place holder for picture if actual resource cannot be located</string>
+    <string name="title_activity_content">ContentActivity</string>
+    <string name="title_section1">Wine Detail</string>
+    <string name="title_section2">Wine Picture</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_image">Wine Picture</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

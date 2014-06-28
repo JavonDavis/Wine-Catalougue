@@ -1,17 +1,23 @@
 package com.jwrayandnephew.winecatlog.database;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+
 import com.jwrayandnephew.winecatlog.content.Wine;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 22;
+	private static final int DATABASE_VERSION = 44;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
@@ -29,12 +35,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_WINE_OF_ORIGIN ="wine_of_origin";
 	private static final String KEY_COUNTRY ="country";
 	private static final String KEY_WINEMAKER_NOTES ="winemaker_notes";
+	
+	private Context context;
 
 	//neccessary contructor to call parent constructor
 	public DatabaseHandler(Context context)
 	{
 		super(context,DATABASE_NAME,null,DATABASE_VERSION);
-		
+		this.context = context;
 	}
 	
 	/*
@@ -83,10 +91,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_CELLARING_POTENTIAL, wine.getCellaringPotential());
 		values.put(KEY_WINEMAKER_NOTES, wine.getWinemakerNotes());
 		
+		saveToInternalSorage(wine.getBitmap(), wine.getName());
+		
 		// Inserting Row
 		db.insert(TABLE_NAME, null, values);
 		db.close(); // Closing database connection
 	}
+	
+	private String saveToInternalSorage(Bitmap bitmapImage,String name){
+        ContextWrapper contextWrapper = new ContextWrapper(context);
+        
+         // path to /data/data/yourapp/app_data/Wine Pictures
+        File directory = contextWrapper.getDir("Wine Pictures", Context.MODE_PRIVATE);
+        
+        // Create picture
+        File picturePath =new File(directory,name+".png");
+
+        FileOutputStream fos = null;
+        try {           
+
+            fos = new FileOutputStream(picturePath);
+
+       // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+            
+        } catch (Exception e) {
+        	//Toast.makeText(context, "Error Saving Image - "+e, Toast.LENGTH_LONG).show();
+        }
+        return directory.getAbsolutePath();
+    }
 	
 	public List<Wine> getAllWines()
 	{
@@ -159,4 +193,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return null;
 	}
 
+	public boolean deleteAllWines()
+	{
+		return false;
+	}
 }

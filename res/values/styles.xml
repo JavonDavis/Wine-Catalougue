@@ -39,12 +39,12 @@
     <!-- ActionBar styles -->
     <style name="MyActionBar"
            parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/actionbar_color</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:titleTextStyle">@style/textStyle</item>
         <item name="android:displayOptions">showTitle</item>
 		<item name="android:icon">@android:color/transparent</item>
 		<item name="android:windowActionBarOverlay">true</item>
-		<item name="android:textSize">20sp</item> 
+		 
     </style>
     
     <!-- the theme applied to the application or activity -->
@@ -55,12 +55,20 @@
     
     <!-- textview style for heading -->
     <style name="customTextView" parent="@android:style/Widget.TextView">            
-          <item name="android:background">#591E1921</item>        
+          <item name="android:background">#B31E1921</item>        
           <item name="android:textColor">@color/Bisque</item>
           <item name="android:textStyle">italic</item> 
-          <item name="android:padding">10sp</item> 
+          <item name="android:padding">10dp</item> 
           <item name="android:textSize">30sp</item>
           <item name="android:gravity">center_vertical|center_horizontal</item>             
+      </style>
+      
+    <style name="customTextView2" parent="@android:style/Widget.TextView">            
+          <item name="android:background">#661E1921</item>        
+          <item name="android:textColor">@color/Bisque</item>
+          <item name="android:textStyle">italic</item> 
+          <item name="android:padding">10dp</item> 
+          <item name="android:textSize">30sp</item>      
       </style>
 
 </resources>

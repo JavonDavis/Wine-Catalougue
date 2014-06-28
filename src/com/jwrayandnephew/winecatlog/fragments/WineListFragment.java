@@ -28,7 +28,6 @@ public class WineListFragment extends ListFragment {
 	
 	//database object
 	DatabaseHandler obj;
-
 	
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -91,22 +90,28 @@ public class WineListFragment extends ListFragment {
 			for(Wine wine: WineContent.WINES)
 			{
 				obj.insert(wine);
-				wines.add(wine);
 			}
+
+			wines= obj.getAllWines();
 			
-			names = WineContent.NAMES;
-		}
-		else
-		{	
-			wines = obj.getAllWines();
 			for(Wine wine: wines)
 				names.add(wine.getName());
 		}
+		else
+		{
+			wines = obj.getAllWines();
+			
+			for(Wine wine: wines)
+				names.add(wine.getName());
 		
+		}
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1,
-				android.R.id.text1, names));
-		
+				android.R.id.text1, names));		
+	}
+	
+	public void refresh()
+	{
 		
 	}
 
@@ -119,8 +124,6 @@ public class WineListFragment extends ListFragment {
         listView.setDividerHeight(4);
         listView.setSelector(R.drawable.list_item_selector_normal);
         listView.setPadding(0,getActivity().getActionBar().getHeight(), 0, 0);
-        //listView.setBackground(new GradientDrawable(GradientDrawable.Orientation.BL_TR,new int[]{Color.GREEN,Color.BLUE}));
-		// Restore the previously serialized activated item position.
 
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
@@ -140,8 +143,7 @@ public class WineListFragment extends ListFragment {
 					"Activity must implement fragment's callbacks.");
 		}
 
-		mCallbacks = (Callbacks) activity;
-		
+		mCallbacks = (Callbacks) activity;	
 	}
 
 	@Override
@@ -189,7 +191,6 @@ public class WineListFragment extends ListFragment {
 		} else {
 			getListView().setItemChecked(position, true);
 		}
-
 		mActivatedPosition = position;
 	}
 }

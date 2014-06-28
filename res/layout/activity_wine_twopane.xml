@@ -5,7 +5,7 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    android:background="@drawable/road"
+    android:background="@drawable/background"
     android:id="@+id/topLevel"
     android:paddingTop="?android:attr/actionBarSize"
     tools:context="com.jwrayandnephew.winecatlog.activities.WineListActivity" >
@@ -28,11 +28,14 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:layout="@android:layout/list_content" />
+    
+    
+    <android.support.v4.view.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="2" 
+    tools:context="com.jwrayandnephew.winecatlog.activities.WineListActivity" />
 
-    <FrameLayout
-        android:id="@+id/wine_detail_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2" />
 
 </LinearLayout>
