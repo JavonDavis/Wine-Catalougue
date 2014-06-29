@@ -48,6 +48,8 @@ import com.jwrayandnephew.winecatlog.fragments.WineListFragment;
 public class WineListActivity extends FragmentActivity implements
 		WineListFragment.Callbacks {
 
+	
+	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
@@ -55,7 +57,7 @@ public class WineListActivity extends FragmentActivity implements
 	private boolean mTwoPane;
 	public LinearLayout topLevel;
 	private static boolean showDemo =true;
-	MenuItem view;
+	private MenuItem view;
 	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -76,7 +78,8 @@ public class WineListActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.activity_wine_list);
-
+		
+		
 		topLevel = (LinearLayout) findViewById(R.id.topLevel);
 		
 		if (findViewById(R.id.pager) != null) {

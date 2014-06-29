@@ -1248,15 +1248,16 @@ containing a value of this type.
         public static final int jwrayback=0x7f020060;
         public static final int list_item_selector_normal=0x7f020061;
         public static final int listbackground=0x7f020062;
-        public static final int new_zealand_horizontal=0x7f020063;
-        public static final int new_zealand_vertical=0x7f020064;
-        public static final int noimg=0x7f020065;
-        public static final int road=0x7f020066;
-        public static final int road2=0x7f020067;
-        public static final int south_africa_horizontal=0x7f020068;
-        public static final int south_africa_vertical=0x7f020069;
-        public static final int spain_horizontal=0x7f02006a;
-        public static final int spain_vertical=0x7f02006b;
+        public static final int logo=0x7f020063;
+        public static final int new_zealand_horizontal=0x7f020064;
+        public static final int new_zealand_vertical=0x7f020065;
+        public static final int noimg=0x7f020066;
+        public static final int road=0x7f020067;
+        public static final int road2=0x7f020068;
+        public static final int south_africa_horizontal=0x7f020069;
+        public static final int south_africa_vertical=0x7f02006a;
+        public static final int spain_horizontal=0x7f02006b;
+        public static final int spain_vertical=0x7f02006c;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1423,8 +1424,9 @@ containing a value of this type.
         public static final int activity_wine_list=0x7f03001a;
         public static final int activity_wine_twopane=0x7f03001b;
         public static final int fragment_wine_detail=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
-        public static final int wine_image=0x7f03001e;
+        public static final int splash=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int wine_image=0x7f03001f;
     }
     public static final class menu {
         public static final int content=0x7f0c0000;
@@ -1470,14 +1472,14 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_settings=0x7f0a0013;
+        public static final int action_settings=0x7f0a0014;
         public static final int app_name=0x7f0a000d;
-        public static final int content_description=0x7f0a000f;
-        public static final int title_activity_content=0x7f0a0010;
-        public static final int title_activity_image=0x7f0a0014;
-        public static final int title_section1=0x7f0a0011;
-        public static final int title_section2=0x7f0a0012;
-        public static final int title_section3=0x7f0a0015;
+        public static final int content_description=0x7f0a0010;
+        public static final int title_activity_content=0x7f0a0011;
+        public static final int title_activity_image=0x7f0a0015;
+        public static final int title_activity_splash=0x7f0a000f;
+        public static final int title_section1=0x7f0a0012;
+        public static final int title_section2=0x7f0a0013;
         public static final int title_wine_detail=0x7f0a000e;
     }
     public static final class style {

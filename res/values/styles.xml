@@ -20,6 +20,7 @@
         <item name="android:textColor">@color/general</item>
         <item name="android:textSize">30sp</item>
         <item name="android:textViewStyle">@style/baseTextView</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
     
     <!-- textview style for heading -->

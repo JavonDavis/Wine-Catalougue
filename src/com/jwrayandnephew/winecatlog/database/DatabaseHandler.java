@@ -17,7 +17,7 @@ import com.jwrayandnephew.winecatlog.content.Wine;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 44;
+	private static final int DATABASE_VERSION = 67;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";

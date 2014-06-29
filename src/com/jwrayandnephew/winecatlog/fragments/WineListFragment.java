@@ -9,10 +9,10 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.jwrayandnephew.winecatlog.R;
 import com.jwrayandnephew.winecatlog.content.Wine;
-import com.jwrayandnephew.winecatlog.content.WineContent;
 import com.jwrayandnephew.winecatlog.database.DatabaseHandler;
 
 /**
@@ -27,7 +27,7 @@ import com.jwrayandnephew.winecatlog.database.DatabaseHandler;
 public class WineListFragment extends ListFragment {
 	
 	//database object
-	DatabaseHandler obj;
+	private DatabaseHandler obj;
 	
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -67,6 +67,7 @@ public class WineListFragment extends ListFragment {
 		public void onItemSelected(int id) {
 		}
 	};
+	
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -80,40 +81,32 @@ public class WineListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		
 		obj = new DatabaseHandler(getActivity());
-		List<String> names = new ArrayList<String>();
+		List<String >names = new ArrayList<String>();
 		List<Wine> wines = new ArrayList<Wine>();
 		
-		if(obj.getAllWines().isEmpty())
-		{
-			new WineContent().getWines(getActivity());
-			
-			for(Wine wine: WineContent.WINES)
-			{
-				obj.insert(wine);
-			}
-
-			wines= obj.getAllWines();
-			
-			for(Wine wine: wines)
-				names.add(wine.getName());
-		}
-		else
-		{
-			wines = obj.getAllWines();
-			
-			for(Wine wine: wines)
-				names.add(wine.getName());
+		wines = obj.getAllWines();
 		
-		}
-		setListAdapter(new ArrayAdapter<String>(getActivity(),
+		for(Wine wine: wines)
+			names.add(wine.getName());
+		
+		try
+		{
+			setListAdapter(new ArrayAdapter<String>(getActivity(),
+		
 				android.R.layout.simple_list_item_1,
-				android.R.id.text1, names));		
+				android.R.id.text1, names));
+		}
+		catch(java.lang.NullPointerException e)
+		{
+			Toast.makeText(getActivity(), "I'm sorry the cellar was empty, please contact the owner", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	public void refresh()
 	{
 		
 	}
+	
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -137,6 +130,7 @@ public class WineListFragment extends ListFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		
+		
 		// Activities containing this fragment must implement its callbacks.
 		if (!(activity instanceof Callbacks)) {
 			throw new IllegalStateException(
@@ -158,7 +152,7 @@ public class WineListFragment extends ListFragment {
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
 		super.onListItemClick(listView, view, position, id);
-		obj  = new DatabaseHandler(getActivity());
+		
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
 		mCallbacks.onItemSelected(obj.getAllWines().get(position).getId());

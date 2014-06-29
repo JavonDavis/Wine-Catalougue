@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,7 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ParseException;
@@ -26,31 +27,26 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jwrayandnephew.winecatlog.activities.WineListActivity;
+import com.jwrayandnephew.winecatlog.database.DatabaseHandler;
+
 public class WineContent 
 {	
 	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
 	public static List<Wine> WINES = new ArrayList<Wine>();
 	public static List<String> NAMES = new ArrayList<String>();
+	private Context context;
 	
 	//hashmap used to match a wines' name to itself 
 	public static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();
-
+	ProgressDialog progressDialog;
 	
-	public void getWines(final Context context)
+	public void getWines(final Context mContext)
 	{
+		context = mContext;
 		AsyncCaller caller = new AsyncCaller();
-		caller.execute(context);
+		caller.execute();
 		
-		try {
-			caller.get();
-		} catch (InterruptedException e) 
-		{
-			Toast.makeText(context, "AsyncCaller Interrupted Exception", Toast.LENGTH_LONG).show();
-		} 
-		catch (ExecutionException e) 
-		{
-			Toast.makeText(context, "AsyncCaller Execution Exception", Toast.LENGTH_LONG).show();
-		}
 	}
 	
 	public String removeBreaks(String string)
@@ -63,8 +59,13 @@ public class WineContent
 	{
 		
 		@Override
+		protected void onProgressUpdate(String... values) {
+			Log.e("prog", values.toString());
+		}
+		
+		@Override
 		protected void onPreExecute() {
-			super.onPreExecute();
+			progressDialog = ProgressDialog.show(context, "Please give me a moment", "Filling up cellar.", true, false);
 		}
 		
 		@Override
@@ -75,8 +76,6 @@ public class WineContent
 			InputStream is = null;
 	        StringBuilder sb=null;
 	        String result=null;
-	        Context context = params[0];
-	        
 	      //http post
 	        try{
 	            HttpClient httpclient = new DefaultHttpClient();
@@ -88,7 +87,6 @@ public class WineContent
 	        catch(Exception e)
 	        {
 	            Log.e("log_tag", "Error in http connection"+e.toString());
-	            Toast.makeText(context, "Internet Connection error", Toast.LENGTH_LONG).show();
 	        }
 	        
 	        //convert response to string
@@ -192,13 +190,13 @@ public class WineContent
 		        }
 	         
 	        }catch(JSONException e1){
-	            Toast.makeText(context, "No wine Found", Toast.LENGTH_LONG).show();
+	            Log.e("No wine Found",e1.toString());
 	        }catch (ParseException e1){
-	        	Toast.makeText(context, "Parse Exception Identified", Toast.LENGTH_LONG).show();
+	        	Log.e("Parse Exception Identified", e1.toString());
 	        }
 	        catch(NullPointerException e)
 	        {
-	        	Toast.makeText(context, "Null Pointer Exception", Toast.LENGTH_LONG).show();
+	        	Log.e("Null Pointer Exception",e.toString());
 	        }
 	        
 			return null;
@@ -206,7 +204,14 @@ public class WineContent
 		
 		@Override
 		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
+			Intent intent = new Intent(context,WineListActivity.class);
+			DatabaseHandler obj = new DatabaseHandler(context);
+			
+	        for(Wine wine: WINES)
+				obj.insert(wine);
+	        
+	        context.startActivity(intent);
+			progressDialog.dismiss();
 		}
 		
 	}
