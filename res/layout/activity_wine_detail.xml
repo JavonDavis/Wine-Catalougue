@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:id="@+id/detail">
+
+<FrameLayout 
+    android:id="@+id/wine_detail_container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    tools:context="com.jwrayandnephew.winecatlog.activities.WineDetailActivity"
+    tools:ignore="MergeRootFrame" />
+
+</LinearLayout>

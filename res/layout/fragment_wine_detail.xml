@@ -1,0 +1,202 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="match_parent"
+    	    android:layout_weight="2"
+    	    style="@style/CustomActionBarTheme"
+    	    android:orientation="vertical">
+        
+    <TextView
+            android:id="@+id/alcohol_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+	
+	<ScrollView 
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+	    	
+    	<LinearLayout
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:orientation="vertical">
+	        
+	        <LinearLayout
+	            android:id="@+id/description"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/descriptionTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/descriptionContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	
+	        <LinearLayout
+	            android:id="@+id/servingSuggestion"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/servingSuggestionTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/servingSuggestionContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:id="@+id/tastingNotes"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/tastingNotesTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/tastingNotesContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	 
+	        <LinearLayout
+	            android:id="@+id/wineOfOrigin"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/wineOfOriginTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/wineOfOriginContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	
+			<LinearLayout
+			    	android:id="@+id/cellaringPotential"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1" 
+		            android:orientation="vertical" >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/cellaringPotentialTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/cellaringPotentialContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	
+	        <LinearLayout
+	            android:id="@+id/maturation"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:orientation="vertical" >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/maturationTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/maturationContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	 
+	        <LinearLayout
+	            android:id="@+id/foodPairing"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/foodPairingTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/foodPairingContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:id="@+id/winemakerNotes"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:orientation="vertical"  >
+	        
+	        <TextView
+	            style="@style/customTextView"
+	            android:id="@+id/winemakerNotesTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        
+	        <TextView
+	            style="@style/customTextView2"
+	            android:id="@+id/winemakerNotesContent"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="" />
+	        </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
