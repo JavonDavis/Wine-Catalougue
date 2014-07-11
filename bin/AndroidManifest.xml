@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jwray.jwraywines"
+    android:versionCode="1"
+    android:versionName="1.2" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Jwray" >
+        <activity
+            android:name="com.jwray.jwraywines.activities.HomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jwray.jwraywines.activities.WineListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.jwray.jwraywines.activities.WineInformationActivity"
+            android:label="@string/title_activity_wine_information"
+            android:screenOrientation="portrait" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
+
+<TableLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+     >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="2" >
+        
+        <ImageView
+        android:id="@+id/spainView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:contentDescription="@string/spainDescription"
+        android:layout_weight="1"
+        android:src="@drawable/spain" />
+        
+        <ImageView
+        android:id="@+id/italyView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/italyDescription"
+        android:src="@drawable/italy" />
+        
+        
+        
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="2" >
+        
+        <ImageView
+        android:id="@+id/zealandView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:contentDescription="@string/zealandDescription"
+        android:layout_weight="1"
+        android:src="@drawable/new_zealand" />
+        
+        <ImageView
+        android:id="@+id/africaView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/africaDescription"
+        android:src="@drawable/south_africa" />
+        
+        
+        
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="2" >
+        
+        <ImageView
+        android:id="@+id/franceView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:contentDescription="@string/franceDescription"
+        android:layout_weight="1"
+        android:src="@drawable/france" />
+        
+        <ImageView
+        android:id="@+id/californiaView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:contentDescription="@string/californiaDescription"
+        android:layout_weight="1"
+        android:src="@drawable/california" />
+        
+   </TableRow>
+
+</TableLayout>
+</RelativeLayout>

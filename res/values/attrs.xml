@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WineTextView">
+		<attr name="Glametrix" format="string" />
+		<attr name="GlametrixBold" format="string" />
+		<attr name="GlametrixLight" format="string" />
+		<attr name="Prida61" format="string" />
+   	</declare-styleable>
+</resources>

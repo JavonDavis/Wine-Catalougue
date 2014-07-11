@@ -1,0 +1,41 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    
+    <style name="textStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        
+    	<item name="android:textColor">@color/actionbar_text</item>
+    	<item name="android:textStyle">italic</item>
+    	
+  	</style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionBarStyle">@style/JActionBar</item>
+        <item name="android:actionBarTabStyle">@style/JTabStyle</item>
+    </style>
+
+    <style name="JActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:textColor">@color/actionbar_text</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:titleTextStyle">@style/textStyle</item>
+        <item name="android:displayOptions">showTitle</item>
+		<item name="android:icon">@android:color/transparent</item>
+		<item name="android:windowActionBarOverlay">true</item>
+    </style>
+    
+    <style name="JTabStyle" parent="">
+        <item name="android:background">@color/tab_background</item>
+    </style>
+</resources>

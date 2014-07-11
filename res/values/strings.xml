@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">J Wray &amp; Nephew Wine Cellar</string>
+    <string name="title_search_section">Home</string>
+    <string name="title_brand_section">Brands</string>
+    <string name="title_country_section">Countries</string>
+    <string name="title_list_section">All Wines</string>
+    <string name="action_settings">Settings</string>
+    <string name="searchContentDescription">Search the repository of wines by name</string>
+    <string name="wineSearchHint">Search for a wine by name</string>
+    <string name="image_content_description">ImageView for wines</string>
+    <string name="spainDescription">spain</string>
+    <string name="italyDescription">italy</string>
+    <string name="africaDescription">south_africa</string>
+    <string name="zealandDescription">new_zealand</string>
+    <string name="californiaDescription">california</string>
+    <string name="franceDescription">france</string>
+    <string name="france_prompt">Would you like to see our French wines?</string>
+    <string name="italy_prompt">Would you like to see our Italian wines?</string>
+    <string name="california_prompt">Would you like to see our Californian wines?</string>
+    <string name="spain_prompt">Would you like to see our Spanish wines?</string>
+    <string name="south_africa_prompt">Would you like to see our South African wines?</string>
+    <string name="new_zealand_prompt">Would you like to see our wines from New Zealand?</string>
+    <string name="title_activity_wine_search">WineSearchActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="view_all">View all our wines</string>
+    <string name="title_activity_wine_information">WineInformationActivity</string>
+    <string name="wine_title1">Details</string>
+    <string name="wine_title2">Pictures</string>
+    <string name="wine_title3">My Notes</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="fav">favorite</string>
+    <string name="unfav">un-favorite</string>
+    <string name="fav_title">favorites</string>
+    <string name="handle">Handle</string>
+
+</resources>
