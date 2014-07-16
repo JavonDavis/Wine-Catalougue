@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.classes.DatabaseHandler;
 import com.jwray.jwraywines.classes.Wine;
+import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
  * @author Javon
@@ -21,7 +21,7 @@ import com.jwray.jwraywines.classes.Wine;
 public class WinePhotoFragment extends Fragment {
 
 	private Context mContext;
-	private DatabaseHandler obj;
+	private WineManager obj;
 	private static String WINE_IDENTIFIER = "id";
 	
 	@Override
@@ -29,7 +29,7 @@ public class WinePhotoFragment extends Fragment {
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new DatabaseHandler(mContext);
+		obj = new WineManager(mContext);
 
 	}
 	

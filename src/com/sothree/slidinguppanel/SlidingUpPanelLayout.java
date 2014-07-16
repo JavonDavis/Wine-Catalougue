@@ -20,8 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.jwray.jwraywines.R;
 import com.nineoldandroids.view.animation.AnimatorProxy;
-import com.sothree.slidinguppanel.library.R;
 
 public class SlidingUpPanelLayout extends ViewGroup {
 

@@ -1,4 +1,4 @@
-package com.jwray.jwraywines.classes;
+package com.jwray.jwraywines.classes.adapters;
 
 import java.util.HashMap;
 import java.util.List;

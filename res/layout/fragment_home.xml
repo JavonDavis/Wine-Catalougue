@@ -1,43 +1,71 @@
-<LinearLayout
-    	xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:background="@drawable/background"
+    sothree:panelHeight="68dp"
+    sothree:shadowHeight="4dp">
+
+	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
         android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/wineSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_edit"
-        android:focusableInTouchMode="true"
-        android:hint="@string/wineSearchHint"
-        android:includeFontPadding="true"
-        android:inputType="text"
-        android:padding="20dp"
-        android:drawableRight="@drawable/arrow_right">
-        
-        </EditText>
-        
-    <Button
-		android:id="@+id/viewAll"
-		android:text="@string/view_all"
-		android:textColor="#F7FFBF"
-		android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:background="@drawable/buttonshape"
-		android:shadowColor="#A8A8A8"
-		android:shadowRadius="13"
-		android:layout_gravity="center_horizontal"
-		/>
-    
+	    <EditText
+	        android:id="@+id/wineSearchView"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="10dp"
+	        android:background="@drawable/rounded_edit"
+	        android:focusableInTouchMode="true"
+	        android:hint="@string/wineSearchHint"
+	        android:includeFontPadding="true"
+	        android:inputType="text"
+	        android:padding="20dp"
+	        android:drawableRight="@drawable/arrow_right">
+	        
+	        </EditText>
+	        
+	    <Button
+			android:id="@+id/viewAll"
+			android:text="@string/view_all"
+			android:textColor="#F7FFBF"
+			android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:background="@drawable/buttonshape"
+			android:shadowColor="#A8A8A8"
+			android:shadowRadius="13"
+			android:layout_gravity="center_horizontal"
+			/>
 
-    <GridView 
-        android:id="@+id/favourite"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns = "10" >
-	</GridView>
-</LinearLayout>
+	</LinearLayout>
+	
+	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	        
+	        <TextView
+	        	android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:id="@+id/handle"
+		        android:gravity="center|top"
+		        android:text="@string/slideUpText"
+		        android:padding="30dp"
+		        android:textSize="16sp" />
+	        
+	        <GridView
+		        android:id="@+id/favoriteView"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:numColumns="auto_fit" >
+	    </GridView>
+        
+        
+    </LinearLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
     

@@ -1,10 +1,12 @@
-package com.jwray.jwraywines.classes;
+package com.jwray.jwraywines.classes.databases;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import com.jwray.jwraywines.classes.Wine;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,9 +17,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class WineManager extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 28;
+	private static final int DATABASE_VERSION = 37;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
@@ -38,12 +40,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_BRAND = "brand";
 	
 	private Context context;
+	private FavoriteManager favObj;
+	ArrayList<Integer> favorites;
 
 	//neccessary contructor to call parent constructor
-	public DatabaseHandler(Context context)
+	public WineManager(Context context)
 	{
 		super(context,DATABASE_NAME,null,DATABASE_VERSION);
 		this.context = context;
+		favObj = new FavoriteManager(context);
+		favorites = (ArrayList<Integer>) favObj.getAllFavorites();
 	}
 	
 	/*
@@ -155,6 +161,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
 				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
 				// Adding wine to list
 				wines.add(wine);
 			} while (cursor.moveToNext());
@@ -192,6 +200,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
 				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
 				// Adding wine to list
 				if(wine.getName().toLowerCase(Locale.US).contains(name.toLowerCase(Locale.US)))
 					wines.add(wine);
@@ -230,6 +240,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
 				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
+				
 				// Adding wine to list
 				wines.add(wine);
 			} while (cursor.moveToNext());
@@ -266,6 +279,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
 				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
+				
 				// Adding wine to list
 				wines.add(wine);
 			} while (cursor.moveToNext());
@@ -301,6 +317,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			wine.setWinemakerNotes(cursor.getString(10));
 			wine.setBrand(cursor.getString(11));
 			wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+			
+			if(favorites.contains(wine.getId()))
+				wine.setFavorite(true);
 			
 			cursor.close();
 			db.close();

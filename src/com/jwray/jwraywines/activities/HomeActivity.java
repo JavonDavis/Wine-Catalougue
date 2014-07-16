@@ -18,9 +18,9 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.classes.DatabaseHandler;
 import com.jwray.jwraywines.classes.ThreadControl;
 import com.jwray.jwraywines.classes.WineContent;
+import com.jwray.jwraywines.classes.databases.WineManager;
 import com.jwray.jwraywines.fragments.BrandFragment;
 import com.jwray.jwraywines.fragments.CountryFragment;
 import com.jwray.jwraywines.fragments.HomeFragment;
@@ -47,7 +47,7 @@ public class HomeActivity extends ActionBarActivity implements
 	 */
 	private ViewPager mViewPager;
 	
-	private DatabaseHandler obj;
+	private WineManager obj;
 	private ThreadControl tControl;
 
 	@Override
@@ -60,16 +60,15 @@ public class HomeActivity extends ActionBarActivity implements
 		//getSupportActionBar().set
 		
 		tControl = new ThreadControl();
-		obj = new DatabaseHandler(this);
-		
-		
-		if(obj.getAllWines().isEmpty())
-			new WineContent().getWines(this, tControl);
-		
+		obj = new WineManager(this);
+			
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		//actionBar.setIcon(android.R.color.transparent);
+		
+		if(obj.getAllWines().isEmpty())
+			new WineContent().getWines(this, tControl);
 		
 		// Create the adapter that will return a fragment for each of the four
 		// primary sections of the activity.

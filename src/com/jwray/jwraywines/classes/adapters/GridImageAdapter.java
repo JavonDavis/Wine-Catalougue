@@ -1,8 +1,7 @@
-package com.jwray.jwraywines.classes;
+package com.jwray.jwraywines.classes.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,13 +46,12 @@ public class GridImageAdapter extends BaseAdapter{
 		int id = (int) getItem(position);
 
 		layout.setGravity(Gravity.CENTER);
-		layout.setPadding(50, 50, 50, 50);
+		layout.setPadding(10, 10, 10, 10);
 
 		ImageView imageView = new ImageView(mContext);
 
 		imageView.setId(id);
 		
-		Log.e("id", id+"");
 		Drawable wine_image = mContext.getResources().getDrawable(id);
 		imageView.setImageDrawable(wine_image);
 

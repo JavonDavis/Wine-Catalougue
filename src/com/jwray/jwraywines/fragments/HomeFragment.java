@@ -1,27 +1,28 @@
 package com.jwray.jwraywines.fragments;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.activities.WineListActivity;
-import com.jwray.jwraywines.classes.DatabaseHandler;
-import com.jwray.jwraywines.classes.Wine;
+import com.jwray.jwraywines.classes.adapters.FavoriteAdapter;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
 /**
  * 
@@ -33,8 +34,9 @@ public class HomeFragment extends Fragment
 	private Context mContext;
 	private EditText wineSearch;
 	private static final String NAME_IDENTIFIER ="name";
-	private DatabaseHandler obj = null;;
-	private Random generator = null;
+	private static final String WINE_IDENTIFIER = "id";
+	private GridView favorites;
+	public static FavoriteAdapter favAdapter;
 	
 	
 	@Override
@@ -42,9 +44,6 @@ public class HomeFragment extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new DatabaseHandler(mContext);
-		generator = new Random();
-		
 	}
 
 	public static HomeFragment newInstance()
@@ -53,17 +52,19 @@ public class HomeFragment extends Fragment
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		favAdapter = new FavoriteAdapter(mContext);
+		favorites.setAdapter(favAdapter);
+	}
+	
+	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = null;
-		try{
-			rootView = inflater.inflate(R.layout.fragment_home, container,false);
-		}
-		catch(InflateException e)
-		{
-			Log.e("Search inflater", e.toString());
-		}
+		
+		final View rootView = inflater.inflate(R.layout.fragment_home, container,false);
 		
 		wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
 		
@@ -103,17 +104,60 @@ public class HomeFragment extends Fragment
 				
 			}
 		});
-		ArrayList<Wine> wines = (ArrayList<Wine>) obj.getAllWines();
-		Integer[] drawableIds = new Integer[4];
-		;
 		
-		for(int i =0; i<4;i++)
-		{
-			Wine wine = wines.get(generator.nextInt(wines.size()));
-			drawableIds[i] = wine.getPictureId(mContext);
-		}
+		SlidingUpPanelLayout slider = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
+		
+		slider.setPanelSlideListener(new PanelSlideListener() {
+
+			@Override
+			public void onPanelSlide(View panel, float slideOffset) {
+			}
+
+			@Override
+			public void onPanelCollapsed(View panel) {
+				TextView handle = (TextView) rootView.findViewById(R.id.handle);
+				handle.setText(R.string.slideUpText);
+				
+			}
+
+			@Override
+			public void onPanelExpanded(View panel) {
+				TextView handle = (TextView) rootView.findViewById(R.id.handle);
+				handle.setText(R.string.slideDownText);
+			}
+
+			@Override
+			public void onPanelAnchored(View panel) {
+			}
+
+			@Override
+			public void onPanelHidden(View panel) {
+			}
 			
-		Log.d("length",drawableIds[0]+"");
+			
+		});
+		 
+		favAdapter = new FavoriteAdapter(mContext);
+		
+		favorites = (GridView) rootView.findViewById(R.id.favoriteView);
+		favorites.setAdapter(favAdapter);
+
+		favorites.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(mContext,WineInformationActivity.class);
+
+				int ID = (int) favAdapter.getItem(position);
+				intent.putExtra(WINE_IDENTIFIER, ID);
+				startActivity(intent);
+			}
+
+		});
+
+		//Check to ensure it waits for when async task is finished in the case of the database being re-populated
+		
 		
 		return rootView;
 	}

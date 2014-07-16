@@ -4,9 +4,9 @@
     tools:context="com.jwray.jwraywines.WineInformationActivity" >
     
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/add_note"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/new_note"
         app:showAsAction="never"/>
     
     <item

@@ -17,14 +17,14 @@ import android.widget.ListView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineInformationActivity;
-import com.jwray.jwraywines.classes.DatabaseHandler;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.WineAdapter;
+import com.jwray.jwraywines.classes.adapters.WineAdapter;
+import com.jwray.jwraywines.classes.databases.WineManager;
 
 public class WineListFragment extends Fragment
 {
 	private Context mContext;
-	private DatabaseHandler obj;
+	private WineManager obj;
 	private String brand,country,name;
 	private static String BRAND_IDENTIFIER = "brand";
 	private static String COUNTRY_IDENTIFIER = "country";
@@ -36,7 +36,7 @@ public class WineListFragment extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new DatabaseHandler(mContext);
+		obj = new WineManager(mContext);
 		
 		brand = getActivity().getIntent().getStringExtra(BRAND_IDENTIFIER);
 		country = getActivity().getIntent().getStringExtra(COUNTRY_IDENTIFIER);

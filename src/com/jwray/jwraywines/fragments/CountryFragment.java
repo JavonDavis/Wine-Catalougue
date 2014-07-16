@@ -25,6 +25,7 @@ public class CountryFragment extends Fragment
 	private Context mContext;
 	private static String COUNTRY_IDENTIFIER = "country";
 	
+	@SuppressWarnings("unused")
 	private static final Integer[] mCountryIds = 
 		{
 			R.drawable.italy,

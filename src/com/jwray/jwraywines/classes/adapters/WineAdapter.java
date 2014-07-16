@@ -1,4 +1,4 @@
-package com.jwray.jwraywines.classes;
+package com.jwray.jwraywines.classes.adapters;
 
 import java.util.List;
 
@@ -11,10 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.classes.Wine;
 
+/**
+ * Adapter for the wine list
+ * @author Javon Davis
+ *
+ */
 public class WineAdapter extends ArrayAdapter<Wine> {
 	
-	Context mContext;
+	@SuppressWarnings("unused")
+	private Context mContext;
+	
 	public WineAdapter(Context context, int resource) {
 		super(context, resource);
 		mContext = context;

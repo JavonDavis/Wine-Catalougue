@@ -6,6 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="C:/Users/Javon/Development/workspace/WineCellar/libs/android-support-v13.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/library"/>
+	<classpathentry kind="lib" path="C:/Users/Javon/Development/workspace/joda-time-2.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

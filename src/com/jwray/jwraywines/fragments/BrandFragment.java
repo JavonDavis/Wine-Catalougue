@@ -15,7 +15,7 @@ import android.widget.GridView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
-import com.jwray.jwraywines.classes.GridImageAdapter;
+import com.jwray.jwraywines.classes.adapters.GridImageAdapter;
 
 public class BrandFragment extends Fragment
 {
@@ -80,7 +80,8 @@ public class BrandFragment extends Fragment
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 
-							String imageBrand = mContext.getResources().getResourceEntryName((int) gridImageAdapter.getItem(position));
+							String imageBrand = mContext.getResources()
+									.getResourceEntryName((int) gridImageAdapter.getItem(position));
 							switch(imageBrand)
 							{
 								case "cathedral_cellar":

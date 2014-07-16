@@ -17,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.fragments.HomeFragment;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,10 +33,11 @@ public class WineContent
 	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
 	public static List<Wine> WINES = new ArrayList<Wine>();
 	public static List<String> NAMES = new ArrayList<String>();
+	
 	private Context context;
 	//private ProgressBar progress;
 	private ThreadControl control;
-	private ProgressDialog progress;
+	private static ProgressDialog progress;
 	
 	//hashmap used to match a wines' name to itself 
 	private static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();
@@ -225,7 +229,7 @@ public class WineContent
 		@Override
 		protected void onPostExecute(String result) {
 			//Intent intent = new Intent(context,WineListActivity.class);
-			DatabaseHandler obj = new DatabaseHandler(context);
+			WineManager obj = new WineManager(context);
 			
 	        for(Wine wine: WINES)
 				obj.insert(wine);
@@ -238,6 +242,8 @@ public class WineContent
 	        
 	        if(progress.isShowing())
 	            progress.dismiss();
+	        
+	        HomeFragment.favAdapter.notifyDataSetChanged();
 	        
 	        ((Activity) context).setProgressBarIndeterminateVisibility(false);
 		}

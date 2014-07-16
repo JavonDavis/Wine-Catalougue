@@ -239,6 +239,14 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int activityChooserViewStyle=0x7f01006c;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int anchorPoint=0x7f010079;
         /**  Specifies a background drawable for the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -327,6 +335,10 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int dividerVertical=0x7f01001a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int dragView=0x7f010077;
         /**  ListPopupWindow comaptibility 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -353,6 +365,23 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int expandActivityOverflowButtonDrawable=0x7f01006b;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fadeColor=0x7f010075;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int flingVelocity=0x7f010076;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -402,6 +431,19 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int initialActivityCount=0x7f01006a;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>expanded</code></td><td>0</td><td></td></tr>
+<tr><td><code>collapsed</code></td><td>1</td><td></td></tr>
+<tr><td><code>anchored</code></td><td>2</td><td></td></tr>
+<tr><td><code>hidden</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int initialState=0x7f01007a;
         /**  Specifies whether the theme is light, otherwise it is dark. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -505,6 +547,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int navigationMode=0x7f010027;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int overlay=0x7f010078;
         /**  Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -527,6 +577,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int paddingStart=0x7f010038;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int panelHeight=0x7f010072;
         /**  Default Panel Menu style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -543,6 +603,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int panelMenuListWidth=0x7f01004a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int paralaxOffset=0x7f010074;
         /**  Default PopupMenu style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -653,6 +723,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int selectableItemBackground=0x7f010019;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int shadowHeight=0x7f010073;
         /**  How this item should display in the Action Bar, if present. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -1386,100 +1466,111 @@ containing a value of this type.
         public static final int wine_list_icon=0x7f0200c5;
     }
     public static final class id {
-        public static final int action_bar=0x7f05001c;
+        public static final int action_bar=0x7f050020;
         public static final int action_bar_activity_content=0x7f050015;
-        public static final int action_bar_container=0x7f05001b;
-        public static final int action_bar_overlay_layout=0x7f05001f;
-        public static final int action_bar_root=0x7f05001a;
-        public static final int action_bar_subtitle=0x7f050023;
-        public static final int action_bar_title=0x7f050022;
-        public static final int action_context_bar=0x7f05001d;
+        public static final int action_bar_container=0x7f05001f;
+        public static final int action_bar_overlay_layout=0x7f050023;
+        public static final int action_bar_root=0x7f05001e;
+        public static final int action_bar_subtitle=0x7f050027;
+        public static final int action_bar_title=0x7f050026;
+        public static final int action_context_bar=0x7f050021;
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
-        public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05005b;
-        public static final int activity_chooser_view_content=0x7f050025;
-        public static final int africaView=0x7f050047;
-        public static final int alcohol=0x7f05004e;
+        public static final int action_mode_close_button=0x7f050028;
+        public static final int activity_chooser_view_content=0x7f050029;
+        public static final int add_note=0x7f050066;
+        public static final int africaView=0x7f05004c;
+        public static final int alcohol=0x7f050055;
         public static final int always=0x7f05000b;
+        public static final int anchored=0x7f05001c;
         public static final int beginning=0x7f050011;
-        public static final int brand=0x7f05004f;
-        public static final int brandView=0x7f050041;
-        public static final int californiaView=0x7f05004a;
-        public static final int checkbox=0x7f05002d;
+        public static final int brand=0x7f050056;
+        public static final int brandView=0x7f050046;
+        public static final int californiaView=0x7f05004f;
+        public static final int checkbox=0x7f050031;
         public static final int collapseActionView=0x7f05000d;
-        public static final int container=0x7f05003e;
-        public static final int content=0x7f050056;
-        public static final int country=0x7f050050;
-        public static final int default_activity_button=0x7f050028;
+        public static final int collapsed=0x7f05001b;
+        public static final int container=0x7f050042;
+        public static final int content=0x7f05005d;
+        public static final int contentPortion=0x7f050060;
+        public static final int country=0x7f050057;
+        public static final int dateView=0x7f05005f;
+        public static final int default_activity_button=0x7f05002c;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
-        public static final int drawer_layout=0x7f05003d;
+        public static final int drawer_layout=0x7f050041;
         public static final int dropdown=0x7f05000f;
-        public static final int edit_query=0x7f050030;
+        public static final int edit_query=0x7f050034;
         public static final int end=0x7f050013;
-        public static final int expand_activities_button=0x7f050026;
-        public static final int expanded_menu=0x7f05002c;
-        public static final int fav=0x7f05005c;
-        public static final int favourite=0x7f05004d;
-        public static final int franceView=0x7f050049;
-        public static final int header=0x7f050057;
+        public static final int expand_activities_button=0x7f05002a;
+        public static final int expanded=0x7f05001a;
+        public static final int expanded_menu=0x7f050030;
+        public static final int fav=0x7f050067;
+        public static final int favoriteView=0x7f050054;
+        public static final int favorite_val=0x7f050045;
+        public static final int franceView=0x7f05004e;
+        public static final int handle=0x7f050053;
+        public static final int header=0x7f050062;
+        public static final int hidden=0x7f05001d;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
-        public static final int icon=0x7f05002a;
+        public static final int icon=0x7f05002e;
         public static final int ifRoom=0x7f05000a;
-        public static final int image=0x7f050027;
-        public static final int information=0x7f050051;
-        public static final int italyView=0x7f050044;
+        public static final int image=0x7f05002b;
+        public static final int information=0x7f050058;
+        public static final int italyView=0x7f050049;
         public static final int listMode=0x7f050001;
-        public static final int list_item=0x7f050029;
+        public static final int list_item=0x7f05002d;
         public static final int middle=0x7f050012;
-        public static final int navigation_drawer=0x7f05003f;
+        public static final int navigation_drawer=0x7f050043;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int pager=0x7f05003c;
+        public static final int notesList=0x7f05005b;
+        public static final int pager=0x7f050040;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
-        public static final int radio=0x7f05002f;
-        public static final int search_badge=0x7f050032;
-        public static final int search_bar=0x7f050031;
-        public static final int search_button=0x7f050033;
-        public static final int search_close_btn=0x7f050038;
-        public static final int search_edit_frame=0x7f050034;
-        public static final int search_go_btn=0x7f05003a;
-        public static final int search_mag_icon=0x7f050035;
-        public static final int search_plate=0x7f050036;
-        public static final int search_src_text=0x7f050037;
-        public static final int search_voice_btn=0x7f05003b;
-        public static final int section_label=0x7f050052;
-        public static final int shortcut=0x7f05002e;
+        public static final int radio=0x7f050033;
+        public static final int search_badge=0x7f050036;
+        public static final int search_bar=0x7f050035;
+        public static final int search_button=0x7f050037;
+        public static final int search_close_btn=0x7f05003c;
+        public static final int search_edit_frame=0x7f050038;
+        public static final int search_go_btn=0x7f05003e;
+        public static final int search_mag_icon=0x7f050039;
+        public static final int search_plate=0x7f05003a;
+        public static final int search_src_text=0x7f05003b;
+        public static final int search_voice_btn=0x7f05003f;
+        public static final int section_label=0x7f050059;
+        public static final int shortcut=0x7f050032;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int spainView=0x7f050043;
-        public static final int split_action_bar=0x7f05001e;
-        public static final int submit_area=0x7f050039;
+        public static final int sliding_layout=0x7f050050;
+        public static final int spainView=0x7f050048;
+        public static final int split_action_bar=0x7f050022;
+        public static final int submit_area=0x7f05003d;
         public static final int tabMode=0x7f050002;
-        public static final int tableRow1=0x7f050042;
-        public static final int tableRow2=0x7f050045;
-        public static final int tableRow3=0x7f050048;
-        public static final int title=0x7f05002b;
-        public static final int top_action_bar=0x7f050020;
-        public static final int unfav=0x7f05005d;
-        public static final int up=0x7f050021;
+        public static final int tableRow1=0x7f050047;
+        public static final int tableRow2=0x7f05004a;
+        public static final int tableRow3=0x7f05004d;
+        public static final int title=0x7f05002f;
+        public static final int titleView=0x7f05005e;
+        public static final int top_action_bar=0x7f050024;
+        public static final int unfav=0x7f050068;
+        public static final int up=0x7f050025;
         public static final int useLogo=0x7f050003;
-        public static final int viewAll=0x7f05004c;
-        public static final int wineDescription=0x7f05005a;
-        public static final int wineName=0x7f050059;
-        public static final int wineSearchView=0x7f05004b;
-        public static final int wineView=0x7f050058;
-        public static final int wine_container=0x7f050040;
-        public static final int wine_image=0x7f050054;
-        public static final int wine_list=0x7f050053;
-        public static final int wineimg=0x7f050055;
+        public static final int viewAll=0x7f050052;
+        public static final int wineDescription=0x7f050065;
+        public static final int wineName=0x7f050064;
+        public static final int wineSearchView=0x7f050051;
+        public static final int wineView=0x7f050063;
+        public static final int wine_container=0x7f050044;
+        public static final int wine_image=0x7f05005c;
+        public static final int wine_list=0x7f05005a;
+        public static final int wineimg=0x7f050061;
         public static final int withText=0x7f05000c;
-        public static final int zealandView=0x7f050046;
+        public static final int zealandView=0x7f05004b;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within
@@ -1534,19 +1625,23 @@ containing a value of this type.
         public static final int activity_home=0x7f030018;
         public static final int activity_wine_information=0x7f030019;
         public static final int activity_wine_list=0x7f03001a;
-        public static final int fragment_brands=0x7f03001b;
-        public static final int fragment_country=0x7f03001c;
-        public static final int fragment_home=0x7f03001d;
-        public static final int fragment_wine_detail=0x7f03001e;
-        public static final int fragment_wine_drawer=0x7f03001f;
-        public static final int fragment_wine_information=0x7f030020;
-        public static final int fragment_wine_list=0x7f030021;
-        public static final int fragment_wine_pics=0x7f030022;
-        public static final int support_simple_spinner_dropdown_item=0x7f030023;
-        public static final int wine_image=0x7f030024;
-        public static final int wine_item=0x7f030025;
-        public static final int wine_item_header=0x7f030026;
-        public static final int wine_list_item=0x7f030027;
+        public static final int favorite_layout=0x7f03001b;
+        public static final int fragment_brands=0x7f03001c;
+        public static final int fragment_country=0x7f03001d;
+        public static final int fragment_home=0x7f03001e;
+        public static final int fragment_wine_detail=0x7f03001f;
+        public static final int fragment_wine_drawer=0x7f030020;
+        public static final int fragment_wine_information=0x7f030021;
+        public static final int fragment_wine_list=0x7f030022;
+        public static final int fragment_wine_notes=0x7f030023;
+        public static final int fragment_wine_pics=0x7f030024;
+        public static final int note_dialog=0x7f030025;
+        public static final int note_item=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
+        public static final int wine_image=0x7f030028;
+        public static final int wine_item=0x7f030029;
+        public static final int wine_item_header=0x7f03002a;
+        public static final int wine_list_item=0x7f03002b;
     }
     public static final class menu {
         public static final int global=0x7f0d0000;
@@ -1600,6 +1695,8 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int californiaDescription=0x7f0a001a;
         public static final int california_prompt=0x7f0a001e;
+        public static final int cancel=0x7f0a0035;
+        public static final int delete_note=0x7f0a0033;
         public static final int fav=0x7f0a002c;
         public static final int fav_title=0x7f0a002e;
         public static final int franceDescription=0x7f0a001b;
@@ -1611,8 +1708,13 @@ containing a value of this type.
         public static final int italy_prompt=0x7f0a001d;
         public static final int navigation_drawer_close=0x7f0a002a;
         public static final int navigation_drawer_open=0x7f0a0029;
+        public static final int new_note=0x7f0a0032;
         public static final int new_zealand_prompt=0x7f0a0021;
+        public static final int ok=0x7f0a0034;
+        public static final int pick=0x7f0a0036;
         public static final int searchContentDescription=0x7f0a0013;
+        public static final int slideDownText=0x7f0a0031;
+        public static final int slideUpText=0x7f0a0030;
         public static final int south_africa_prompt=0x7f0a0020;
         public static final int spainDescription=0x7f0a0016;
         public static final int spain_prompt=0x7f0a001f;
@@ -1622,6 +1724,7 @@ containing a value of this type.
         public static final int title_country_section=0x7f0a0010;
         public static final int title_list_section=0x7f0a0011;
         public static final int title_search_section=0x7f0a000e;
+        public static final int title_text=0x7f0a0037;
         public static final int unfav=0x7f0a002d;
         public static final int view_all=0x7f0a0024;
         public static final int wineSearchHint=0x7f0a0014;
@@ -3177,6 +3280,171 @@ containing a value of this type.
           @attr name com.jwray.jwraywines:queryHint
         */
         public static final int SearchView_queryHint = 4;
+        /** Attributes that can be used with a SlidingUpPanelLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_anchorPoint com.jwray.jwraywines:anchorPoint}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_dragView com.jwray.jwraywines:dragView}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_fadeColor com.jwray.jwraywines:fadeColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_flingVelocity com.jwray.jwraywines:flingVelocity}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_initialState com.jwray.jwraywines:initialState}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_overlay com.jwray.jwraywines:overlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_panelHeight com.jwray.jwraywines:panelHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_paralaxOffset com.jwray.jwraywines:paralaxOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #SlidingUpPanelLayout_shadowHeight com.jwray.jwraywines:shadowHeight}</code></td><td></td></tr>
+           </table>
+           @see #SlidingUpPanelLayout_anchorPoint
+           @see #SlidingUpPanelLayout_dragView
+           @see #SlidingUpPanelLayout_fadeColor
+           @see #SlidingUpPanelLayout_flingVelocity
+           @see #SlidingUpPanelLayout_initialState
+           @see #SlidingUpPanelLayout_overlay
+           @see #SlidingUpPanelLayout_panelHeight
+           @see #SlidingUpPanelLayout_paralaxOffset
+           @see #SlidingUpPanelLayout_shadowHeight
+         */
+        public static final int[] SlidingUpPanelLayout = {
+            0x7f010072, 0x7f010073, 0x7f010074, 0x7f010075,
+            0x7f010076, 0x7f010077, 0x7f010078, 0x7f010079,
+            0x7f01007a
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#anchorPoint}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:anchorPoint
+        */
+        public static final int SlidingUpPanelLayout_anchorPoint = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#dragView}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.jwray.jwraywines:dragView
+        */
+        public static final int SlidingUpPanelLayout_dragView = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#fadeColor}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:fadeColor
+        */
+        public static final int SlidingUpPanelLayout_fadeColor = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#flingVelocity}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:flingVelocity
+        */
+        public static final int SlidingUpPanelLayout_flingVelocity = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#initialState}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>expanded</code></td><td>0</td><td></td></tr>
+<tr><td><code>collapsed</code></td><td>1</td><td></td></tr>
+<tr><td><code>anchored</code></td><td>2</td><td></td></tr>
+<tr><td><code>hidden</code></td><td>3</td><td></td></tr>
+</table>
+          @attr name com.jwray.jwraywines:initialState
+        */
+        public static final int SlidingUpPanelLayout_initialState = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#overlay}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:overlay
+        */
+        public static final int SlidingUpPanelLayout_overlay = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#panelHeight}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:panelHeight
+        */
+        public static final int SlidingUpPanelLayout_panelHeight = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#paralaxOffset}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:paralaxOffset
+        */
+        public static final int SlidingUpPanelLayout_paralaxOffset = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.jwray.jwraywines.R.attr#shadowHeight}
+          attribute's value can be found in the {@link #SlidingUpPanelLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.jwray.jwraywines:shadowHeight
+        */
+        public static final int SlidingUpPanelLayout_shadowHeight = 1;
         /** Attributes that can be used with a Spinner.
            <p>Includes the following attributes:</p>
            <table>

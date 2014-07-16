@@ -1,6 +1,9 @@
 package com.jwray.jwraywines.activities;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -10,13 +13,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.classes.DatabaseHandler;
-import com.jwray.jwraywines.classes.FavoriteManager;
+import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.Wine;
+import com.jwray.jwraywines.classes.adapters.NoteAdapter;
+import com.jwray.jwraywines.classes.databases.FavoriteManager;
+import com.jwray.jwraywines.classes.databases.NotesManager;
+import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.interfaces.NoteDialogInterface;
+import com.jwray.jwraywines.fragments.NoteDialogFragment;
 import com.jwray.jwraywines.fragments.NotesFragment;
+import com.jwray.jwraywines.fragments.OptionsDialogFragment;
 import com.jwray.jwraywines.fragments.WineDetailFragment;
 import com.jwray.jwraywines.fragments.WineDrawerFragment;
 import com.jwray.jwraywines.fragments.WinePhotoFragment;
@@ -27,7 +38,7 @@ import com.jwray.jwraywines.fragments.WinePhotoFragment;
  *
  */
 public class WineInformationActivity extends ActionBarActivity implements
-		WineDrawerFragment.NavigationDrawerCallbacks {
+		WineDrawerFragment.NavigationDrawerCallbacks,NoteDialogInterface {
 	
 
 	/**
@@ -43,8 +54,11 @@ public class WineInformationActivity extends ActionBarActivity implements
 	private CharSequence mTitle;
 	
 	private static String WINE_IDENTIFIER = "id";
-	private DatabaseHandler obj;
+	private WineManager obj;
 	private Wine wine;
+	private FavoriteManager favObj;
+	private int wineId;
+	private NotesManager notesObj;
 
 
 	@Override
@@ -55,9 +69,13 @@ public class WineInformationActivity extends ActionBarActivity implements
 		mWineDrawerFragment = (WineDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		
-		obj = new DatabaseHandler(this);
+		obj = new WineManager(this);
+		favObj = new FavoriteManager(this);
+		notesObj = new NotesManager(this);
 		
 		wine = obj.getWine(getIntent().getIntExtra(WINE_IDENTIFIER,-1));
+		wineId = wine.getId();
+		
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
 		
 		mTitle = wine.getName();
@@ -118,17 +136,15 @@ public class WineInformationActivity extends ActionBarActivity implements
 		super.onPrepareOptionsMenu(menu);
 		if(menu.findItem(R.id.fav)!=null && menu.findItem(R.id.unfav)!=null)
 			try
-			{
-				
-				Log.d("deh", "ya");
-					menu.findItem(R.id.fav).setVisible(!wine.isFavorite());
-					menu.findItem(R.id.unfav).setVisible(wine.isFavorite());
-		
-			}
-			catch(java.lang.NullPointerException e)
-			{
-				Log.e("error", e+""+wine);
-			}
+		{
+				menu.findItem(R.id.fav).setVisible(!wine.isFavorite());
+				menu.findItem(R.id.unfav).setVisible(wine.isFavorite());
+
+		}
+		catch(java.lang.NullPointerException e)
+		{
+			Log.e("error", e+""+wine);
+		}
 		return true;
 	}
 
@@ -153,15 +169,25 @@ public class WineInformationActivity extends ActionBarActivity implements
 							wine.setFavorite(true);
 							fav.setVisible(false);
 							unfav.setVisible(true);
-							Toast.makeText(WineInformationActivity.this, "Added to favorites", Toast.LENGTH_LONG).show();
-							FavoriteManager.addToFavorites(wine.getId(), WineInformationActivity.this);
+							try
+							{
+								favObj.insert(wine.getId());
+								Log.e("size", ""+favObj.getAllFavorites().size());
+								Toast.makeText(WineInformationActivity.this, "Wine added to favorites", Toast.LENGTH_LONG).show();
+							}
+							catch(Exception e)
+							{
+								Log.e("error", e.toString());
+								Toast.makeText(WineInformationActivity.this, "Problem adding to favorites", Toast.LENGTH_LONG).show();
+							}
 							break;
 						case R.id.unfav:
 							wine.setFavorite(false);
 							fav.setVisible(true);
 							unfav.setVisible(false);
-							Toast.makeText(WineInformationActivity.this, "Removed from favorites", Toast.LENGTH_LONG).show();
-							FavoriteManager.removeFavorite(WineInformationActivity.this, wine.getId());
+							Toast.makeText(WineInformationActivity.this, "Wine removed from favorites", Toast.LENGTH_LONG).show();
+							favObj.deleteFavorite(wine.getId());
+							Log.e("size", ""+favObj.getAllFavorites().size());
 							break;
 					}
 					return false;
@@ -181,10 +207,19 @@ public class WineInformationActivity extends ActionBarActivity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		//int id = item.getItemId();
+		int id = item.getItemId();
 		//if (id == R.id.action_settings) {
 			//return true;
 		//}
+		if(id==R.id.add_note)
+		{
+			NoteDialogFragment.setContext(this);
+			DialogFragment dialog = new NoteDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("id", wineId);
+			dialog.setArguments(args);
+			dialog.show(getSupportFragmentManager(), "NoteDialogFragment");
+		}
 		/*
 		if(id==R.id.fav)
 		{
@@ -200,6 +235,39 @@ public class WineInformationActivity extends ActionBarActivity implements
 		item.setVisible(wine.isFavorite());
 		*/
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onNewNote(Note mNote, String key) {
+		ArrayList<Note> notes = (ArrayList<Note>) notesObj.getNotesByWineId(wineId);
+		
+		final NoteAdapter noteAdapter = new NoteAdapter(this,
+				android.R.layout.simple_list_item_2,
+				notes);
+		
+		                     
+		NotesFragment.notesList.setAdapter(noteAdapter);
+		
+		NotesFragment.notesList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Note note = noteAdapter.getItem(position);
+				
+				OptionsDialogFragment.setContext(WineInformationActivity.this);
+				OptionsDialogFragment.setNote(note);
+				
+				DialogFragment dialog = new OptionsDialogFragment();
+		        dialog.show(WineInformationActivity.this.getSupportFragmentManager(), "OptionsDialog");
+			}
+		});
+		
+	}
+
+	@Override
+	public void viewNote(Note note, String view) {
+		
 	}
 
 }

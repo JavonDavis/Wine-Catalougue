@@ -36,5 +36,13 @@
     <string name="unfav">un-favorite</string>
     <string name="fav_title">favorites</string>
     <string name="handle">Handle</string>
+    <string name="slideUpText">Slide up to see your favorites</string>
+    <string name="slideDownText">Slide down to search for a wine by name</string>
+    <string name="new_note">New Note</string>
+    <string name="delete_note">delete Note/s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="pick">Select an option</string>
+    <string name="title_text">Title</string>
 
 </resources>

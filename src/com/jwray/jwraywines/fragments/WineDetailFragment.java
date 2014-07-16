@@ -16,9 +16,9 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.classes.DatabaseHandler;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.WineItemAdapter;
+import com.jwray.jwraywines.classes.adapters.WineItemAdapter;
+import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
  * Fragment for the detail page of wine 'x'
@@ -29,7 +29,7 @@ public class WineDetailFragment extends Fragment {
 
 	private Context mContext;
 	private static String WINE_IDENTIFIER = "id";
-	private DatabaseHandler obj;
+	private WineManager obj;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -37,7 +37,7 @@ public class WineDetailFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
 		
-		obj = new DatabaseHandler(mContext);
+		obj = new WineManager(mContext);
 
 	}
 	
