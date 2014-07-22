@@ -19,7 +19,7 @@ import android.graphics.Bitmap;
 
 public class WineManager extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 37;
+	private static final int DATABASE_VERSION = 38;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
@@ -217,7 +217,7 @@ public class WineManager extends SQLiteOpenHelper {
 	{
 		List<Wine> wines = new ArrayList<Wine>();
 		
-		String query = "select * from "+TABLE_NAME+" where "+KEY_BRAND+"='"+brand+"' order by "+KEY_NAME+" asc";
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -244,7 +244,8 @@ public class WineManager extends SQLiteOpenHelper {
 					wine.setFavorite(true);
 				
 				// Adding wine to list
-				wines.add(wine);
+				if(wine.getBrand().toLowerCase(Locale.US).contains(brand.toLowerCase(Locale.US)))
+					wines.add(wine);
 			} while (cursor.moveToNext());
 		}
 		cursor.close();
@@ -256,7 +257,7 @@ public class WineManager extends SQLiteOpenHelper {
 	{
 		List<Wine> wines = new ArrayList<Wine>();
 		
-		String query = "select * from "+TABLE_NAME+" where "+KEY_COUNTRY+"='"+country+"' order by "+KEY_NAME+" asc";
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -283,7 +284,8 @@ public class WineManager extends SQLiteOpenHelper {
 					wine.setFavorite(true);
 				
 				// Adding wine to list
-				wines.add(wine);
+				if(wine.getCountry().toLowerCase(Locale.US).contains(country.toLowerCase(Locale.US)))
+					wines.add(wine);
 			} while (cursor.moveToNext());
 		}
 		cursor.close();

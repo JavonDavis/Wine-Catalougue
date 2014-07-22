@@ -15,16 +15,16 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.adapters.NoteAdapter;
 import com.jwray.jwraywines.classes.databases.FavoriteManager;
 import com.jwray.jwraywines.classes.databases.NotesManager;
 import com.jwray.jwraywines.classes.databases.WineManager;
-import com.jwray.jwraywines.classes.interfaces.NoteDialogInterface;
 import com.jwray.jwraywines.fragments.NoteDialogFragment;
 import com.jwray.jwraywines.fragments.NotesFragment;
 import com.jwray.jwraywines.fragments.OptionsDialogFragment;
@@ -38,7 +38,7 @@ import com.jwray.jwraywines.fragments.WinePhotoFragment;
  *
  */
 public class WineInformationActivity extends ActionBarActivity implements
-		WineDrawerFragment.NavigationDrawerCallbacks,NoteDialogInterface {
+		WineDrawerFragment.NavigationDrawerCallbacks,ParcelKeys,ParcelKeys.NoteDialogInterface {
 	
 
 	/**
@@ -52,8 +52,6 @@ public class WineInformationActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-	
-	private static String WINE_IDENTIFIER = "id";
 	private WineManager obj;
 	private Wine wine;
 	private FavoriteManager favObj;
@@ -79,6 +77,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
 		
 		mTitle = wine.getName();
+		setTitle(mTitle);
 
 		// Set up the drawer.
 		mWineDrawerFragment.setUp(R.id.navigation_drawer,
@@ -220,35 +219,22 @@ public class WineInformationActivity extends ActionBarActivity implements
 			dialog.setArguments(args);
 			dialog.show(getSupportFragmentManager(), "NoteDialogFragment");
 		}
-		/*
-		if(id==R.id.fav)
-		{
-			Log.d("woot","woot2");
-			wine.setFavorite(true);
-		}
-		else if(id==R.id.unfav)
-		{
-			Log.d("woot","woot3");
-			wine.setFavorite(false);
-		}
-		item.setVisible(!wine.isFavorite());
-		item.setVisible(wine.isFavorite());
-		*/
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onNewNote(Note mNote, String key) {
+	public void onNoteSelected(Note mNote, String key) {
 		ArrayList<Note> notes = (ArrayList<Note>) notesObj.getNotesByWineId(wineId);
 		
-		final NoteAdapter noteAdapter = new NoteAdapter(this,
+		final NotesFragment.NoteAdapter noteAdapter = new NotesFragment.NoteAdapter(this,
 				android.R.layout.simple_list_item_2,
 				notes);
 		
+		ListView noteView = NotesFragment.getNotesList();
 		                     
-		NotesFragment.notesList.setAdapter(noteAdapter);
+		noteView.setAdapter(noteAdapter);
 		
-		NotesFragment.notesList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+		noteView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -265,9 +251,5 @@ public class WineInformationActivity extends ActionBarActivity implements
 		
 	}
 
-	@Override
-	public void viewNote(Note note, String view) {
-		
-	}
 
 }

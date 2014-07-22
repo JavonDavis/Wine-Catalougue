@@ -1,0 +1,35 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <TableRow
+        android:id="@+id/noteHeadingRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center" >
+
+            <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/noteContentRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+        
+        <TextView
+        android:id="@+id/noteDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </TableRow>
+
+    
+
+</TableLayout>

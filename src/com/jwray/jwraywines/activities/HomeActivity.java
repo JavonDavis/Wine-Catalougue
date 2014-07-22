@@ -24,6 +24,7 @@ import com.jwray.jwraywines.classes.databases.WineManager;
 import com.jwray.jwraywines.fragments.BrandFragment;
 import com.jwray.jwraywines.fragments.CountryFragment;
 import com.jwray.jwraywines.fragments.HomeFragment;
+import com.jwray.jwraywines.fragments.SearchFragment;
 
 /**
  * First activity displayed for interaction with navigation tabs
@@ -197,14 +198,14 @@ public class HomeActivity extends ActionBarActivity implements
 					f = HomeFragment.newInstance();
 					break;
 				case 1:
-					f = BrandFragment.newInstance();
+					f = SearchFragment.newInstance();
 					break;
 				case 2:
+					f = BrandFragment.newInstance();
+					break;
+				case 3:
 					f = CountryFragment.newInstance();
 					break;
-				/*case 3:
-					f = WineListFragment.newInstance();
-					break;*/
 				default:
 					f = null;
 			}
@@ -213,7 +214,7 @@ public class HomeActivity extends ActionBarActivity implements
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 4;
 		}
 
 		@Override
@@ -221,10 +222,12 @@ public class HomeActivity extends ActionBarActivity implements
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_search_section).toUpperCase(l);
+				return getString(R.string.title_home_section).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_brand_section).toUpperCase(l);
+				return getString(R.string.title_search_section).toUpperCase(l);
 			case 2:
+				return getString(R.string.title_brand_section).toUpperCase(l);
+			case 3:
 				return getString(R.string.title_country_section).toUpperCase(l);
 			//case 3:
 				//return getString(R.string.title_list_section).toUpperCase(l);

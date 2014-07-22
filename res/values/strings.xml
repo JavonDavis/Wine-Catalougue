@@ -2,13 +2,16 @@
 <resources>
 
     <string name="app_name">J Wray &amp; Nephew Wine Cellar</string>
-    <string name="title_search_section">Home</string>
+    <string name="title_home_section">Home</string>
+    <string name="title_search_section">Wines</string>
     <string name="title_brand_section">Brands</string>
     <string name="title_country_section">Countries</string>
     <string name="title_list_section">All Wines</string>
     <string name="action_settings">Settings</string>
     <string name="searchContentDescription">Search the repository of wines by name</string>
     <string name="wineSearchHint">Search for a wine by name</string>
+    <string name="wineBrandSearchHint">Search for a wine by brand name</string>
+    <string name="wineCountrySearchHint">Search for a wine by country</string>
     <string name="image_content_description">ImageView for wines</string>
     <string name="spainDescription">spain</string>
     <string name="italyDescription">italy</string>
@@ -16,12 +19,20 @@
     <string name="zealandDescription">new_zealand</string>
     <string name="californiaDescription">california</string>
     <string name="franceDescription">france</string>
+    <string name="argentinaDescription">argentina</string>
+    <string name="australiaDescription">australia</string>
+    <string name="chileDescription">chile</string>
+    <string name="germanyDescription">germany</string>
     <string name="france_prompt">Would you like to see our French wines?</string>
     <string name="italy_prompt">Would you like to see our Italian wines?</string>
     <string name="california_prompt">Would you like to see our Californian wines?</string>
     <string name="spain_prompt">Would you like to see our Spanish wines?</string>
     <string name="south_africa_prompt">Would you like to see our South African wines?</string>
     <string name="new_zealand_prompt">Would you like to see our wines from New Zealand?</string>
+    <string name="australia_prompt">Would you like to see our wines from Australia?</string>
+    <string name="germany_prompt">Would you like to see our wines from Germany?</string>
+    <string name="argentina_prompt">Would you like to see our Argentine wines?</string>
+    <string name="chile_prompt">Would you like to see our wines from Chile?</string>
     <string name="title_activity_wine_search">WineSearchActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="view_all">View all our wines</string>
@@ -44,5 +55,12 @@
     <string name="cancel">Cancel</string>
     <string name="pick">Select an option</string>
     <string name="title_text">Title</string>
+    <string name="note_empty">Oh. You don\'t have any notes yet, press the menu button on your device to add a new note</string>
+    <string name="favorite_empty">Your favorite wines come here</string>
+    <string name="title_activity_note_view">NoteViewActivity</string>
+    <string name="pH">Placeholder text</string>
+    <string name="wine_option_1">Wine for a Meal</string>
+    <string name="wine_option_2">Wine by Type</string>
+    <string name="wine_option_3">Wine for an Occasion</string>
 
 </resources>

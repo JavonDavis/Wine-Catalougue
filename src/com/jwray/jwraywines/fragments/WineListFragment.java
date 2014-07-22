@@ -1,6 +1,7 @@
 package com.jwray.jwraywines.fragments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,12 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.adapters.WineAdapter;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
 public class WineListFragment extends Fragment
@@ -105,5 +108,53 @@ public class WineListFragment extends Fragment
 		
 		return rootView;
 	}
+	
+	/*=================================== Adapter =================================*/
+	/**
+	 * Adapter for the wine list
+	 * @author Javon Davis
+	 *
+	 */
+	private class WineAdapter extends ArrayAdapter<Wine> {
+		
+		public WineAdapter(Context context, int resource) {
+			super(context, resource);
+		}
+		
+		public WineAdapter(Context context, int resource, List<Wine> wines) {
+		    super(context, resource, wines);
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View view = convertView;
+			
+			if (view == null) {
+
+		        LayoutInflater inflater;
+		        inflater = LayoutInflater.from(getContext());
+		        view = inflater.inflate(R.layout.wine_list_item, null);
+
+		    }
+			
+			Wine wine = getItem(position);
+			
+			if(wine!= null)
+			{
+				ImageView wineImage = (ImageView) view.findViewById(R.id.wineView);
+				TextView wineName = (TextView) view.findViewById(R.id.wineName);
+				TextView wineDescription = (TextView) view.findViewById(R.id.wineDescription);
+				
+				wineImage.setVisibility(View.GONE);
+				//TODO delete the imageview 
+				
+				wineName.setText(wine.getName());
+				wineDescription.setText("Country:"+wine.getCountry()+"\nBrand:"+wine.getBrand());
+			}
+			
+			return view;
+		}
+	}
+
 }
 

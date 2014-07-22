@@ -1,5 +1,9 @@
 package com.jwray.jwraywines.fragments;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,15 +19,15 @@ import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.NotesManager;
-import com.jwray.jwraywines.classes.interfaces.NoteDialogInterface;
 
 /**
  * Dialog for adding a new note
  * @author Javon
  *
  */
-public class NoteDialogFragment extends DialogFragment{
+public class NoteDialogFragment extends DialogFragment implements ParcelKeys{
 
 	private NotesManager notesObj;
 	private static Context context;
@@ -68,11 +72,15 @@ public class NoteDialogFragment extends DialogFragment{
 						EditText title = (EditText) noteItem.findViewById(R.id.title);
 						EditText content = (EditText) noteItem.findViewById(R.id.content);
 						
-						Note note = new Note(title.getText().toString(),content.getText().toString(),id);
+						SimpleDateFormat sdf = new SimpleDateFormat("h:m a d MMM, yyyy",Locale.US);
+						String date = sdf.format(new Date());
+	
+						Note note = new Note(title.getText().toString(),content.getText().toString(),id,date);
 						
 						notesObj.insertNote(note);
 						
-						mListener.onNewNote(null,null);
+						NotesFragment.hideEmpty();
+						mListener.onNoteSelected(null,null);
 						Toast.makeText(getActivity(), "Note Created", Toast.LENGTH_LONG).show();
 						
 				
@@ -82,8 +90,6 @@ public class NoteDialogFragment extends DialogFragment{
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						
 					}
 				});
         
@@ -98,5 +104,5 @@ public class NoteDialogFragment extends DialogFragment{
 	private Context getContext() {
 		return context;
 	}
-
+	
 }

@@ -5,43 +5,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.activities.WineListActivity;
-import com.jwray.jwraywines.classes.adapters.GridImageAdapter;
+import com.jwray.jwraywines.classes.ParcelKeys;
+import com.jwray.jwraywines.classes.databases.FavoriteManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
-public class BrandFragment extends Fragment
+public class BrandFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	private static String BRAND_IDENTIFIER = "brand";
+	private EditText wineSearch;
+	private GridView favorites;
+	private static FavoriteAdapter favAdapter;
+	private FavoriteManager favObj;
 	
-	public static final Integer[] mBrandIds = {
-        R.drawable.lamargue,
-        R.drawable.cathedral_cellar,
-        R.drawable.naked_grape,
-        R.drawable.teruzzi_puthod,
-        R.drawable.sella_mosca,
-        R.drawable.cecchi,
-        R.drawable.cinzano,
-        R.drawable.cloudy_bay,
-        R.drawable.torres,
-        R.drawable.masi,
-        R.drawable.mirassou,
-        R.drawable.golden_kaan
-	};
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
+		favObj = new FavoriteManager(mContext);
 	}
 
 	
@@ -54,81 +49,95 @@ public class BrandFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		
-		View rootView = null;
-		try
-		{
-			rootView = inflater.inflate(R.layout.fragment_brands, container,false);
+		//TODO- surround in try catch
+		final View rootView = inflater.inflate(R.layout.fragment_search, container,false);
 			
-		}
-		catch(InflateException e)
-		{
-			Log.e("brand inflater", e.toString());
-		}
 		
 		if(rootView!=null)
 		{
+			wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
+			wineSearch.setHint(R.string.wineBrandSearchHint);
 			
-			final GridImageAdapter gridImageAdapter = new GridImageAdapter(mContext,mBrandIds);
-			GridView brandGrid = (GridView) rootView.findViewById(R.id.brandView);
-			brandGrid.setAdapter(gridImageAdapter);
+			wineSearch.setOnTouchListener(new OnTouchListener() {
+		        @Override
+		        public boolean onTouch(View v, MotionEvent event) {
+		            //final int DRAWABLE_LEFT = 0;
+		            //final int DRAWABLE_TOP = 1;
+		            final int DRAWABLE_RIGHT = 2;
+		            //final int DRAWABLE_BOTTOM = 3;
+
+		            if(event.getAction() == MotionEvent.ACTION_UP) {
+		                if(event.getRawX()>= ((wineSearch.getRight() - wineSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))-50) {
+		                	String query = wineSearch.getText().toString();
+		                	
+		                    Intent intent = new Intent(mContext,WineListActivity.class);
+		                    
+		                    Log.d("query", query);
+		                    intent.putExtra(BRAND_IDENTIFIER, query);
+		                    
+		                    startActivity(intent);
+		                }
+		            }
+		            return false;
+		        }
+		    });
 			
+			SlidingUpPanelLayout slider = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
 			
-			brandGrid.setOnItemClickListener(new OnItemClickListener() {
+			slider.setPanelSlideListener(new PanelSlideListener() {
+
+				@Override
+				public void onPanelSlide(View panel, float slideOffset) {
+				}
+
+				@Override
+				public void onPanelCollapsed(View panel) {
+					TextView handle = (TextView) rootView.findViewById(R.id.handle);
+					handle.setText(R.string.slideUpText);
+					handle.setTextColor(mContext.getResources().getColor(R.color.white));
+					
+				}
+
+				@Override
+				public void onPanelExpanded(View panel) {
+					TextView handle = (TextView) rootView.findViewById(R.id.handle);
+					handle.setText(R.string.slideDownText);
+					handle.setTextColor(mContext.getResources().getColor(R.color.black));
+				}
+
+				@Override
+				public void onPanelAnchored(View panel) {
+				}
+
+				@Override
+				public void onPanelHidden(View panel) {
+				}
+				
+				
+			});
+			
+			TextView empty = (TextView) rootView.findViewById(R.id.favoriteEmpty);
+			
+			if(!favObj.getAllFavorites().isEmpty())
+				empty.setVisibility(View.GONE);
+			 
+			favAdapter = new FavoriteAdapter(mContext);
+			
+			favorites = (GridView) rootView.findViewById(R.id.favoriteView);
+			favorites.setAdapter(favAdapter);
+
+			favorites.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
+					Intent intent = new Intent(mContext,WineInformationActivity.class);
 
-							String imageBrand = mContext.getResources()
-									.getResourceEntryName((int) gridImageAdapter.getItem(position));
-							switch(imageBrand)
-							{
-								case "cathedral_cellar":
-									imageBrand = "Cathedral Cellar";
-									break;
-								case "golden_kaan":
-									imageBrand = "Golden Kaan";
-									break;
-								case "california":
-									imageBrand = "California";
-									break;
-								case "masi":
-									imageBrand = "Masi";
-									break;
-								case "cloudy_bay":
-									imageBrand = "Cloudy Bay";
-									break;
-								case "cecchi":
-									imageBrand = "Cecchi";
-									break;
-								case "lamargue":
-									imageBrand = "Lamargue";
-									break;
-								case "mirassou":
-									imageBrand = "Mirassou";
-									break;
-								case "torres":
-									imageBrand = "Torres";
-									break;
-								case "naked_grape":
-									imageBrand = "Naked Grape";
-									break;
-								case "cinzano":
-									imageBrand = "Cinzano";
-									break;
-								case "sella_mosca":
-									imageBrand = "Sella&Mosca";
-									break;
-								case "teruzzi_puthod":
-									imageBrand = "Teruzzi & Puthod";
-									break;
-							}
-							Intent intent = new Intent(mContext,WineListActivity.class);
-							intent.putExtra(BRAND_IDENTIFIER, imageBrand);
-							mContext.startActivity(intent);
-					
+					int ID = (int) favAdapter.getItem(position);
+					intent.putExtra(WINE_IDENTIFIER, ID);
+					startActivity(intent);
 				}
+
 			});
 			
 		}

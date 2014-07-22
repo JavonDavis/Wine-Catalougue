@@ -5,19 +5,20 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.activities.NoteViewActivity;
 import com.jwray.jwraywines.classes.Note;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.NotesManager;
-import com.jwray.jwraywines.classes.interfaces.NoteDialogInterface;
 
-public class OptionsDialogFragment extends DialogFragment{
+public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	
-	String[] options = {"Delete"};
+	private final String[] options = {"View","Delete"};
 	private NotesManager notesObj;
 	private static Context context;
 	private static Note note;
@@ -49,9 +50,13 @@ public class OptionsDialogFragment extends DialogFragment{
 	               switch(which)
 	               {
 	               		case 0:
-	               			Log.d("note", note.toString());
+	               			Intent intent = new Intent(getContext(),NoteViewActivity.class);
+	               			intent.putExtra(NOTE_IDENTIFITER, note.getIdentifier());
+	               			startActivity(intent);
+	               			break;
+	               		case 1:
 	               			notesObj.deleteNote(note);
-	               			mListener.onNewNote(null, "delete");
+	               			mListener.onNoteSelected(null, "delete");
 	               			break;
 	               		default:
 	               			Toast.makeText(context,"Option not ready yet", Toast.LENGTH_LONG).show();

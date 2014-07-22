@@ -16,7 +16,8 @@
         android:id="@+id/tableRow1"
         android:layout_width="match_parent"
     	android:layout_height="match_parent"
-        android:layout_weight="2" >
+        android:layout_weight="2"
+        android:gravity="center" >
         
         <ImageView
         android:id="@+id/spainView"
@@ -34,6 +35,14 @@
         android:contentDescription="@string/italyDescription"
         android:src="@drawable/italy" />
         
+        <ImageView
+        android:id="@+id/germanyView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/germanyDescription"
+        android:src="@drawable/germany" />
+        
         
         
     </TableRow>
@@ -42,7 +51,8 @@
         android:id="@+id/tableRow2"
         android:layout_width="match_parent"
     	android:layout_height="match_parent"
-        android:layout_weight="2" >
+        android:layout_weight="2"
+        android:gravity="center" >
         
         <ImageView
         android:id="@+id/zealandView"
@@ -60,7 +70,13 @@
         android:contentDescription="@string/africaDescription"
         android:src="@drawable/south_africa" />
         
-        
+        <ImageView
+        android:id="@+id/argentinaView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/argentinaDescription"
+        android:src="@drawable/argentina" />
         
     </TableRow>
     
@@ -68,7 +84,8 @@
         android:id="@+id/tableRow3"
         android:layout_width="match_parent"
     	android:layout_height="match_parent"
-    	android:layout_weight="2" >
+    	android:layout_weight="2"
+    	android:gravity="center" >
         
         <ImageView
         android:id="@+id/franceView"
@@ -86,6 +103,30 @@
         android:layout_weight="1"
         android:src="@drawable/california" />
         
+        <ImageView
+        android:id="@+id/chileView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/chileDescription"
+        android:src="@drawable/chile" />
+        
+   </TableRow>
+   
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="2"
+    	android:gravity="center" >
+        
+        <ImageView
+        android:id="@+id/australiaView"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+        android:contentDescription="@string/australiaDescription"
+        android:layout_weight="1"
+        android:src="@drawable/australia" />
    </TableRow>
 
 </TableLayout>

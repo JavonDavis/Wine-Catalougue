@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.jwray.jwraywines.classes.databases.WineManager;
-import com.jwray.jwraywines.fragments.HomeFragment;
+import com.jwray.jwraywines.fragments.SearchFragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -243,7 +243,7 @@ public class WineContent
 	        if(progress.isShowing())
 	            progress.dismiss();
 	        
-	        HomeFragment.favAdapter.notifyDataSetChanged();
+	        SearchFragment.resetFavorites();
 	        
 	        ((Activity) context).setProgressBarIndeterminateVisibility(false);
 		}

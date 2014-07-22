@@ -76,12 +76,6 @@ public class Wine extends WineBase
 		
 	}
 	
-	public int getPictureId(Context context)
-	{
-		String mDrawableName = "id"+getId();
-		return context.getResources().getIdentifier(mDrawableName , "drawable", context.getPackageName());
-	}
-	
 	
 	@Override
 	public String toString()

@@ -6,12 +6,14 @@ public class Note {
 	private String mTitle,mContent;
 	private int mId; //used to match note to a wine
 	private int identifier;
+	private String DateCreated;
 	
-	public Note(String title,String content,int id)
+	public Note(String title,String content,int id,String date)
 	{
 		setTitle(title);
 		setContent(content);
-		setId(id); 
+		setId(id);
+		setDateCreated(date);
 	}
 
 	/**
@@ -43,28 +45,28 @@ public class Note {
 	}
 
 	/**
-	 * @return the mId
+	 * @return the wine ID of this note
 	 */
 	public int getId() {
 		return mId;
 	}
 
 	/**
-	 * @param mId the mId to set
+	 * @param (int) the wine ID for this note
 	 */
 	public void setId(int mId) {
 		this.mId = mId;
 	}
 
 	/**
-	 * @return the identifier
+	 * @return the unique identifier for the note
 	 */
 	public int getIdentifier() {
 		return identifier;
 	}
 
 	/**
-	 * @param identifier the identifier to set
+	 * @param (int) the unique identifier to set
 	 */
 	public void setIdentifier(int identifier) {
 		this.identifier = identifier;
@@ -77,6 +79,20 @@ public class Note {
 		String id = "ID:"+getIdentifier();
 		
 		return title+"\n"+wineId+"\n"+id;
+	}
+
+	/**
+	 * @return the dateCreated
+	 */
+	public String getDateCreated() {
+		return DateCreated;
+	}
+
+	/**
+	 * @param dateCreated the dateCreated to set
+	 */
+	public void setDateCreated(String dateCreated) {
+		DateCreated = dateCreated;
 	}
 
 }

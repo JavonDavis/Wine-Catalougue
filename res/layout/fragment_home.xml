@@ -1,71 +1,48 @@
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sliding_layout"
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
-    android:background="@drawable/background"
-    sothree:panelHeight="68dp"
-    sothree:shadowHeight="4dp">
+    android:orientation="vertical"
+    android:background="@drawable/background" >
+    
+    <ProgressBar
+        android:id="@+id/recommendationProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/r_progress"
+        android:padding="10dp" />
 
-	<LinearLayout
+    <TableRow
+        android:id="@+id/headingRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pH" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/contentRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_weight="1"
+        android:gravity="center" >
 
-	    <EditText
-	        android:id="@+id/wineSearchView"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="10dp"
-	        android:background="@drawable/rounded_edit"
-	        android:focusableInTouchMode="true"
-	        android:hint="@string/wineSearchHint"
-	        android:includeFontPadding="true"
-	        android:inputType="text"
-	        android:padding="20dp"
-	        android:drawableRight="@drawable/arrow_right">
-	        
-	        </EditText>
-	        
-	    <Button
-			android:id="@+id/viewAll"
-			android:text="@string/view_all"
-			android:textColor="#F7FFBF"
-			android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-			android:background="@drawable/buttonshape"
-			android:shadowColor="#A8A8A8"
-			android:shadowRadius="13"
-			android:layout_gravity="center_horizontal"
-			/>
+        <Button
+            android:id="@+id/recommendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape"
+            android:text="@string/pH" />
 
-	</LinearLayout>
-	
-	<LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical" >
-	        
-	        <TextView
-	        	android:layout_width="match_parent"
-		        android:layout_height="match_parent"
-		        android:id="@+id/handle"
-		        android:gravity="center|top"
-		        android:text="@string/slideUpText"
-		        android:padding="30dp"
-		        android:textSize="16sp" />
-	        
-	        <GridView
-		        android:id="@+id/favoriteView"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:numColumns="auto_fit" >
-	    </GridView>
-        
-        
-    </LinearLayout>
+    </TableRow>
 
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
-    
+</TableLayout>

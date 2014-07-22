@@ -13,7 +13,7 @@ import com.jwray.jwraywines.classes.Note;
 
 public class NotesManager extends SQLiteOpenHelper{
 
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 5;
 	private static final String DATABASE_NAME = "NoteManagement";
 	private static final String TABLE_NAME = "notes";
 
@@ -21,7 +21,6 @@ public class NotesManager extends SQLiteOpenHelper{
 	private static final String KEY_WINE_ID = "wine_id";
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_CONTENT = "content";
-	@SuppressWarnings("unused")
 	private static final String KEY_DATE = "date";
 	
 	@SuppressWarnings("unused")
@@ -36,7 +35,7 @@ public class NotesManager extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String createTable = "create table "+TABLE_NAME+" ("
-				+KEY_ID +" integer primary key,"+KEY_TITLE+" text,"+ KEY_CONTENT +" text,"+ KEY_WINE_ID +" integer);";
+				+KEY_ID +" integer primary key,"+KEY_TITLE+" text,"+ KEY_CONTENT +" text,"+ KEY_WINE_ID +" integer,"+KEY_DATE+" text);";
 		
 		db.execSQL(createTable);
 		
@@ -60,6 +59,7 @@ public class NotesManager extends SQLiteOpenHelper{
 		values.put(KEY_CONTENT, note.getContent());
 		values.put(KEY_TITLE, note.getTitle());
 		values.put(KEY_CONTENT, note.getContent());
+		values.put(KEY_DATE, note.getDateCreated());
 		
 		// Inserting Row
 		db.insert(TABLE_NAME, null, values);
@@ -85,8 +85,9 @@ public class NotesManager extends SQLiteOpenHelper{
 				String title = cursor.getString(1);
 				String content = cursor.getString(2);
 				int wineID = Integer.parseInt(cursor.getString(3));
+				String date = cursor.getString(4);
 								
-				note = new Note(title,content,wineID);
+				note = new Note(title,content,wineID,date);
 				note.setIdentifier(identifier);
 				notes.add(note);
 			} while (cursor.moveToNext());
@@ -115,8 +116,9 @@ public class NotesManager extends SQLiteOpenHelper{
 				String title = cursor.getString(1);
 				String content = cursor.getString(2);
 				int wineID = Integer.parseInt(cursor.getString(3));
+				String date = cursor.getString(4);
 
-				note = new Note(title,content,wineID);
+				note = new Note(title,content,wineID,date);
 				note.setIdentifier(identifier);
 				notes.add(note);
 			} while (cursor.moveToNext());

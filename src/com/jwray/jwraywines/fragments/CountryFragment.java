@@ -1,46 +1,50 @@
 package com.jwray.jwraywines.fragments;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.activities.WineListActivity;
+import com.jwray.jwraywines.classes.ParcelKeys;
+import com.jwray.jwraywines.classes.databases.FavoriteManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
-public class CountryFragment extends Fragment
+/**
+ * 
+ * @author Javon Davis
+ *
+ */
+public class CountryFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	private static String COUNTRY_IDENTIFIER = "country";
+	private EditText wineSearch;
+	private GridView favorites;
+	private static FavoriteAdapter favAdapter;
+	private FavoriteManager favObj;
+
 	
-	@SuppressWarnings("unused")
-	private static final Integer[] mCountryIds = 
-		{
-			R.drawable.italy,
-			R.drawable.france,
-			R.drawable.spain,
-			R.drawable.new_zealand,
-			R.drawable.south_africa,
-			R.drawable.california
-		};
+	//TODO check countries, i.e california
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
+		favObj = new FavoriteManager(mContext);
 	}
 
 	
@@ -52,108 +56,98 @@ public class CountryFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		View rootView = null;
-		
-		List<ImageView> countryImages = new ArrayList<ImageView>();
-		
-		try{
-			rootView = inflater.inflate(R.layout.fragment_country, container,false);
-			ImageView spainImage = (ImageView) rootView.findViewById(R.id.spainView);
-			ImageView italyImage = (ImageView) rootView.findViewById(R.id.italyView);
-			ImageView franceImage = (ImageView) rootView.findViewById(R.id.franceView);
-			ImageView africaImage = (ImageView) rootView.findViewById(R.id.africaView);
-			ImageView californiaImage = (ImageView) rootView.findViewById(R.id.californiaView);
-			ImageView zealandImage = (ImageView) rootView.findViewById(R.id.zealandView);
+
+		final View rootView = inflater.inflate(R.layout.fragment_search, container,false);
 			
-			countryImages.add(spainImage);
-			countryImages.add(italyImage);
-			countryImages.add(franceImage);
-			countryImages.add(africaImage);
-			countryImages.add(californiaImage);
-			countryImages.add(zealandImage);
-			
-			for(ImageView view : countryImages)
-				view.setOnClickListener(new ImageListener());
-			
-		}
-		catch(InflateException e)
+		if(rootView!=null)
 		{
-			Log.e("Country inflater", e.toString());
-		}
-		catch(java.lang.NullPointerException e)
-		{
-			Log.e("NullPointerException in imageviews", e.toString());
+			wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
+			wineSearch.setHint(R.string.wineCountrySearchHint);
+			
+			wineSearch.setOnTouchListener(new OnTouchListener() {
+		        @Override
+		        public boolean onTouch(View v, MotionEvent event) {
+		            //final int DRAWABLE_LEFT = 0;
+		            //final int DRAWABLE_TOP = 1;
+		            final int DRAWABLE_RIGHT = 2;
+		            //final int DRAWABLE_BOTTOM = 3;
+
+		            if(event.getAction() == MotionEvent.ACTION_UP) {
+		                if(event.getRawX()>= ((wineSearch.getRight() - wineSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))-50) {
+		                	String query = wineSearch.getText().toString();
+		                	
+		                    Intent intent = new Intent(mContext,WineListActivity.class);
+		                    
+		                    Log.d("query", query);
+		                    intent.putExtra(COUNTRY_IDENTIFIER, query);
+		                    
+		                    startActivity(intent);
+		                }
+		            }
+		            return false;
+		        }
+		    });
+			
+			SlidingUpPanelLayout slider = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
+			
+			slider.setPanelSlideListener(new PanelSlideListener() {
+
+				@Override
+				public void onPanelSlide(View panel, float slideOffset) {
+				}
+
+				@Override
+				public void onPanelCollapsed(View panel) {
+					TextView handle = (TextView) rootView.findViewById(R.id.handle);
+					handle.setText(R.string.slideUpText);
+					handle.setTextColor(mContext.getResources().getColor(R.color.white));
+				}
+
+				@Override
+				public void onPanelExpanded(View panel) {
+					TextView handle = (TextView) rootView.findViewById(R.id.handle);
+					handle.setText(R.string.slideDownText);
+					handle.setTextColor(mContext.getResources().getColor(R.color.black));
+				}
+
+				@Override
+				public void onPanelAnchored(View panel) {
+				}
+
+				@Override
+				public void onPanelHidden(View panel) {
+				}
+				
+				
+			});
+			
+			TextView empty = (TextView) rootView.findViewById(R.id.favoriteEmpty);
+			
+			if(!favObj.getAllFavorites().isEmpty())
+				empty.setVisibility(View.GONE);
+			 
+			favAdapter = new FavoriteAdapter(mContext);
+			
+			favorites = (GridView) rootView.findViewById(R.id.favoriteView);
+			favorites.setAdapter(favAdapter);
+
+			favorites.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Intent intent = new Intent(mContext,WineInformationActivity.class);
+
+					int ID = (int) favAdapter.getItem(position);
+					intent.putExtra(WINE_IDENTIFIER, ID);
+					startActivity(intent);
+				}
+
+			});
+			
 		}
 		
 		return rootView;
 	}
 	
-	private void ImageDialog(final String country, String prompt)
-	{
-		new AlertDialog.Builder(mContext)
-	    .setTitle("View wine by country")
-	    .setMessage(prompt)
-	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            Intent intent = new Intent(mContext,WineListActivity.class);
-	            
-	            intent.putExtra(COUNTRY_IDENTIFIER, country);
-	            
-	            startActivity(intent);
-	        }
-	     })
-	    .setNegativeButton(android.R.string.no, null)
-	    .setIcon(android.R.drawable.ic_dialog_info)
-	     .show();
-	}
-	
-	//===================================Listener======================================//
-	private class ImageListener implements OnClickListener
-	{
-
-		@Override
-		public void onClick(View v) 
-		{
-			String country = v.getContentDescription().toString();
-			String prompt =null;
-			switch(country)
-			{
-				case "spain":
-					country = "Spain";
-					prompt = mContext.getString(R.string.spain_prompt);
-					ImageDialog(country, prompt);
-					break;
-				case "italy":
-					country="Italy";
-					prompt = mContext.getString(R.string.italy_prompt);
-					ImageDialog(country, prompt);
-					break;
-				case "new_zealand":
-					country="New Zealand";
-					prompt = mContext.getString(R.string.new_zealand_prompt);
-					ImageDialog(country, prompt);
-					break;
-				case "south_africa":
-					country = "South Africa";
-					prompt = mContext.getString(R.string.south_africa_prompt);
-					ImageDialog(country, prompt);
-					break;
-				case "california":
-					country = "California";
-					prompt = mContext.getString(R.string.california_prompt);
-					ImageDialog(country, prompt);
-					break;
-				case "france":
-					country="France";
-					prompt = mContext.getString(R.string.france_prompt);
-					ImageDialog(country, prompt);
-					break;
-				default:
-					Log.e("content", "Invalid content description");
-			}
-			
-		}
-		
-	}
 }

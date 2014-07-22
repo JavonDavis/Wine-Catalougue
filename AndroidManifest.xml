@@ -39,6 +39,10 @@
             android:label="@string/title_activity_wine_information"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.jwray.jwraywines.activities.NoteViewActivity"
+            android:label="@string/title_activity_note_view" >
+        </activity>
     </application>
 
 </manifest>

@@ -8,6 +8,9 @@
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:lineSpacingExtra="3dp"
+        android:padding="10dp" />
 
 </LinearLayout>
