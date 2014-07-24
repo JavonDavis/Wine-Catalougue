@@ -107,7 +107,6 @@ public class SearchFragment extends Fragment implements ParcelKeys
 			public void onPanelCollapsed(View panel) {
 				TextView handle = (TextView) rootView.findViewById(R.id.handle);
 				handle.setText(R.string.slideUpText);
-				handle.setTextColor(mContext.getResources().getColor(R.color.white));
 				
 			}
 
@@ -115,7 +114,6 @@ public class SearchFragment extends Fragment implements ParcelKeys
 			public void onPanelExpanded(View panel) {
 				TextView handle = (TextView) rootView.findViewById(R.id.handle);
 				handle.setText(R.string.slideDownText);
-				handle.setTextColor(mContext.getResources().getColor(R.color.black));
 			}
 
 			@Override

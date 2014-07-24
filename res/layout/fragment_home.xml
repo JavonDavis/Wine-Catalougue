@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
-    
-    <ProgressBar
-        android:id="@+id/recommendationProgress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:progress="0"
-        android:progressDrawable="@drawable/r_progress"
-        android:padding="10dp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
+	<TableLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	     >
+	    <TableRow
+	        android:id="@+id/headingRow"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center" >
+	
+	        <TextView
+	            android:id="@+id/heading"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:text="@string/home_prompt"
+	            android:textColor="@color/White"
+	            android:padding="10dp"
+	            android:textSize="24sp" />
+	
+	    </TableRow>
+	
+	    <TableRow
+	        android:id="@+id/contentRow"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:gravity="center" >
+		
+	        <TextView
+	            android:id="@+id/prompter"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:text="@string/initial_prompt"
+	            android:textColor="@color/White"
+	            android:padding="5dp"
+	            android:textSize="16sp" />
 
-    <TableRow
-        android:id="@+id/headingRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
-
-        <TextView
-            android:id="@+id/heading"
-            android:layout_width="wrap_content"
+	    </TableRow>  
+	</TableLayout>
+		<ListView
+            android:id="@+id/optionsList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/pH" />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/contentRow"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center" >
-
-        <Button
-            android:id="@+id/recommendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttonshape"
-            android:text="@string/pH" />
-
-    </TableRow>
-
-</TableLayout>
+            android:layout_centerInParent="true">
+        </ListView>
+</RelativeLayout>

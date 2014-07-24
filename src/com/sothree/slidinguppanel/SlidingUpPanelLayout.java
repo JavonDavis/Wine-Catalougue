@@ -25,7 +25,8 @@ import com.nineoldandroids.view.animation.AnimatorProxy;
 
 public class SlidingUpPanelLayout extends ViewGroup {
 
-    private static final String TAG = SlidingUpPanelLayout.class.getSimpleName();
+    @SuppressWarnings("unused")
+	private static final String TAG = SlidingUpPanelLayout.class.getSimpleName();
 
     /**
      * Default peeking out panel height

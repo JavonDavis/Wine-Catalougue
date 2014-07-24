@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
         android:text="" />
     
     <TextView
@@ -17,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:textColor="@color/White"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="" />
     
@@ -25,13 +27,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:textColor="@color/White"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="" />
 
     <ExpandableListView
         android:id="@+id/information"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
     </ExpandableListView>
 
 

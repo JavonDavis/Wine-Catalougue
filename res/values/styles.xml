@@ -24,6 +24,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:actionBarStyle">@style/JActionBar</item>
         <item name="android:actionBarTabStyle">@style/JTabStyle</item>
+        <item name="android:textColor">@color/White</item>
     </style>
 
     <style name="JActionBar" parent="@style/Widget.AppCompat.ActionBar">
