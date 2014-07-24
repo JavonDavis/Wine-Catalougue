@@ -54,7 +54,6 @@ public class HomeActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		
 		setContentView(R.layout.activity_home);
@@ -125,6 +124,12 @@ public class HomeActivity extends ActionBarActivity implements
 	    inflater.inflate(R.menu.home, menu);
 	    return true;
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Consiider making a dialog
+		super.onBackPressed();
 	}
 
 	@Override

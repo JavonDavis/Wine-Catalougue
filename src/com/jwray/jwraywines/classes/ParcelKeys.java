@@ -25,13 +25,27 @@ import com.jwray.jwraywines.classes.databases.WineManager;
 public interface ParcelKeys {
 	static final String NAME_IDENTIFIER ="name";
 	static final String WINE_IDENTIFIER = "id";
-	static String BRAND_IDENTIFIER = "brand";
-	static String COUNTRY_IDENTIFIER = "country";
-	static String NOTE_IDENTIFITER = "note_id";
+	static final String BRAND_IDENTIFIER = "brand";
+	static final String COUNTRY_IDENTIFIER = "country";
+	static final String NOTE_IDENTIFITER = "note_id";
 	
 	/*============================================ Interfaces =================================================*/
 	static interface NoteDialogInterface {
 		void onNoteSelected(Note note, String key);
+	}
+	
+	interface OptionNotifiers
+	{
+		static final String MEAL_TEXT ="Wine for a Meal";
+		static final String TYPE_TEXT = "Wine by Type";
+		static final String OCCASION_TEXT = "Wine for an Occasion";
+		static final String TYPE_RED = "Red";
+		static final String TYPE_WHITE = "White";
+		static final String TYPE_SPARKLING = "Sparkling";
+		static final int HOME_IDENTIFIER = 1;
+		static final int MEAL_IDENTIFIER = 2;
+		static final int TYPE_IDENTIFIER = 3;
+		static final int OCCASION_IDENTIFIER = 4;
 	}
 	
 	static class FavoriteAdapter extends BaseAdapter{

@@ -10,18 +10,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.FavoriteManager;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
 /**
  * 
@@ -32,10 +25,6 @@ public class CountryFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	private EditText wineSearch;
-	private GridView favorites;
-	private static FavoriteAdapter favAdapter;
-	private FavoriteManager favObj;
-
 	
 	//TODO check countries, i.e california
 	
@@ -44,7 +33,6 @@ public class CountryFragment extends Fragment implements ParcelKeys
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		favObj = new FavoriteManager(mContext);
 	}
 
 	
@@ -87,61 +75,6 @@ public class CountryFragment extends Fragment implements ParcelKeys
 		            return false;
 		        }
 		    });
-			
-			SlidingUpPanelLayout slider = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
-			
-			slider.setPanelSlideListener(new PanelSlideListener() {
-
-				@Override
-				public void onPanelSlide(View panel, float slideOffset) {
-				}
-
-				@Override
-				public void onPanelCollapsed(View panel) {
-					TextView handle = (TextView) rootView.findViewById(R.id.handle);
-					handle.setText(R.string.slideUpText);
-				}
-
-				@Override
-				public void onPanelExpanded(View panel) {
-					TextView handle = (TextView) rootView.findViewById(R.id.handle);
-					handle.setText(R.string.slideDownText);
-				}
-
-				@Override
-				public void onPanelAnchored(View panel) {
-				}
-
-				@Override
-				public void onPanelHidden(View panel) {
-				}
-				
-				
-			});
-			
-			TextView empty = (TextView) rootView.findViewById(R.id.favoriteEmpty);
-			
-			if(!favObj.getAllFavorites().isEmpty())
-				empty.setVisibility(View.GONE);
-			 
-			favAdapter = new FavoriteAdapter(mContext);
-			
-			favorites = (GridView) rootView.findViewById(R.id.favoriteView);
-			favorites.setAdapter(favAdapter);
-
-			favorites.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					Intent intent = new Intent(mContext,WineInformationActivity.class);
-
-					int ID = (int) favAdapter.getItem(position);
-					intent.putExtra(WINE_IDENTIFIER, ID);
-					startActivity(intent);
-				}
-
-			});
 			
 		}
 		

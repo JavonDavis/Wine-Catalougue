@@ -49,8 +49,8 @@
     <string name="handle">Handle</string>
     <string name="slideUpText">Slide up to see your favorites</string>
     <string name="slideDownText">Slide down to search for a wine</string>
-    <string name="home_prompt">Let us help you find one of our wines</string>
-    <string name="initial_prompt">What kind of wine are you looking for ?</string>
+    <string name="home_prompt">Let us help you find a wine</string>
+    <string name="initial_prompt">What kind of wine are you looking for?</string>
     <string name="new_note">New Note</string>
     <string name="delete_note">delete Note/s</string>
     <string name="ok">OK</string>
@@ -64,5 +64,6 @@
     <string name="wine_option_1">Wine for a Meal</string>
     <string name="wine_option_2">Wine by Type</string>
     <string name="wine_option_3">Wine for an Occasion</string>
+    <string name="back">Back</string>
 
 </resources>
