@@ -16,7 +16,7 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:padding="5dp"
-            android:textColor="@color/White" />
+            android:textColor="@color/BaseColor" />
 
         <TextView
             android:id="@+id/dateView"
@@ -28,7 +28,7 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:padding="5dp"
-            android:textColor="@color/White" />
+            android:textColor="@color/BaseColor" />
 
     </RelativeLayout>
 
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:text=""
         android:padding="5dp"
-        android:textColor="@color/White" />
+        android:textColor="@color/BaseColor" />
 
 </LinearLayout>

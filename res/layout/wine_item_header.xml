@@ -11,6 +11,6 @@
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:padding="10dp"
-        android:textColor="@color/White" />
+        android:textColor="@color/BaseColor" />
 
 </LinearLayout>

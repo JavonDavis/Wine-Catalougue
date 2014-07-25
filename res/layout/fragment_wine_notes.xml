@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:text="@string/note_empty"
         android:layout_centerInParent="true"
-        android:textColor="@color/White"/>
+        android:textColor="@color/BaseColor"/>
     
     <ListView
 			android:id="@+id/notesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cacheColorHint="@color/black"
+            android:cacheColorHint="@color/BaseColor"
             />
 
 </RelativeLayout>

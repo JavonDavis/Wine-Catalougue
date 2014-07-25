@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/White"
+        android:textColor="@color/BaseColor"
         android:padding="10dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />

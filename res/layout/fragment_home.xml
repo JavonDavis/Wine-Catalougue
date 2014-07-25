@@ -32,7 +32,7 @@
 	            android:layout_height="wrap_content"
 	            android:gravity="center"
 	            android:text="@string/home_prompt"
-	            android:textColor="@color/White"
+	            android:textColor="@color/BaseColor"
 	            android:padding="10dp"
 	            android:textSize="24sp" />
 	
@@ -51,7 +51,7 @@
 	            android:layout_height="wrap_content"
 	            android:gravity="center"
 	            android:text="@string/initial_prompt"
-	            android:textColor="@color/White"
+	            android:textColor="@color/BaseColor"
 	            android:padding="5dp"
 	            android:textSize="16sp" />
 
@@ -70,7 +70,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentBottom="true"
 		    android:layout_alignParentLeft="true"
-		    android:textColor="@color/White"
+		    android:textColor="@color/BaseColor"
 		    android:background="@android:color/transparent"
 		    android:text="@string/back"
 		    android:visibility="gone" />
@@ -91,7 +91,7 @@
 	        android:text="@string/slideUpText"
 	        android:padding="30dp"
 	        android:textSize="16sp"
-	        android:textColor="@color/White" />
+	        android:textColor="@color/BaseColor" />
         
         <TextView
 	        android:id="@+id/favoriteEmpty"

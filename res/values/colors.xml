@@ -160,4 +160,5 @@
  <color name="actionbar_color">#00000000</color>
  <color name="general">@color/DarkGray</color>
  <color name="tab_background">#1A000000</color>
+ <color name="BaseColor">@color/White</color>
 </resources>

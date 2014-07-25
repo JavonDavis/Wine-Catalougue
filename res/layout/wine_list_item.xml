@@ -23,7 +23,7 @@
 		    android:layout_height="wrap_content"
 		    app:GlametrixBold="GlametrixBold.otf"
 		    android:layout_margin="5dp"
-		    android:textColor="@color/White"
+		    android:textColor="@color/BaseColor"
 		    android:textSize="18sp"/>
 	</LinearLayout>                                                  
 	    
