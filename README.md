@@ -12,7 +12,7 @@ When givin the option choose settings and then check the unknown sources box and
 
 ### Contribution guidelines ###
 
-Any bugs noticed please place in the issue tracker
+Any bugs noticed please place in the issue tracker which can be accessed in the issues option under navigation
 
 ### Contact ###
 
