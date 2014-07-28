@@ -1,10 +1,10 @@
 package com.jwray.jwraywines.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,12 +60,20 @@ public class SearchFragment extends Fragment implements ParcelKeys
 	                if(event.getRawX()>= ((wineSearch.getRight() - wineSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))-50) {
 	                	String query = wineSearch.getText().toString();
 	                	
-	                    Intent intent = new Intent(mContext,WineListActivity.class);
-	                    
-	                    Log.d("query", query);
-	                    intent.putExtra(NAME_IDENTIFIER, query);
-	                    
-	                    startActivity(intent);
+	                	if(!query.isEmpty())
+	                	{
+		                    Intent intent = new Intent(mContext,WineListActivity.class);
+		                    
+		                    intent.putExtra(NAME_IDENTIFIER, query);
+		                    
+		                    startActivity(intent);
+	                	}
+	                	else 
+	                	{
+	                		new AlertDialog.Builder(mContext)
+	                			.setTitle("Blank Search")
+	                			.setMessage("Your search request was empty");
+	                	}
 	                }
 	            }
 	            return false;

@@ -36,12 +36,16 @@ public interface ParcelKeys {
 	
 	interface OptionNotifiers
 	{
-		static final String MEAL_TEXT ="Wine for a Meal";
+		static final String MEAL_TEXT ="Wine with a Meal";
 		static final String TYPE_TEXT = "Wine by Type";
 		static final String OCCASION_TEXT = "Wine for an Occasion";
 		static final String TYPE_RED = "Red";
 		static final String TYPE_WHITE = "White";
 		static final String TYPE_SPARKLING = "Sparkling";
+		static final String MEAL_CHICKEN = "Chicken";
+		static final String MEAL_PASTA = "Pasta";
+		static final String MEAL_PIZZA= "Pizza";
+		static final String MEAL_PORK = "Pork";
 		static final int HOME_IDENTIFIER = 1;
 		static final int MEAL_IDENTIFIER = 2;
 		static final int TYPE_IDENTIFIER = 3;

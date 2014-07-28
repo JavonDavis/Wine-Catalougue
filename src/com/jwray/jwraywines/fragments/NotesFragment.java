@@ -53,7 +53,14 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 	
 	public static void hideEmpty()
 	{
-		emptyText.setVisibility(View.GONE);
+		try
+		{
+			emptyText.setVisibility(View.GONE);
+		}
+		catch(java.lang.NullPointerException e)
+		{
+			
+		}
 	}
 	
 	@Override

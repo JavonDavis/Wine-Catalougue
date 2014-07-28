@@ -75,6 +75,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 		wineId = wine.getId();
 		
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
+		getSupportActionBar().setIcon(android.R.color.transparent);
 		
 		mTitle = wine.getName();
 		setTitle(mTitle);
@@ -231,24 +232,25 @@ public class WineInformationActivity extends ActionBarActivity implements
 				notes);
 		
 		ListView noteView = NotesFragment.getNotesList();
-		                     
-		noteView.setAdapter(noteAdapter);
-		
-		noteView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Note note = noteAdapter.getItem(position);
-				
-				OptionsDialogFragment.setContext(WineInformationActivity.this);
-				OptionsDialogFragment.setNote(note);
-				
-				DialogFragment dialog = new OptionsDialogFragment();
-		        dialog.show(WineInformationActivity.this.getSupportFragmentManager(), "OptionsDialog");
-			}
-		});
-		
+		if(noteView!=null)   
+		{
+			noteView.setAdapter(noteAdapter);
+			
+			noteView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+	
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Note note = noteAdapter.getItem(position);
+					
+					OptionsDialogFragment.setContext(WineInformationActivity.this);
+					OptionsDialogFragment.setNote(note);
+					
+					DialogFragment dialog = new OptionsDialogFragment();
+			        dialog.show(WineInformationActivity.this.getSupportFragmentManager(), "OptionsDialog");
+				}
+			});
+		}
 	}
 
 

@@ -57,7 +57,6 @@ public class HomeActivity extends ActionBarActivity implements
 		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		
 		setContentView(R.layout.activity_home);
-		//getSupportActionBar().set
 		
 		tControl = new ThreadControl();
 		obj = new WineManager(this);
@@ -65,7 +64,7 @@ public class HomeActivity extends ActionBarActivity implements
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		//actionBar.setIcon(android.R.color.transparent);
+		actionBar.setIcon(android.R.color.transparent);
 		
 		if(obj.getAllWines().isEmpty())
 			new WineContent().getWines(this, tControl);
@@ -97,7 +96,6 @@ public class HomeActivity extends ActionBarActivity implements
 					public void onPageScrollStateChanged(int state)
 					{
 					    if (state == ViewPager.SCROLL_STATE_IDLE)
-					        if (mViewPager.getCurrentItem()!= 0)
 					            // Hide the keyboard.
 					            ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE))
 					                .hideSoftInputFromWindow(mViewPager.getWindowToken(), 0);

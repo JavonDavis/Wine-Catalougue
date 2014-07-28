@@ -18,7 +18,7 @@
     	android:layout_height="match_parent"
         android:layout_weight="2"
         android:gravity="center" >
-        
+        <!-- 
         <ImageView
         android:id="@+id/spainView"
         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
     	android:layout_height="match_parent"
         android:contentDescription="@string/australiaDescription"
         android:layout_weight="1"
-        android:src="@drawable/australia" />
+        android:src="@drawable/australia" />-->
    </TableRow>
 
 </TableLayout>

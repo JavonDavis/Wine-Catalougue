@@ -17,9 +17,9 @@
      limitations under the License.
 -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
-    <style name="Theme.Jwray" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Jwray" parent="@style/Theme.AppCompat">
         <item name="actionBarItemBackground">@drawable/selectable_background_jwray</item>
         <item name="popupMenuStyle">@style/PopupMenu.Jwray</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Jwray</item>
@@ -29,13 +29,10 @@
         <item name="actionModeBackground">@drawable/cab_background_top_jwray</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_jwray</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Jwray</item>
-
-                <!-- Light.DarkActionBar specific -->
-        <item name="actionBarWidgetTheme">@style/Theme.Jwray.Widget</item>
-
+        
     </style>
 
-    <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_jwray</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_jwray</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_jwray</item>

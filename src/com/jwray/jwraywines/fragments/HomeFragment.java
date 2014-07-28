@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	private HomeOptionAdapter listAdapter;
 	private static List<String> optionSet = new ArrayList<String>();
 	private TextView prompt_text;
-	private int previousIdentifier = 0;
+	private int previousIdentifier = 0;  //used to identify the previous list 
 	private Button back;
 	
 	public static Fragment newInstance() {
@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		switch(code)
 		{
 			case HOME_IDENTIFIER:
+				prompt_text.setText("What kind of wine are you looking for?"); //move to the parcelkeys class
 				optionSet.add(MEAL_TEXT);
 				optionSet.add(TYPE_TEXT);
 				optionSet.add(OCCASION_TEXT);
@@ -89,6 +90,13 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				optionSet.add(TYPE_RED);
 				optionSet.add(TYPE_WHITE);
 				optionSet.add(TYPE_SPARKLING);
+				break;
+			case MEAL_IDENTIFIER:
+				prompt_text.setText("Please choose an option that best describes your meal");
+				optionSet.add(MEAL_CHICKEN);
+				optionSet.add(MEAL_PASTA);
+				optionSet.add(MEAL_PIZZA);
+				optionSet.add(MEAL_PORK);
 				break;
 		}
 		if(listAdapter!=null)
@@ -210,6 +218,13 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case TYPE_TEXT:
 					refreshList(TYPE_IDENTIFIER);
 					setPreviousIdentifier(HOME_IDENTIFIER);
+					break;
+				case TYPE_RED:
+					break;
+				case MEAL_TEXT:
+					refreshList(MEAL_IDENTIFIER);
+					setPreviousIdentifier(HOME_IDENTIFIER);
+					break;
 			}
 		}
 		

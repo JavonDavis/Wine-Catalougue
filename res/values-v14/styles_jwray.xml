@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Jwray" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Jwray" parent="@style/Theme.AppCompat">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_jwray</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Jwray</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Jwray</item>
@@ -30,12 +30,10 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_jwray</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Jwray</item>
         
-                <!-- Light.DarkActionBar specific -->
-        <item name="android:actionBarWidgetTheme">@style/Theme.Jwray.Widget</item>
-
+        
     </style>
 
-    <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="android:background">@drawable/ab_solid_jwray</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_jwray</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_jwray</item>

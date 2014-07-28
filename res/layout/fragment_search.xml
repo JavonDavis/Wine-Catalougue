@@ -16,7 +16,8 @@
         android:includeFontPadding="true"
         android:inputType="text"
         android:padding="20dp"
-        android:drawableRight="@drawable/arrow_right">
+        android:drawableRight="@drawable/arrow_right"
+        android:textColor="@color/Black">
         
         </EditText>
         

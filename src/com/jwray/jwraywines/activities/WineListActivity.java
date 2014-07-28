@@ -15,5 +15,6 @@ public class WineListActivity extends FragmentActivity
 		
 		getSupportFragmentManager().beginTransaction()
 		.add(R.id.wine_container, new WineListFragment()).commit();
+		
 	}
 }
