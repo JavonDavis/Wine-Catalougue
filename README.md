@@ -1,5 +1,14 @@
 # README #
 
+### Latest release v1.2 details ###
+
+* Refresh Button - pulls from the online db
+* small functionality to home page
+* tab text color changed
+* share button added on wine page - not fully functional yet
+* wine name now centered on its detail page
+
+
 ### What is this repository for? ###
 
 * This repository is used to house the source code along with an apk file for the J Wray and Nephew Wines application.
