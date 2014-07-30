@@ -19,7 +19,7 @@ import android.graphics.Bitmap;
 
 public class WineManager extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 38;
+	private static final int DATABASE_VERSION = 40;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
@@ -38,6 +38,10 @@ public class WineManager extends SQLiteOpenHelper {
 	private static final String KEY_COUNTRY ="country";
 	private static final String KEY_WINEMAKER_NOTES ="winemaker_notes";
 	private static final String KEY_BRAND = "brand";
+	private static final String KEY_PRONOUNCIATION = "pronounciation";
+	private static final String KEY_MEAL = "meal";
+	private static final String KEY_OCCASION = "occasion";
+	private static final String KEY_TYPE = "type";
 	
 	private Context context;
 	private FavoriteManager favObj;
@@ -64,7 +68,8 @@ public class WineManager extends SQLiteOpenHelper {
 				+ KEY_ID +" integer primary key,"+ KEY_NAME +" text,"+ KEY_DESCRIPTION +" text,"+ KEY_COUNTRY +" text,"
 				+ KEY_TASTING_NOTES +" text,"+ KEY_MATURATION +" text,"+ KEY_FOOD_PAIRING +" text,"+ KEY_SERVING_SUGGESTION +" text,"
 				+ KEY_WINE_OF_ORIGIN +" text,"+ KEY_CELLARING_POTENTIAL +" text,"+ KEY_WINEMAKER_NOTES +" text,"
-				+ KEY_BRAND +" text,"+ KEY_ALCOHOL_LEVEL +" double"
+				+ KEY_BRAND +" text,"+ KEY_ALCOHOL_LEVEL +" double,"+ KEY_PRONOUNCIATION +" text,"+ KEY_MEAL +" text,"
+				+ KEY_OCCASION +" text,"+ KEY_TYPE +" text"
 				+");";
 		
 		db.execSQL(createTable);
@@ -86,7 +91,7 @@ public class WineManager extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		
-		values.put(KEY_ID, wine.getId());
+		//values.put(KEY_ID, wine.getId());
 		values.put(KEY_NAME, wine.getName());
 		values.put(KEY_DESCRIPTION, wine.getDescription());
 		values.put(KEY_WINE_OF_ORIGIN, wine.getWineOfOrigin());
@@ -99,6 +104,10 @@ public class WineManager extends SQLiteOpenHelper {
 		values.put(KEY_CELLARING_POTENTIAL, wine.getCellaringPotential());
 		values.put(KEY_WINEMAKER_NOTES, wine.getWinemakerNotes());
 		values.put(KEY_BRAND, wine.getBrand());
+		values.put(KEY_MEAL,wine.getMeal());
+		values.put(KEY_PRONOUNCIATION,wine.getPronounciation());
+		values.put(KEY_OCCASION,wine.getOccasion());
+		values.put(KEY_TYPE,wine.getType());
 		
 		//saveToInternalSorage(wine.getBitmap(), wine.getName());
 		
@@ -160,6 +169,10 @@ public class WineManager extends SQLiteOpenHelper {
 				wine.setWinemakerNotes(cursor.getString(10));
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
 				
 				if(favorites.contains(wine.getId()))
 					wine.setFavorite(true);
@@ -199,6 +212,10 @@ public class WineManager extends SQLiteOpenHelper {
 				wine.setWinemakerNotes(cursor.getString(10));
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
 				
 				if(favorites.contains(wine.getId()))
 					wine.setFavorite(true);
@@ -239,6 +256,10 @@ public class WineManager extends SQLiteOpenHelper {
 				wine.setWinemakerNotes(cursor.getString(10));
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
 				
 				if(favorites.contains(wine.getId()))
 					wine.setFavorite(true);
@@ -252,6 +273,50 @@ public class WineManager extends SQLiteOpenHelper {
 		db.close();
 		return wines;
 	} 
+	
+	public List<Wine> getAllWinesByType(String type)
+	{
+		List<Wine> wines = new ArrayList<Wine>();
+		
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Wine wine = new Wine();
+				wine.setId(Integer.parseInt(cursor.getString(0)));
+				wine.setName(cursor.getString(1));
+				wine.setDescription(cursor.getString(2));
+				wine.setCountry(cursor.getString(3));
+				wine.setTastingNotes(cursor.getString(4));
+				wine.setMaturation(cursor.getString(5));
+				wine.setFoodPairing(cursor.getString(6));
+				wine.setServingSuggestion(cursor.getString(7));
+				wine.setWineOfOrigin(cursor.getString(8));
+				wine.setCellaringPotential(cursor.getString(9));
+				wine.setWinemakerNotes(cursor.getString(10));
+				wine.setBrand(cursor.getString(11));
+				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
+				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
+				
+				// Adding wine to list
+				if(wine.getType().toLowerCase(Locale.US).contains(type.toLowerCase(Locale.US)))
+					wines.add(wine);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return wines;
+	}
 	
 	public List<Wine> getAllWinesByCountry(String country)
 	{
@@ -279,6 +344,10 @@ public class WineManager extends SQLiteOpenHelper {
 				wine.setWinemakerNotes(cursor.getString(10));
 				wine.setBrand(cursor.getString(11));
 				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
 				
 				if(favorites.contains(wine.getId()))
 					wine.setFavorite(true);
@@ -319,6 +388,10 @@ public class WineManager extends SQLiteOpenHelper {
 			wine.setWinemakerNotes(cursor.getString(10));
 			wine.setBrand(cursor.getString(11));
 			wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+			wine.setPronounciation(cursor.getString(13));
+			wine.setMeal(cursor.getString(14));
+			wine.setOccasion(cursor.getString(15));
+			wine.setType(cursor.getString(16));
 			
 			if(favorites.contains(wine.getId()))
 				wine.setFavorite(true);
@@ -334,6 +407,8 @@ public class WineManager extends SQLiteOpenHelper {
 
 	public boolean deleteAllWines()
 	{
-		return false;
+		SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+	    db.delete(TABLE_NAME, null, null);
+	    return true;
 	}
 }

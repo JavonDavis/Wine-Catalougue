@@ -17,13 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.jwray.jwraywines.activities.HomeActivity;
 import com.jwray.jwraywines.classes.databases.WineManager;
 import com.jwray.jwraywines.fragments.HomeFragment;
 
@@ -31,13 +30,13 @@ import com.jwray.jwraywines.fragments.HomeFragment;
 public class WineContent 
 {	
 	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
-	public static List<Wine> WINES = new ArrayList<Wine>();
-	public static List<String> NAMES = new ArrayList<String>();
+	private List<Wine> WINES = new ArrayList<Wine>();
+	private List<String> NAMES = new ArrayList<String>();
 	
 	private Context context;
-	//private ProgressBar progress;
+	
 	private ThreadControl control;
-	private static ProgressDialog progress;
+	WineManager obj;
 	
 	//hashmap used to match a wines' name to itself 
 	private static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();
@@ -45,7 +44,6 @@ public class WineContent
 	public void getWines(final Context mContext,ThreadControl mControl)
 	{
 		context = mContext;
-		progress = new ProgressDialog(context);
 		control = mControl;
 		AsyncCaller caller = new AsyncCaller();
 		caller.execute();
@@ -72,10 +70,17 @@ public class WineContent
 			//((Activity) context).requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);  
 			//((Activity) context).setProgressBarIndeterminateVisibility(true);
 			
-			progress.setMessage("Fetching all the wines");
+			/*progress.setMessage("Fetching all the wines");
 		    progress.setIndeterminate(true);
 		    progress.setCancelable(false);
-		    progress.show();
+		    progress.show();*/
+			
+			HomeActivity.setRefreshActionButtonState(true);
+			obj = new WineManager(context);
+			obj.deleteAllWines();
+			WINES.clear();
+			NAMES.clear();
+			Log.d("soze", "s"+obj.getAllWines().size());
 		}
 		
 		@Override
@@ -127,8 +132,6 @@ public class WineContent
 	        
 			
 	      //paring data
-	         @SuppressWarnings("unused")
-			 int id=0;
 	         
 	         String name= null;
 	    	 String country= null;
@@ -143,6 +146,10 @@ public class WineContent
 	    	 String foodPairing= null;
 	    	 String winemakerNotes= null;
 	    	 String brand = null;
+	    	 String meal = null;
+	    	 String pronounciation = null;
+	    	 String type = null;
+	    	 String occasion = null;
 	    	
 	        try{
 		        JSONArray jArray = new JSONArray(result);
@@ -151,7 +158,6 @@ public class WineContent
 		        for(int i=0;i<jArray.length();i++){
 		                json_data = jArray.getJSONObject(i);
 		                
-		                id=json_data.getInt("id");
 		                name=json_data.getString("name");
 		                country=json_data.getString("country");
 		                alcohol_level=json_data.getDouble("alcohol_level");
@@ -164,6 +170,10 @@ public class WineContent
 		                cellaringPotential=json_data.getString("cellaring_potential");
 		                servingSuggestion=json_data.getString("serving_suggestion");
 		                brand=json_data.getString("brand");
+		                pronounciation = json_data.getString("pronounciation");
+		                meal = json_data.getString("Meal");
+		                type = json_data.getString("Type");
+		                occasion = json_data.getString("Occasion");
 		                
 		                name = removeBreaks(name);
 		                country = removeBreaks(country);
@@ -176,6 +186,10 @@ public class WineContent
 		                winemakerNotes = removeBreaks(winemakerNotes);
 		                maturation = removeBreaks(maturation);
 		                brand = removeBreaks(brand);
+		                pronounciation = removeBreaks(pronounciation);
+		                meal = removeBreaks(meal);
+		                type = removeBreaks(type);
+		                occasion = removeBreaks(occasion);
 			        	
 			        	Wine wine = new Wine();
 			        	wine.setName(name);
@@ -190,6 +204,10 @@ public class WineContent
 			        	wine.setWinemakerNotes(winemakerNotes);
 			        	wine.setWineOfOrigin(wineOfOrigin);
 			        	wine.setBrand(brand);
+			        	wine.setPronounciation(pronounciation);
+			        	wine.setMeal(meal);
+			        	wine.setType(type);
+			        	wine.setOccasion(occasion);
 			        	
 			        	
 			        	//Got wines from the internet with this method
@@ -229,7 +247,6 @@ public class WineContent
 		@Override
 		protected void onPostExecute(String result) {
 			//Intent intent = new Intent(context,WineListActivity.class);
-			WineManager obj = new WineManager(context);
 			
 	        for(Wine wine: WINES)
 				obj.insert(wine);
@@ -240,12 +257,12 @@ public class WineContent
 	       // context.startActivity(intent);
 			//progressDialog.dismiss();
 	        
-	        if(progress.isShowing())
-	            progress.dismiss();
-	        
+	        //if(progress.isShowing())
+	          //  progress.dismiss();
+	        HomeActivity.setRefreshActionButtonState(false);
 	        HomeFragment.resetFavorites();
 	        
-	        ((Activity) context).setProgressBarIndeterminateVisibility(false);
+	        //((Activity) context).setProgressBarIndeterminateVisibility(false);
 		}
 		
 	}

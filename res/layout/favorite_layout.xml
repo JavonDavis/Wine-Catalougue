@@ -6,4 +6,5 @@
      android:layout_height="match_parent"
      android:drawableTop="@drawable/ab_stacked_solid_jwray"
      android:textAppearance="?android:attr/textAppearanceLarge"
+     android:background="@color/DarkBackground"
      android:text="" />

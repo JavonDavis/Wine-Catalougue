@@ -28,6 +28,7 @@ public interface ParcelKeys {
 	static final String BRAND_IDENTIFIER = "brand";
 	static final String COUNTRY_IDENTIFIER = "country";
 	static final String NOTE_IDENTIFITER = "note_id";
+	static final String TYPE_IDENTIFIER = "type";
 	
 	/*============================================ Interfaces =================================================*/
 	static interface NoteDialogInterface {

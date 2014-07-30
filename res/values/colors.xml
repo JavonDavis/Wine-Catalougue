@@ -161,5 +161,5 @@
  <color name="general">@color/DarkGray</color>
  <color name="tab_background">#1A000000</color>
  <color name="BaseColor">@color/White</color>
- <color name="HomeOptionBackground">#1A1E1921</color>
+ <color name="DarkBackground">#261E1921</color>
 </resources>

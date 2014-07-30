@@ -3,11 +3,14 @@ package com.jwray.jwraywines.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineInformationActivity;
+import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.FavoriteManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -65,8 +69,16 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		mContext = getActivity();
 		favObj = new FavoriteManager(mContext);
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		
+		inflater.inflate(R.menu.home, menu);
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 	
 	private void refreshList(int code)
@@ -85,7 +97,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				optionSet.add(TYPE_TEXT);
 				optionSet.add(OCCASION_TEXT);
 				break;
-			case TYPE_IDENTIFIER:
+			case OptionNotifiers.TYPE_IDENTIFIER:
 				prompt_text.setText("What type of wine?");
 				optionSet.add(TYPE_RED);
 				optionSet.add(TYPE_WHITE);
@@ -106,7 +118,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+		setHasOptionsMenu(true);
 		final View rootView = inflater.inflate(R.layout.fragment_home, container,false);
 		
 		if(rootView!=null)
@@ -213,13 +225,33 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				long id) {
 			
 			String option = (String) parent.getItemAtPosition(position);
+			Intent intent;
 			switch(option)
 			{
 				case TYPE_TEXT:
-					refreshList(TYPE_IDENTIFIER);
+					refreshList(OptionNotifiers.TYPE_IDENTIFIER);
 					setPreviousIdentifier(HOME_IDENTIFIER);
 					break;
 				case TYPE_RED:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_RED);
+                    
+                    startActivity(intent);
+					break;
+				case TYPE_WHITE:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_WHITE);
+                    
+                    startActivity(intent);
+					break;
+				case TYPE_SPARKLING:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_SPARKLING);
+                    
+                    startActivity(intent);
 					break;
 				case MEAL_TEXT:
 					refreshList(MEAL_IDENTIFIER);
@@ -243,6 +275,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 			super(context, resource, objects);
 		}
 		
+		@SuppressLint("InflateParams")
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;

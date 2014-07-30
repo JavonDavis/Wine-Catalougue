@@ -49,6 +49,7 @@ public class SearchFragment extends Fragment implements ParcelKeys
 		wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
 		
 		wineSearch.setOnTouchListener(new OnTouchListener() {
+			
 	        @Override
 	        public boolean onTouch(View v, MotionEvent event) {
 	            //final int DRAWABLE_LEFT = 0;
@@ -72,7 +73,9 @@ public class SearchFragment extends Fragment implements ParcelKeys
 	                	{
 	                		new AlertDialog.Builder(mContext)
 	                			.setTitle("Blank Search")
-	                			.setMessage("Your search request was empty");
+	                			.setMessage("Your search request was empty")
+	                			.setIcon(android.R.drawable.ic_dialog_alert)
+	                		     .show();
 	                	}
 	                }
 	            }

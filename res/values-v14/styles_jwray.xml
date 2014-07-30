@@ -29,9 +29,12 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_jwray</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_jwray</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Jwray</item>
-        
-        
+		<item name="android:actionBarTabTextStyle">@style/ActionBarTabTextStyle.Jwray</item>
     </style>
+    
+    <style name="ActionBarTabTextStyle.Jwray" parent="@style/Widget.AppCompat.ActionBar.TabText">
+    	<item name="android:textColor">@color/Black</item>        
+	</style>
 
     <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="android:background">@drawable/ab_solid_jwray</item>

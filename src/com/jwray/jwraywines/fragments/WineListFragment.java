@@ -20,19 +20,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.classes.Wine;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
-public class WineListFragment extends Fragment
+public class WineListFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	private WineManager obj;
-	private String brand,country,name;
-	private static String BRAND_IDENTIFIER = "brand";
-	private static String COUNTRY_IDENTIFIER = "country";
-	private static String NAME_IDENTIFIER = "name";
-	private static String WINE_IDENTIFIER = "id";
+	private String brand,country,name,type;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -44,6 +41,7 @@ public class WineListFragment extends Fragment
 		brand = getActivity().getIntent().getStringExtra(BRAND_IDENTIFIER);
 		country = getActivity().getIntent().getStringExtra(COUNTRY_IDENTIFIER);
 		name = getActivity().getIntent().getStringExtra(NAME_IDENTIFIER);
+		type = getActivity().getIntent().getStringExtra(TYPE_IDENTIFIER);
 	}
 
 	
@@ -75,6 +73,10 @@ public class WineListFragment extends Fragment
 			else if(name!=null)
 			{
 				wines = (ArrayList<Wine>) obj.getAllWines(name);
+			}
+			else if(type!=null)
+			{
+				wines = (ArrayList<Wine>) obj.getAllWinesByType(type);
 			}
 			else
 			{

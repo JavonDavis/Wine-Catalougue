@@ -17,6 +17,10 @@ public class Wine extends WineBase
 	private Bitmap bitmap; //TODO delete 
 	private Drawable picture;
 	private boolean favorite = false;
+	private String pronounciation;
+	private String occasion;
+	private String type;
+	private String meal;
 	
 	public Wine() 
 	{
@@ -62,8 +66,7 @@ public class Wine extends WineBase
 
     	try
     	{
-    		picture = context.getResources().getDrawable(resID);
-    		
+    		picture = context.getResources().getDrawable(resID);	
     	}
     	catch(android.content.res.Resources.NotFoundException e)
     	{
@@ -101,6 +104,67 @@ public class Wine extends WineBase
 	 */
 	public void setFavorite(boolean favorite) {
 		this.favorite = favorite;
+	}
+
+	public String getPictureLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return the pronounciation
+	 */
+	public String getPronounciation() {
+		return pronounciation;
+	}
+
+	/**
+	 * @param pronounciation the pronounciation to set
+	 */
+	public void setPronounciation(String pronounciation) {
+		this.pronounciation = pronounciation;
+	}
+
+	/**
+	 * @return the occasion
+	 */
+	public String getOccasion() {
+		return occasion;
+	}
+
+	/**
+	 * @param occasion the occasion to set
+	 */
+	public void setOccasion(String occasion) {
+		this.occasion = occasion;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the meal
+	 */
+	public String getMeal() {
+		return meal;
+	}
+
+	/**
+	 * @param meal the meal to set
+	 */
+	public void setMeal(String meal) {
+		this.meal = meal;
 	}
 
 

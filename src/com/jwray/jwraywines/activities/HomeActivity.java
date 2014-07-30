@@ -13,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
@@ -50,6 +49,7 @@ public class HomeActivity extends ActionBarActivity implements
 	
 	private WineManager obj;
 	private ThreadControl tControl;
+	private static Menu optionsMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,27 +118,36 @@ public class HomeActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.home, menu);
-	    return true;
+		optionsMenu = menu;
+		return super.onCreateOptionsMenu(menu);
 
 	}
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Consiider making a dialog
+		// TODO Consider making a dialog
 		super.onBackPressed();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		//int id = item.getItemId();
-		return super.onOptionsItemSelected(item);
+	public void refresh(MenuItem item)
+	{
+		new WineContent().getWines(this, tControl);
 	}
-
+	
+	public static void setRefreshActionButtonState(final boolean refreshing) {
+	    if (optionsMenu != null) {
+	        final MenuItem refreshItem = optionsMenu
+	            .findItem(R.id.wine_refresh);
+	        if (refreshItem != null) {
+	            if (refreshing) {
+	                refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+	            } else {
+	                refreshItem.setActionView(null);
+	            }
+	        }
+	    }
+	}
+	
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {

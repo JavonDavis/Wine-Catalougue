@@ -13,6 +13,6 @@
         android:padding="10dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@color/HomeOptionBackground"/>
+        android:background="@color/DarkBackground"/>
 
 </LinearLayout>

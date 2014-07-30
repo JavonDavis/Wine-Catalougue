@@ -69,6 +69,9 @@ public class WineDetailFragment extends Fragment {
 			{
 				aWine = obj.getWine(id);
 				
+				view = ((TextView) rootView.findViewById(R.id.name));
+				view.setText(aWine.getName());
+				
 				//check for alcohol level
 				if(aWine.getAlcohol_level()!=0)
 				{
@@ -284,7 +287,6 @@ public class WineDetailFragment extends Fragment {
 	            convertView = infalInflater.inflate(R.layout.wine_item, null);
 	        }
 	 
-	        Log.d("t",childText);
 	        TextView txtListChild = (TextView) convertView
 	                .findViewById(R.id.content);
 	 

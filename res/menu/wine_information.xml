@@ -10,6 +10,12 @@
         app:showAsAction="never"/>
     
     <item
+        android:id="@+id/share"
+        android:title="@string/shareText"
+        android:icon="@drawable/icon_share"
+        app:showAsAction="ifRoom"/>
+    
+    <item
         android:id="@+id/fav"
         android:title="@string/fav"
         android:icon="@drawable/icon_favorite"

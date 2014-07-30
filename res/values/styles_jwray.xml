@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.Jwray" parent="@style/Theme.AppCompat">
         <item name="actionBarItemBackground">@drawable/selectable_background_jwray</item>
@@ -29,14 +29,23 @@
         <item name="actionModeBackground">@drawable/cab_background_top_jwray</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_jwray</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Jwray</item>
-        
+		<item name="android:actionBarTabTextStyle">@style/ActionBarTabTextStyle.YourTheme</item>
     </style>
+    
+    <style name="ActionBarTabTextStyle.YourTheme" parent="@style/Widget.AppCompat.ActionBar.TabText">
+    <item name="android:textColor">@color/Black</item>        
+</style>
+
+    <style name="ActionBarTitleTextStyle.YourTheme" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <item name="android:textColor">@color/Black</item>
+</style>
 
     <style name="ActionBar.Solid.Jwray" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_jwray</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_jwray</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_jwray</item>
         <item name="progressBarStyle">@style/ProgressBar.Jwray</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleTextStyle.YourTheme</item>
     </style>
 
     <style name="ActionBar.Transparent.Jwray" parent="@style/Widget.AppCompat.ActionBar">
