@@ -411,4 +411,47 @@ public class WineManager extends SQLiteOpenHelper {
 	    db.delete(TABLE_NAME, null, null);
 	    return true;
 	}
+
+	public List<Wine> getAllWinesByMeal(String meal) {
+		List<Wine> wines = new ArrayList<Wine>();
+		
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Wine wine = new Wine();
+				wine.setId(Integer.parseInt(cursor.getString(0)));
+				wine.setName(cursor.getString(1));
+				wine.setDescription(cursor.getString(2));
+				wine.setCountry(cursor.getString(3));
+				wine.setTastingNotes(cursor.getString(4));
+				wine.setMaturation(cursor.getString(5));
+				wine.setFoodPairing(cursor.getString(6));
+				wine.setServingSuggestion(cursor.getString(7));
+				wine.setWineOfOrigin(cursor.getString(8));
+				wine.setCellaringPotential(cursor.getString(9));
+				wine.setWinemakerNotes(cursor.getString(10));
+				wine.setBrand(cursor.getString(11));
+				wine.setAlcohol_level(Double.parseDouble(cursor.getString(12)));
+				wine.setPronounciation(cursor.getString(13));
+				wine.setMeal(cursor.getString(14));
+				wine.setOccasion(cursor.getString(15));
+				wine.setType(cursor.getString(16));
+				
+				if(favorites.contains(wine.getId()))
+					wine.setFavorite(true);
+				
+				// Adding wine to list
+				if(wine.getMeal().toLowerCase(Locale.US).contains(meal.toLowerCase(Locale.US)))
+					wines.add(wine);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		db.close();
+		return wines;
+	}
 }

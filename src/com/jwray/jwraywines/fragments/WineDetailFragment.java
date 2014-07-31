@@ -94,6 +94,13 @@ public class WineDetailFragment extends Fragment {
 					view.setVisibility(View.VISIBLE);
 				}
 				
+				if(!aWine.getPronounciation().isEmpty())
+				{
+					view = ((TextView) rootView.findViewById(R.id.pronounciation));
+					view.setText(aWine.getPronounciation());
+					view.setVisibility(View.VISIBLE);
+				}
+				
 				//check for description
 				if(!aWine.getDescription().isEmpty())
 				{

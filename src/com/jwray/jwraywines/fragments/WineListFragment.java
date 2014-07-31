@@ -3,7 +3,11 @@ package com.jwray.jwraywines.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +33,7 @@ public class WineListFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	private WineManager obj;
-	private String brand,country,name,type;
+	private String brand,country,name,type,meal;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -42,6 +46,7 @@ public class WineListFragment extends Fragment implements ParcelKeys
 		country = getActivity().getIntent().getStringExtra(COUNTRY_IDENTIFIER);
 		name = getActivity().getIntent().getStringExtra(NAME_IDENTIFIER);
 		type = getActivity().getIntent().getStringExtra(TYPE_IDENTIFIER);
+		meal = getActivity().getIntent().getStringExtra(MEAL_IDENTIFIER);
 	}
 
 	
@@ -78,29 +83,54 @@ public class WineListFragment extends Fragment implements ParcelKeys
 			{
 				wines = (ArrayList<Wine>) obj.getAllWinesByType(type);
 			}
+			else if(meal!=null)
+			{
+				wines = (ArrayList<Wine>) obj.getAllWinesByMeal(meal);
+			}
 			else
 			{
 				wines = (ArrayList<Wine>) obj.getAllWines();
 			}
 			
-			final WineAdapter wineAdapter = new WineAdapter(mContext,
-					android.R.layout.simple_list_item_2,
-					wines);
-			
-			wineList.setAdapter(wineAdapter);
-			
-			wineList.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					Intent intent = new Intent(mContext,WineInformationActivity.class);
+			if(!wines.isEmpty())
+			{
+				final WineAdapter wineAdapter = new WineAdapter(mContext,
+						android.R.layout.simple_list_item_2,
+						wines);
+				
+				wineList.setAdapter(wineAdapter);
+				
+				wineList.setOnItemClickListener(new OnItemClickListener() {
+	
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						Intent intent = new Intent(mContext,WineInformationActivity.class);
+						
+						int ID = wineAdapter.getItem(position).getId();
+						intent.putExtra(WINE_IDENTIFIER, ID);
+						startActivity(intent);
+					}
+				});
+			}
+			else
+			{
+				new AlertDialog.Builder(mContext)
+    			.setTitle("No Results")
+    			.setMessage("Your search returned no results")
+    			.setIcon(android.R.drawable.ic_dialog_alert)
+    			.setPositiveButton(android.R.string.ok, new OnClickListener() {
 					
-					int ID = wineAdapter.getItem(position).getId();
-					intent.putExtra(WINE_IDENTIFIER, ID);
-					startActivity(intent);
-				}
-			});
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						((Activity) mContext).finish();
+						
+					}
+				})
+    		     .show();
+				
+				
+			}
 		}
 		catch(InflateException e)
 		{

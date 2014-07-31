@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineInformationActivity;
@@ -92,7 +93,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		switch(code)
 		{
 			case HOME_IDENTIFIER:
-				prompt_text.setText("What kind of wine are you looking for?"); //move to the parcelkeys class
+				prompt_text.setText("What kind of wine are you looking for?"); //move to the ParcelKeys class
 				optionSet.add(MEAL_TEXT);
 				optionSet.add(TYPE_TEXT);
 				optionSet.add(OCCASION_TEXT);
@@ -100,15 +101,52 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 			case OptionNotifiers.TYPE_IDENTIFIER:
 				prompt_text.setText("What type of wine?");
 				optionSet.add(TYPE_RED);
+				optionSet.add(TYPE_ROSE);
 				optionSet.add(TYPE_WHITE);
 				optionSet.add(TYPE_SPARKLING);
+				setPreviousIdentifier(HOME_IDENTIFIER);
 				break;
-			case MEAL_IDENTIFIER:
+			case OptionNotifiers.MEAL_IDENTIFIER:
 				prompt_text.setText("Please choose an option that best describes your meal");
-				optionSet.add(MEAL_CHICKEN);
+				optionSet.add(MEAL_MEAT);
 				optionSet.add(MEAL_PASTA);
 				optionSet.add(MEAL_PIZZA);
-				optionSet.add(MEAL_PORK);
+				optionSet.add(MEAL_CHEESE);
+				optionSet.add(MEAL_VEGGIES);
+				optionSet.add(MEAL_SEAFOOD);
+				optionSet.add(MEAL_FRUIT);
+				setPreviousIdentifier(HOME_IDENTIFIER);
+				break;
+			case OptionNotifiers.OCCASION_IDENTIFIER:
+				prompt_text.setText("What's the occasion?");
+				optionSet.add(OCCASION_DATE_TEXT);
+				optionSet.add(OCCASION_GIFT_TEXT);	
+				setPreviousIdentifier(HOME_IDENTIFIER);
+				break;
+			case OptionNotifiers.DATE_IDENTIFIER:
+				prompt_text.setText("Nice! What kind of date?");
+				optionSet.add(DATE_BREAKFAST);
+				optionSet.add(DATE_LUNCH);		
+				optionSet.add(DATE_DINNER);
+				setPreviousIdentifier(OptionNotifiers.OCCASION_IDENTIFIER);
+				break;
+			case OptionNotifiers.GIFT_IDENTIFIER:
+				prompt_text.setText("Cool, what kind of gift are you looking for?");
+				optionSet.add(GIFT_BIRTHDAY);
+				optionSet.add(GIFT_ANNIVERSARY);		
+				optionSet.add(GIFT_HOLIDAY);
+				setPreviousIdentifier(OptionNotifiers.OCCASION_IDENTIFIER);
+				break;
+			case OptionNotifiers.MEAT_IDENTIFIER:
+				prompt_text.setText("What kind of meat?");
+				optionSet.add(MEAT_BEEF);
+				optionSet.add(MEAT_CHICKEN);		
+				optionSet.add(MEAT_STEAK);
+				optionSet.add(MEAT_PORK);
+				setPreviousIdentifier(OptionNotifiers.MEAL_IDENTIFIER);
+				break;
+			default:
+				Toast.makeText(mContext, "Invalid Identifier", Toast.LENGTH_LONG).show();
 				break;
 		}
 		if(listAdapter!=null)
@@ -150,7 +188,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 
 				@Override
 				public void onPanelSlide(View panel, float slideOffset) {
-				}
+				} 
 
 				@Override
 				public void onPanelCollapsed(View panel) {
@@ -230,32 +268,140 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 			{
 				case TYPE_TEXT:
 					refreshList(OptionNotifiers.TYPE_IDENTIFIER);
-					setPreviousIdentifier(HOME_IDENTIFIER);
 					break;
 				case TYPE_RED:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_RED);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case TYPE_ROSE:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case TYPE_WHITE:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_WHITE);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case TYPE_SPARKLING:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, TYPE_SPARKLING);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_TEXT:
-					refreshList(MEAL_IDENTIFIER);
-					setPreviousIdentifier(HOME_IDENTIFIER);
+					refreshList(OptionNotifiers.MEAL_IDENTIFIER);
+					break;
+				case OCCASION_TEXT:
+					refreshList(OptionNotifiers.OCCASION_IDENTIFIER);
+					break;
+				case DATE_BREAKFAST:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    //startActivity(intent);
+					break;
+				case DATE_LUNCH:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    //startActivity(intent);
+					break;
+				case DATE_DINNER:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    //startActivity(intent);
+					break;
+				case OCCASION_GIFT_TEXT:
+					refreshList(OptionNotifiers.GIFT_IDENTIFIER);
+					break;
+				case OCCASION_DATE_TEXT:
+					refreshList(OptionNotifiers.DATE_IDENTIFIER);
+					break;
+				case MEAL_PASTA:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_PIZZA:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_CHEESE:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_FRUIT:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_VEGGIES:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_SEAFOOD:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAL_MEAT:
+					refreshList(OptionNotifiers.MEAT_IDENTIFIER);
+					break;
+				case MEAT_BEEF:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAT_CHICKEN:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAT_PORK:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case MEAT_STEAK:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
 					break;
 			}
 		}
