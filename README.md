@@ -1,6 +1,12 @@
 # README #
 
-### Latest release v1.2 details ###
+### Latest release v1.3.1 details ###
+
+* Prononciation added to wine page
+* more functionality and options to home page
+* minor bug fixes
+
+### release v1.2 details ###
 
 * Refresh Button - pulls from the online db
 * small functionality to home page
