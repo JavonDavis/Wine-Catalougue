@@ -18,7 +18,6 @@
 ### What is this repository for? ###
 
 * This repository is used to house the source code along with an apk file for the J Wray and Nephew Wines application.
-* v1.2
 
 ### How do I get set up? ###
 
