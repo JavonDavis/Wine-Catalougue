@@ -5,7 +5,6 @@ package com.jwray.jwraywines.classes;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +65,7 @@ public interface ParcelKeys {
 		static final String GIFT_BIRTHDAY = "Birthday Gift";
 		static final String GIFT_ANNIVERSARY = "Anniversary Gift";
 		static final String GIFT_HOLIDAY= "Holiday Gift";
+		static final int START_IDENTIFIER = 0;
 		static final int HOME_IDENTIFIER = 1;
 		static final int MEAL_IDENTIFIER = 2;
 		static final int TYPE_IDENTIFIER = 3;
@@ -110,7 +110,6 @@ public interface ParcelKeys {
 			return 0;
 		}
 
-		@SuppressLint("NewApi")
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
@@ -123,7 +122,7 @@ public interface ParcelKeys {
 
 		        LayoutInflater inflater;
 		        inflater = LayoutInflater.from(mContext);
-		        view = inflater.inflate(R.layout.wine_list_item, null);
+		        view = inflater.inflate(R.layout.wine_list_item, parent,false);
 
 		    }
 			

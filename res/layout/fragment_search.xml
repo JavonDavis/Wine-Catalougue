@@ -4,21 +4,17 @@
        android:layout_height="match_parent"
        android:orientation="vertical"
        android:background="@drawable/background" >
-
-    <EditText
-        android:id="@+id/wineSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_edit"
-        android:focusableInTouchMode="true"
-        android:hint="@string/wineSearchHint"
-        android:includeFontPadding="true"
-        android:inputType="text"
-        android:padding="20dp"
-        android:drawableRight="@drawable/arrow_right"
-        android:textColor="@color/Black">
         
-        </EditText>
+    <MultiAutoCompleteTextView
+      android:id="@+id/tImpl"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:inputType="textCapSentences"
+      android:padding="20dp"
+      android:drawableRight="@drawable/arrow_right"
+      android:background="@drawable/rounded_edit"
+      android:ems="10"
+      android:textColor="@color/Black" />
         
 </LinearLayout>

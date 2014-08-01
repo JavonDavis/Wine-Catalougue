@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,8 +45,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	private static List<String> optionSet = new ArrayList<String>();
 	private TextView prompt_text;
 	private int previousIdentifier = 0;  //used to identify the previous list 
-	private Button back;
-	
+
 	public static Fragment newInstance() {
 		return new HomeFragment();
 	}
@@ -82,14 +80,9 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 	
-	private void refreshList(int code)
+	public void refreshList(int code)
 	{
 		optionSet.clear();
-		if(code!= HOME_IDENTIFIER)
-			back.setVisibility(View.VISIBLE);
-		else
-			back.setVisibility(View.GONE);
-		
 		switch(code)
 		{
 			case HOME_IDENTIFIER:
@@ -97,6 +90,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				optionSet.add(MEAL_TEXT);
 				optionSet.add(TYPE_TEXT);
 				optionSet.add(OCCASION_TEXT);
+				setPreviousIdentifier(START_IDENTIFIER);
 				break;
 			case OptionNotifiers.TYPE_IDENTIFIER:
 				prompt_text.setText("What type of wine?");
@@ -161,16 +155,6 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		
 		if(rootView!=null)
 		{
-			back = (Button) rootView.findViewById(R.id.backButton);
-			
-			back.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					refreshList(getPreviousIdentifier());
-					
-				}
-			});
 			
 			prompt_text = (TextView) rootView.findViewById(R.id.prompter);
 			options = (ListView) rootView.findViewById(R.id.optionsList);

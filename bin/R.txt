@@ -4,7 +4,7 @@ int anim abc_slide_in_bottom 0x7f040002
 int anim abc_slide_in_top 0x7f040003
 int anim abc_slide_out_bottom 0x7f040004
 int anim abc_slide_out_top 0x7f040005
-int array entries 0x7f0c0000
+int array brands 0x7f0c0000
 int attr Glametrix 0x7f010080
 int attr GlametrixBold 0x7f010081
 int attr GlametrixLight 0x7f010082
@@ -613,7 +613,6 @@ int id add_note 0x7f050089
 int id alcohol 0x7f050075
 int id always 0x7f05000d
 int id anchored 0x7f05001e
-int id backButton 0x7f05006e
 int id beginning 0x7f050013
 int id brand 0x7f050076
 int id brandView 0x7f050066
@@ -648,7 +647,7 @@ int id com_facebook_usersettingsfragment_profile_name 0x7f050063
 int id container 0x7f050048
 int id content 0x7f05007f
 int id contentPortion 0x7f050082
-int id contentRow 0x7f05006b
+int id contentRow 0x7f05006c
 int id country 0x7f050077
 int id dateView 0x7f050081
 int id default_activity_button 0x7f05002e
@@ -667,8 +666,8 @@ int id favoriteView 0x7f050071
 int id favorite_val 0x7f050065
 int id handle 0x7f05006f
 int id header 0x7f050084
-int id heading 0x7f05006a
-int id headingRow 0x7f050069
+int id heading 0x7f05006b
+int id headingRow 0x7f05006a
 int id hidden 0x7f05001f
 int id home 0x7f050016
 int id homeAsUp 0x7f050007
@@ -692,12 +691,12 @@ int id noteHeadingRow 0x7f050043
 int id noteTitle 0x7f050044
 int id notesList 0x7f05007c
 int id option 0x7f05007e
-int id optionsList 0x7f05006d
+int id optionsList 0x7f05006e
 int id pager 0x7f050042
 int id picker_subtitle 0x7f05005a
 int id progress_circular 0x7f05001a
 int id progress_horizontal 0x7f05001b
-int id prompter 0x7f05006c
+int id prompter 0x7f05006d
 int id pronounciation 0x7f050074
 int id radio 0x7f050035
 int id search_badge 0x7f050038
@@ -720,7 +719,9 @@ int id sliding_layout 0x7f050068
 int id small 0x7f050000
 int id split_action_bar 0x7f050024
 int id submit_area 0x7f05003f
+int id tImpl 0x7f050072
 int id tabMode 0x7f050004
+int id table 0x7f050069
 int id tableRow1 0x7f050067
 int id title 0x7f050031
 int id titleView 0x7f050080
@@ -730,7 +731,6 @@ int id up 0x7f050027
 int id useLogo 0x7f050005
 int id wineDescription 0x7f050087
 int id wineName 0x7f050086
-int id wineSearchView 0x7f050072
 int id wineView 0x7f050085
 int id wine_container 0x7f05004a
 int id wine_image 0x7f05007d

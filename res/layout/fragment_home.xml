@@ -16,6 +16,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background">
 	<TableLayout 
+	    android:id="@+id/table"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical"
@@ -61,19 +62,10 @@
             android:id="@+id/optionsList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:layout_below="@id/table">
         </ListView>
-
-		<Button
-		    android:id="@+id/backButton"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentBottom="true"
-		    android:layout_alignParentLeft="true"
-		    android:textColor="@color/BaseColor"
-		    android:background="@android:color/transparent"
-		    android:text="@string/back"
-		    android:visibility="gone" />
 
 </RelativeLayout>
 
@@ -85,7 +77,7 @@
         
         <TextView
         	android:layout_width="match_parent"
-	        android:layout_height="match_parent"
+	        android:layout_height="wrap_content"
 	        android:id="@+id/handle"
 	        android:gravity="center|top"
 	        android:text="@string/slideUpText"
@@ -102,8 +94,8 @@
         <GridView
 	        android:id="@+id/favoriteView"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:numColumns="auto_fit">
+	        android:layout_height="match_parent"
+	        android:numColumns="2">
     </GridView>
        
        

@@ -185,6 +185,54 @@ public class WineManager extends SQLiteOpenHelper {
 		return wines;
 	}
 
+	public List<String> getaAllBrands()
+	{
+		List<String> brands = new ArrayList<String>();
+		
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) 
+			do {
+				String brand = cursor.getString(11);
+				if(!brands.contains(brand))
+					brands.add(brand.trim());
+				
+			} while (cursor.moveToNext());
+		
+		cursor.close();
+		db.close();
+		
+		return brands;
+	}
+	
+	public List<String> getaAllCountries()
+	{
+		List<String> countries = new ArrayList<String>();
+		
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) 
+			do {
+				String country = cursor.getString(3);
+				if(!countries.contains(country))
+					countries.add(country.trim());
+				
+			} while (cursor.moveToNext());
+		
+		cursor.close();
+		db.close();
+		
+		return countries;
+	}
+	
 	public List<Wine> getAllWines(String name)
 	{
 		List<Wine> wines = new ArrayList<Wine>();
@@ -453,5 +501,28 @@ public class WineManager extends SQLiteOpenHelper {
 		cursor.close();
 		db.close();
 		return wines;
+	}
+
+	public List<String> getAllWineNames() {
+		List<String> names = new ArrayList<String>();
+		
+		String query = "select * from "+TABLE_NAME +" order by "+KEY_NAME+" asc";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) 
+			do {
+				String name = cursor.getString(1);
+				if(!names.contains(name))
+					names.add(name.trim());
+				
+			} while (cursor.moveToNext());
+		
+		cursor.close();
+		db.close();
+		
+		return names;
 	}
 }

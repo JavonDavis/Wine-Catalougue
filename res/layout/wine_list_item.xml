@@ -25,6 +25,7 @@
 		    app:GlametrixBold="GlametrixBold.otf"
 		    android:layout_margin="5dp"
 		    android:textColor="@color/BaseColor"
+		    android:singleLine="false"
 		    android:textSize="18sp"/>
 	</LinearLayout>                                                  
 	    

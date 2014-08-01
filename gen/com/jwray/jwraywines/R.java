@@ -17,7 +17,7 @@ public final class R {
         public static final int abc_slide_out_top=0x7f040005;
     }
     public static final class array {
-        public static final int entries=0x7f0c0000;
+        public static final int brands=0x7f0c0000;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -1681,7 +1681,6 @@ containing a value of this type.
         public static final int alcohol=0x7f050075;
         public static final int always=0x7f05000d;
         public static final int anchored=0x7f05001e;
-        public static final int backButton=0x7f05006e;
         public static final int beginning=0x7f050013;
         public static final int brand=0x7f050076;
         public static final int brandView=0x7f050066;
@@ -1716,7 +1715,7 @@ containing a value of this type.
         public static final int container=0x7f050048;
         public static final int content=0x7f05007f;
         public static final int contentPortion=0x7f050082;
-        public static final int contentRow=0x7f05006b;
+        public static final int contentRow=0x7f05006c;
         public static final int country=0x7f050077;
         public static final int dateView=0x7f050081;
         public static final int default_activity_button=0x7f05002e;
@@ -1735,8 +1734,8 @@ containing a value of this type.
         public static final int favorite_val=0x7f050065;
         public static final int handle=0x7f05006f;
         public static final int header=0x7f050084;
-        public static final int heading=0x7f05006a;
-        public static final int headingRow=0x7f050069;
+        public static final int heading=0x7f05006b;
+        public static final int headingRow=0x7f05006a;
         public static final int hidden=0x7f05001f;
         public static final int home=0x7f050016;
         public static final int homeAsUp=0x7f050007;
@@ -1760,12 +1759,12 @@ containing a value of this type.
         public static final int noteTitle=0x7f050044;
         public static final int notesList=0x7f05007c;
         public static final int option=0x7f05007e;
-        public static final int optionsList=0x7f05006d;
+        public static final int optionsList=0x7f05006e;
         public static final int pager=0x7f050042;
         public static final int picker_subtitle=0x7f05005a;
         public static final int progress_circular=0x7f05001a;
         public static final int progress_horizontal=0x7f05001b;
-        public static final int prompter=0x7f05006c;
+        public static final int prompter=0x7f05006d;
         public static final int pronounciation=0x7f050074;
         public static final int radio=0x7f050035;
         public static final int search_badge=0x7f050038;
@@ -1788,7 +1787,9 @@ containing a value of this type.
         public static final int small=0x7f050000;
         public static final int split_action_bar=0x7f050024;
         public static final int submit_area=0x7f05003f;
+        public static final int tImpl=0x7f050072;
         public static final int tabMode=0x7f050004;
+        public static final int table=0x7f050069;
         public static final int tableRow1=0x7f050067;
         public static final int title=0x7f050031;
         public static final int titleView=0x7f050080;
@@ -1798,7 +1799,6 @@ containing a value of this type.
         public static final int useLogo=0x7f050005;
         public static final int wineDescription=0x7f050087;
         public static final int wineName=0x7f050086;
-        public static final int wineSearchView=0x7f050072;
         public static final int wineView=0x7f050085;
         public static final int wine_container=0x7f05004a;
         public static final int wine_image=0x7f05007d;

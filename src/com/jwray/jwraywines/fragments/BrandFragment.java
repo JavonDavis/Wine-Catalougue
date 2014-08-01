@@ -1,5 +1,7 @@
 package com.jwray.jwraywines.fragments;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,22 +12,29 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
+import com.jwray.jwraywines.classes.databases.WineManager;
 
 public class BrandFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	private EditText wineSearch;
+	//private EditText wineSearch;
+	private WineManager obj;
+	private MultiAutoCompleteTextView wineSearch;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
+		obj = new WineManager(mContext);
 	}
 
 	
@@ -44,7 +53,15 @@ public class BrandFragment extends Fragment implements ParcelKeys
 		
 		if(rootView!=null)
 		{
-			wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
+			
+			ArrayList<String> brands = (ArrayList<String>) obj.getaAllBrands();
+			
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>
+					   (mContext,android.R.layout.simple_list_item_1,brands);
+			
+			final MultiAutoCompleteTextView wineSearch = (MultiAutoCompleteTextView) rootView.findViewById
+					   (R.id.tImpl);
+			
 			wineSearch.setHint(R.string.wineBrandSearchHint);
 			
 			wineSearch.setOnTouchListener(new OnTouchListener() {
@@ -65,7 +82,7 @@ public class BrandFragment extends Fragment implements ParcelKeys
 			                    Intent intent = new Intent(mContext,WineListActivity.class);
 			                  
 			                    intent.putExtra(BRAND_IDENTIFIER, query);
-			                    
+			                    wineSearch.getText().clear();
 			                    startActivity(intent);
 		                	}
 		                	else 
@@ -80,7 +97,25 @@ public class BrandFragment extends Fragment implements ParcelKeys
 		            }
 		            return false;
 		        }
-		    });	
+		    });
+			
+			wineSearch.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					String brand = (String) parent.getItemAtPosition(position);
+					
+					Intent intent = new Intent(mContext,WineListActivity.class);
+	                  
+                    intent.putExtra(BRAND_IDENTIFIER, brand);
+                    wineSearch.getText().clear();
+                    startActivity(intent);
+				}
+			});
+			wineSearch.setAdapter(adapter);
+
+			wineSearch.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 		}
 		
 		return rootView;

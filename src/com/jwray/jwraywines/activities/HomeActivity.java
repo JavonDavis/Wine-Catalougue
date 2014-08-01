@@ -50,6 +50,8 @@ public class HomeActivity extends ActionBarActivity implements
 	private WineManager obj;
 	private ThreadControl tControl;
 	private static Menu optionsMenu;
+	private boolean homeFragmentIsVisible = true;
+	HomeFragment home;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,10 @@ public class HomeActivity extends ActionBarActivity implements
 					public void onPageSelected(int position) {
 						actionBar.setSelectedNavigationItem(position);
 						//setTitle(mSectionsPagerAdapter.getPageTitle(mViewPager.getCurrentItem()));
-						
+						if(position==0)
+							setHomeFragmentIsVisible(true);
+						else 
+							setHomeFragmentIsVisible(false);
 					}
 					
 					@Override
@@ -125,8 +130,11 @@ public class HomeActivity extends ActionBarActivity implements
 	
 	@Override
 	public void onBackPressed() {
-		// TODO Consider making a dialog
-		super.onBackPressed();
+		int identifier = home.getPreviousIdentifier();
+		if(isHomeFragmentIsVisible()&&identifier!=0)
+			home.refreshList(identifier);
+		else
+			super.onBackPressed();
 	}
 
 	public void refresh(MenuItem item)
@@ -169,6 +177,22 @@ public class HomeActivity extends ActionBarActivity implements
 
 
 	/**
+	 * @return the homeFragmentIsVisible
+	 */
+	public boolean isHomeFragmentIsVisible() {
+		return homeFragmentIsVisible;
+	}
+
+	/**
+	 * @param homeFragmentIsVisible the homeFragmentIsVisible to set
+	 */
+	public void setHomeFragmentIsVisible(boolean homeFragmentIsVisible) {
+		this.homeFragmentIsVisible = homeFragmentIsVisible;
+	}
+
+
+
+	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
@@ -208,6 +232,7 @@ public class HomeActivity extends ActionBarActivity implements
 			{
 				case 0:
 					f = HomeFragment.newInstance();
+					home = (HomeFragment) f;
 					break;
 				case 1:
 					f = SearchFragment.newInstance();
