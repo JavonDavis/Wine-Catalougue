@@ -1,6 +1,13 @@
 # README #
 
-### Latest release v1.3.1 details ###
+### Latest release v1.3.5 details ###
+
+* Suggestions feature now added when searching 
+* The device back button now controls home page options
+* rims around search box now brown 
+* minor bug fixes 
+
+### release v1.3.1 details ###
 
 * Prononciation added to wine page
 * more functionality and options to home page
