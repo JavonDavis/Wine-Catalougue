@@ -1,18 +1,21 @@
 package com.jwray.jwraywines.classes;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.util.Log;
 
 /**
  * @author Javon
- *
+ * Class Structure for a Wine
  */
 public class Wine extends WineBase
 {
-	public static int idGen=0;
-	
+	private static int idGen=0;
+	private MediaPlayer voicePronounciation;
 	private int id;
 	private Bitmap bitmap; //TODO delete 
 	private Drawable picture;
@@ -106,11 +109,6 @@ public class Wine extends WineBase
 		this.favorite = favorite;
 	}
 
-	public String getPictureLocation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * @return the pronounciation
 	 */
@@ -167,5 +165,23 @@ public class Wine extends WineBase
 		this.meal = meal;
 	}
 
+	public MediaPlayer getVoicePronounciation(Context context) {
+		String mRawFile = "sound_"+getName().replaceAll("\\s+","").toLowerCase(Locale.US);
+    	int resID = context.getResources().getIdentifier(mRawFile , "raw", context.getPackageName());
+
+    	try
+    	{
+    		voicePronounciation =  MediaPlayer.create(context, resID);
+    	}
+    	catch(android.content.res.Resources.NotFoundException e)
+    	{
+    		Log.e("Resource not found stack", context.getPackageName());
+    		Log.e("name", mRawFile);
+    		Log.e("wine name",getName());
+    		Log.e("id", resID+"");
+    		return null;
+    	}
+		return voicePronounciation;
+	}
 
 }

@@ -1,7 +1,7 @@
 package com.jwray.jwraywines.fragments;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,24 +16,24 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
-
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
- * 
+ * Fragment for the Country search page
  * @author Javon Davis
  *
  */
 public class CountryFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	//private EditText wineSearch;
 	
 	//TODO check countries, i.e california
 	private WineManager obj;
+	
+	@SuppressWarnings("unused")
 	private MultiAutoCompleteTextView wineSearch;
 
 	@Override
@@ -71,7 +71,8 @@ public class CountryFragment extends Fragment implements ParcelKeys
 			
 			wineSearch.setOnTouchListener(new OnTouchListener() {
 				
-		        @Override
+		        @SuppressLint("ClickableViewAccessibility")
+				@Override
 		        public boolean onTouch(View v, MotionEvent event) {
 		            //final int DRAWABLE_LEFT = 0;
 		            //final int DRAWABLE_TOP = 1;

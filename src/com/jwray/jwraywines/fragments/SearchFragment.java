@@ -2,6 +2,7 @@ package com.jwray.jwraywines.fragments;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +14,9 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
@@ -24,15 +24,16 @@ import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
- * 
+ * Fragment for the page used to search for a wine by name
  * @author Javon Davis
  *
  */
 public class SearchFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	//private EditText wineSearch;
 	private WineManager obj;
+	
+	@SuppressWarnings("unused")
 	private MultiAutoCompleteTextView wineSearch;
 	
 	@Override
@@ -55,43 +56,6 @@ public class SearchFragment extends Fragment implements ParcelKeys
 		
 		
 		final View rootView = inflater.inflate(R.layout.fragment_search, container,false);
-		/*
-		wineSearch = (EditText) rootView.findViewById(R.id.wineSearchView);
-		
-		wineSearch.setOnTouchListener(new OnTouchListener() {
-			
-	        @Override
-	        public boolean onTouch(View v, MotionEvent event) {
-	            //final int DRAWABLE_LEFT = 0;
-	            //final int DRAWABLE_TOP = 1;
-	            final int DRAWABLE_RIGHT = 2;
-	            //final int DRAWABLE_BOTTOM = 3;
-
-	            if(event.getAction() == MotionEvent.ACTION_UP) {
-	                if(event.getRawX()>= ((wineSearch.getRight() - wineSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))-50) {
-	                	String query = wineSearch.getText().toString();
-	                	
-	                	if(!query.isEmpty())
-	                	{
-		                    Intent intent = new Intent(mContext,WineListActivity.class);
-		                    
-		                    intent.putExtra(NAME_IDENTIFIER, query);
-		                    
-		                    startActivity(intent);
-	                	}
-	                	else 
-	                	{
-	                		new AlertDialog.Builder(mContext)
-	                			.setTitle("Blank Search")
-	                			.setMessage("Your search request was empty")
-	                			.setIcon(android.R.drawable.ic_dialog_alert)
-	                		     .show();
-	                	}
-	                }
-	            }
-	            return false;
-	        }
-	    });*/
 
 		ArrayList<String> brands = (ArrayList<String>) obj.getAllWineNames();
 		
@@ -105,7 +69,8 @@ public class SearchFragment extends Fragment implements ParcelKeys
 		
 		wineSearch.setOnTouchListener(new OnTouchListener() {
 			
-	        @Override
+	        @SuppressLint("ClickableViewAccessibility")
+			@Override
 	        public boolean onTouch(View v, MotionEvent event) {
 	            //final int DRAWABLE_LEFT = 0;
 	            //final int DRAWABLE_TOP = 1;

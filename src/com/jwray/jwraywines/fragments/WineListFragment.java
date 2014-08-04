@@ -29,6 +29,11 @@ import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.classes.Wine;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
+/**
+ * Fragment for displaying a list of wines based on the intent passed @see ParcelKeys.java for key options
+ * @author Javon Davis
+ *
+ */
 public class WineListFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
@@ -165,7 +170,7 @@ public class WineListFragment extends Fragment implements ParcelKeys
 
 		        LayoutInflater inflater;
 		        inflater = LayoutInflater.from(getContext());
-		        view = inflater.inflate(R.layout.wine_list_item, null);
+		        view = inflater.inflate(R.layout.wine_list_item, parent,false);
 
 		    }
 			

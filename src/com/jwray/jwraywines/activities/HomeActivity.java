@@ -2,8 +2,6 @@ package com.jwray.jwraywines.activities;
 
 import java.util.Locale;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,7 +49,7 @@ public class HomeActivity extends ActionBarActivity implements
 	private ThreadControl tControl;
 	private static Menu optionsMenu;
 	private boolean homeFragmentIsVisible = true;
-	HomeFragment home;
+	private HomeFragment home;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +126,9 @@ public class HomeActivity extends ActionBarActivity implements
 
 	}
 	
+	/**
+	 * Overridden and used to control the options on the home page
+	 */
 	@Override
 	public void onBackPressed() {
 		int identifier = home.getPreviousIdentifier();
@@ -137,6 +138,10 @@ public class HomeActivity extends ActionBarActivity implements
 			super.onBackPressed();
 	}
 
+	/**
+	 * Reloads the enter database of wines
+	 * @param item
+	 */
 	public void refresh(MenuItem item)
 	{
 		new WineContent().getWines(this, tControl);
@@ -203,30 +208,11 @@ public class HomeActivity extends ActionBarActivity implements
 		}  
 		
 		
-		public Drawable getPageIcon(int position)
-		{
-			Resources resources = getResources();
-			switch(position)
-			{
-				case 0:
-					return resources.getDrawable(android.R.drawable.ic_search_category_default);
-				case 1:
-					return resources.getDrawable(R.drawable.brands_icon);
-				case 2:
-					return resources.getDrawable(R.drawable.country_icon);
-				//case 3:
-					//return resources.getDrawable(R.drawable.wine_list_icon);
-				default:
-					return null;
-			}
-		}
-
 		@Override
 		public Fragment getItem(int position) {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a Fragment (defined as a static inner class
 			// below).
-			//TODO make error fragment
 			Fragment f = null;
 			switch(position)
 			{
@@ -266,8 +252,6 @@ public class HomeActivity extends ActionBarActivity implements
 				return getString(R.string.title_brand_section).toUpperCase(l);
 			case 3:
 				return getString(R.string.title_country_section).toUpperCase(l);
-			//case 3:
-				//return getString(R.string.title_list_section).toUpperCase(l);
 			}
 			return null;
 		}

@@ -26,7 +26,11 @@ import com.jwray.jwraywines.activities.HomeActivity;
 import com.jwray.jwraywines.classes.databases.WineManager;
 import com.jwray.jwraywines.fragments.HomeFragment;
 
-
+/**
+ * Class used to control the access to the internet in getting the wine information and load it into the appropriate database
+ * @author Javon Davis
+ *
+ */
 public class WineContent 
 {	
 	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
@@ -36,7 +40,7 @@ public class WineContent
 	private Context context;
 	
 	private ThreadControl control;
-	WineManager obj;
+	private WineManager obj;
 	
 	//hashmap used to match a wines' name to itself 
 	private static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();

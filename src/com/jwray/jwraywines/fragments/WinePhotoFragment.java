@@ -15,7 +15,8 @@ import com.jwray.jwraywines.classes.Wine;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
- * @author Javon
+ * Fragment used to display the wine photo
+ * @author Javon Davis
  *
  */
 public class WinePhotoFragment extends Fragment {

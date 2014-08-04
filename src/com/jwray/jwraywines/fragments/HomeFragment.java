@@ -30,7 +30,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
 /**
- * 
+ * Fragment for the homepage, processing for the options list and the favorites are done here
  * @author Javon Davis
  *
  */
@@ -80,6 +80,10 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 	
+	/**
+	 * Class used to reload the options on the home page based on a code
+	 * @param code
+	 */
 	public void refreshList(int code)
 	{
 		optionSet.clear();
@@ -113,8 +117,10 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				break;
 			case OptionNotifiers.OCCASION_IDENTIFIER:
 				prompt_text.setText("What's the occasion?");
-				optionSet.add(OCCASION_DATE_TEXT);
-				optionSet.add(OCCASION_GIFT_TEXT);	
+				optionSet.add(OCCASION_ALL_TEXT);
+				optionSet.add(OCCASION_BDAY_TEXT);	
+				optionSet.add(OCCASION_CHRISTMAS_TEXT);
+				optionSet.add(OCCASION_COCKTAIL_TEXT);
 				setPreviousIdentifier(HOME_IDENTIFIER);
 				break;
 			case OptionNotifiers.DATE_IDENTIFIER:
@@ -393,7 +399,6 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	}
 	
 	/*==========================Private Classes=============================================*/
-	
 	private class HomeOptionAdapter extends ArrayAdapter<String>
 	{
 

@@ -1,7 +1,7 @@
 package com.jwray.jwraywines.fragments;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,17 +16,23 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
-
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.WineManager;
 
+/**
+ * Fragment for the brand search page
+ * @author Javon Davis
+ *
+ */
 public class BrandFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	//private EditText wineSearch;
 	private WineManager obj;
+	
+	@SuppressWarnings("unused")
 	private MultiAutoCompleteTextView wineSearch;
 
 	@Override
@@ -47,9 +53,7 @@ public class BrandFragment extends Fragment implements ParcelKeys
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		//TODO- surround in try catch
 		final View rootView = inflater.inflate(R.layout.fragment_search, container,false);
-			
 		
 		if(rootView!=null)
 		{
@@ -66,7 +70,8 @@ public class BrandFragment extends Fragment implements ParcelKeys
 			
 			wineSearch.setOnTouchListener(new OnTouchListener() {
 				
-		        @Override
+		        @SuppressLint("ClickableViewAccessibility")
+				@Override
 		        public boolean onTouch(View v, MotionEvent event) {
 		            //final int DRAWABLE_LEFT = 0;
 		            //final int DRAWABLE_TOP = 1;
@@ -116,8 +121,7 @@ public class BrandFragment extends Fragment implements ParcelKeys
 			wineSearch.setAdapter(adapter);
 
 			wineSearch.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-		}
-		
+		}	
 		return rootView;
 	}
 }

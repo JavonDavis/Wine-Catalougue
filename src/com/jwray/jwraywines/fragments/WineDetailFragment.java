@@ -272,7 +272,7 @@ public class WineDetailFragment extends Fragment {
 	        if (convertView == null) {
 	            LayoutInflater infalInflater = (LayoutInflater) this.mContext
 	                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	            convertView = infalInflater.inflate(R.layout.wine_item_header, null);
+	            convertView = infalInflater.inflate(R.layout.wine_item_header, parent,false);
 	        }
 	 
 	        TextView lblListHeader = (TextView) convertView
@@ -291,7 +291,7 @@ public class WineDetailFragment extends Fragment {
 	        if (convertView == null) {
 	            LayoutInflater infalInflater = (LayoutInflater) this.mContext
 	                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	            convertView = infalInflater.inflate(R.layout.wine_item, null);
+	            convertView = infalInflater.inflate(R.layout.wine_item, parent,false);
 	        }
 	 
 	        TextView txtListChild = (TextView) convertView

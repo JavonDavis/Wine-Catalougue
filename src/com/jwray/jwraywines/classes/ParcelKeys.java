@@ -19,7 +19,7 @@ import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
  * @author Javon Davis
- *
+ * Class used to govern the general keys used throughout the application's life
  */
 public interface ParcelKeys {
 	static final String NAME_IDENTIFIER ="name";
@@ -37,6 +37,11 @@ public interface ParcelKeys {
 		void onNoteSelected(Note note, String key);
 	}
 	
+	/**
+	 * Interface for the keys for the home page options
+	 * @author Javon Davis
+	 *
+	 */
 	interface OptionNotifiers
 	{
 		static final String MEAL_TEXT ="Wine with a Meal";
@@ -57,6 +62,10 @@ public interface ParcelKeys {
 		static final String MEAL_FRUIT = "Fruits";
 		static final String MEAL_VEGGIES = "Veggies";
 		static final String MEAL_SEAFOOD = "Seafood";
+		static final String OCCASION_ALL_TEXT = "All";
+		static final String OCCASION_BDAY_TEXT = "Birthday/Anniversary";
+		static final String OCCASION_COCKTAIL_TEXT = "Cocktails";
+		static final String OCCASION_CHRISTMAS_TEXT = "Christmas";
 		static final String OCCASION_DATE_TEXT = "Wine for a date";
 		static final String DATE_BREAKFAST = "Wine for a Breakfast Date";
 		static final String DATE_LUNCH = "Wine for a Lunch date";
@@ -76,6 +85,11 @@ public interface ParcelKeys {
 		
 	}
 	
+	/**
+	 * Adapter for the facorites grid on homepage
+	 * @author Javon Davis
+	 *
+	 */
 	static class FavoriteAdapter extends BaseAdapter{
 
 		Context mContext;

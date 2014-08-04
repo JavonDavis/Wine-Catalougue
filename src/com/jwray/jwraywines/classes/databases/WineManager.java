@@ -1,22 +1,22 @@
 package com.jwray.jwraywines.classes.databases;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.jwray.jwraywines.classes.Wine;
-
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 
+import com.jwray.jwraywines.classes.Wine;
 
+/**
+ * Helper class to manage all the wines in the application
+ * @author Javon Davis
+ *
+ */
 public class WineManager extends SQLiteOpenHelper {
 	
 	private static final int DATABASE_VERSION = 40;
@@ -43,9 +43,10 @@ public class WineManager extends SQLiteOpenHelper {
 	private static final String KEY_OCCASION = "occasion";
 	private static final String KEY_TYPE = "type";
 	
+	@SuppressWarnings("unused")
 	private Context context;
 	private FavoriteManager favObj;
-	ArrayList<Integer> favorites;
+	private ArrayList<Integer> favorites;
 
 	//neccessary contructor to call parent constructor
 	public WineManager(Context context)
@@ -55,12 +56,6 @@ public class WineManager extends SQLiteOpenHelper {
 		favObj = new FavoriteManager(context);
 		favorites = (ArrayList<Integer>) favObj.getAllFavorites();
 	}
-	
-	/*
-	 *Override Methods 
-	 * onCreate has to be overridden for a different table
-	 *TODO- write more abstract database handler
-	 */
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -115,33 +110,7 @@ public class WineManager extends SQLiteOpenHelper {
 		db.insert(TABLE_NAME, null, values);
 		db.close(); // Closing database connection
 	}
-	
-	//TODO delete if proven to be no longer necessary
-	@SuppressWarnings("unused")
-	private String saveToInternalSorage(Bitmap bitmapImage,String name){
-        ContextWrapper contextWrapper = new ContextWrapper(context);
-        
-         // path to /data/data/yourapp/app_data/Wine Pictures
-        File directory = contextWrapper.getDir("Wine Pictures", Context.MODE_PRIVATE);
-        
-        // Create picture
-        File picturePath =new File(directory,name+".png");
 
-        FileOutputStream fos = null;
-        try {           
-
-            fos = new FileOutputStream(picturePath);
-
-       // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            
-        } catch (Exception e) {
-        	//Toast.makeText(context, "Error Saving Image - "+e, Toast.LENGTH_LONG).show();
-        }
-        return directory.getAbsolutePath();
-    }
-	
 	public List<Wine> getAllWines()
 	{
 		List<Wine> wines = new ArrayList<Wine>();

@@ -3,6 +3,7 @@ package com.jwray.jwraywines.activities;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -41,7 +42,7 @@ import com.jwray.jwraywines.fragments.WineDrawerFragment;
 import com.jwray.jwraywines.fragments.WinePhotoFragment;
 
 /**
- * 
+ * Activity for the entire wine page and fragments used
  * @author Javon Davis
  *
  */
@@ -178,7 +179,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 		}
 	}*/
 
-	public void restoreActionBar() {
+	private void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
@@ -212,7 +213,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 			
 			final MenuItem fav = menu.findItem(R.id.fav);
 			final MenuItem unfav = menu.findItem(R.id.unfav);
-			final MenuItem share = menu.findItem(R.id.share);
+			//final MenuItem share = menu.findItem(R.id.share);
 			
 			OnMenuItemClickListener iconListen = new OnMenuItemClickListener() {
 				
@@ -243,6 +244,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 							Toast.makeText(WineInformationActivity.this, "Wine removed from favorites", Toast.LENGTH_LONG).show();
 							favObj.deleteFavorite(wine.getId());
 							break;
+							/*
 						case R.id.share:
 							if (FacebookDialog.canPresentShareDialog(getApplicationContext(), 
                                     FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
@@ -258,7 +260,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 									// publish the post using the Feed Dialog
 									//publishFeedDialog();
 								}
-							break;
+							break;*/
 					}
 					return false;
 				}
@@ -266,7 +268,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 			
 			fav.setOnMenuItemClickListener(iconListen);
 			unfav.setOnMenuItemClickListener(iconListen);
-			share.setOnMenuItemClickListener(iconListen);
+			//share.setOnMenuItemClickListener(iconListen);
 			restoreActionBar();
 			return true;
 		}
@@ -341,6 +343,14 @@ public class WineInformationActivity extends ActionBarActivity implements
 			args.putInt("id", wineId);
 			dialog.setArguments(args);
 			dialog.show(getSupportFragmentManager(), "NoteDialogFragment");
+		}
+		else if(id==R.id.pronounce)
+		{
+			MediaPlayer pronunciation = wine.getVoicePronounciation(this);
+			if(pronunciation!=null)
+				pronunciation.start();
+			else
+				Toast.makeText(this, "No Pronunciation available for this wine", Toast.LENGTH_LONG).show();
 		}
 		return super.onOptionsItemSelected(item);
 	}

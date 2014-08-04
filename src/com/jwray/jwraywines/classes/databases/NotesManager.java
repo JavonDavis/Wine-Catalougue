@@ -11,6 +11,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.jwray.jwraywines.classes.Note;
 
+/**
+ * Helper class used to manage all the notes in the application and links them to the wine by using an associative ID which is the ID of it's wine
+ * @author Javon Davis
+ *
+ */
 public class NotesManager extends SQLiteOpenHelper{
 
 	private static final int DATABASE_VERSION = 5;
@@ -77,15 +82,18 @@ public class NotesManager extends SQLiteOpenHelper{
 		Cursor cursor = db.rawQuery(query, null);
 
 		Note note;
+		
+		int identifier,wineID;
+		String title,content,date;
+		
 		// looping through all rows and adding to list
-		//TODO - Consider conserving on memory
 		if (cursor.moveToFirst()) {
 			do {
-				int identifier = Integer.parseInt(cursor.getString(0));
-				String title = cursor.getString(1);
-				String content = cursor.getString(2);
-				int wineID = Integer.parseInt(cursor.getString(3));
-				String date = cursor.getString(4);
+				identifier = Integer.parseInt(cursor.getString(0));
+				title = cursor.getString(1);
+				content = cursor.getString(2);
+				wineID = Integer.parseInt(cursor.getString(3));
+				date = cursor.getString(4);
 								
 				note = new Note(title,content,wineID,date);
 				note.setIdentifier(identifier);
@@ -108,15 +116,17 @@ public class NotesManager extends SQLiteOpenHelper{
 		Cursor cursor = db.rawQuery(query, null);
 
 		Note note;
+		int identifier,wineID;
+		String title,content,date;
+		
 		// looping through all rows and adding to list
-		//TODO - Consider conserving on memory
 		if (cursor.moveToFirst()) {
 			do {
-				int identifier = Integer.parseInt(cursor.getString(0));
-				String title = cursor.getString(1);
-				String content = cursor.getString(2);
-				int wineID = Integer.parseInt(cursor.getString(3));
-				String date = cursor.getString(4);
+				identifier = Integer.parseInt(cursor.getString(0));
+				title = cursor.getString(1);
+				content = cursor.getString(2);
+				wineID = Integer.parseInt(cursor.getString(3));
+				date = cursor.getString(4);
 
 				note = new Note(title,content,wineID,date);
 				note.setIdentifier(identifier);

@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentActivity;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.fragments.WineListFragment;
 
+/**
+ * Activity for the list of wines
+ * @author Javon Davis
+ *
+ */
 public class WineListActivity extends FragmentActivity
 {
 	@Override

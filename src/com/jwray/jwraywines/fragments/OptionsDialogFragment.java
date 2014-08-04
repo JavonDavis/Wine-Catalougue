@@ -16,6 +16,11 @@ import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.NotesManager;
 
+/**
+ * Fragment for the Dialog shown for a not click
+ * @author Javon Davis
+ *
+ */
 public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	
 	private final String[] options = {"View","Delete"};
@@ -23,7 +28,7 @@ public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	private static Context context;
 	private static Note note;
 	
-	NoteDialogInterface mListener;
+	private NoteDialogInterface mListener;
 	
 	@Override
 	 public void onAttach(Activity activity) {
@@ -66,8 +71,7 @@ public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	    return builder.create();
 	}
 
-	private Note getNote() {
-		
+	private Note getNote() {		
 		return note;
 	}
 	

@@ -34,7 +34,7 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 	private ArrayList<Note> notes;
 	private static ListView notesList;
 	private static TextView emptyText;
-	int id;
+	private int id;
 	
 	
 	@Override
@@ -169,7 +169,7 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 
 		        LayoutInflater inflater;
 		        inflater = LayoutInflater.from(getContext());
-		        view = inflater.inflate(R.layout.note_item, null);
+		        view = inflater.inflate(R.layout.note_item, parent,false);
 
 		    }
 			
@@ -186,8 +186,7 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 				String content = note.getContent();
 				
 				int portionStop = content.length() > 200 ? 80:content.length()<26 ? content.length():content.length()/2;
-				Log.d("content", content.length()+"");
-				
+	
 				String portion = content.substring(0,portionStop);
 				
 				if(portion.length()<content.length()-1)

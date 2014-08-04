@@ -9,6 +9,11 @@ import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.databases.NotesManager;
 
+/**
+ * Activity for the purpose of viewing a note
+ * @author Javon Davis
+ *
+ */
 public class NoteViewActivity extends Activity implements ParcelKeys{
 
 	NotesManager notesObj;
@@ -21,6 +26,7 @@ public class NoteViewActivity extends Activity implements ParcelKeys{
 		notesObj = new NotesManager(this);
 		
 		TextView title = (TextView) findViewById(R.id.noteTitle);
+
 		TextView content = (TextView) findViewById(R.id.noteDetails);
 		
 		int identifier = getIntent().getIntExtra(NOTE_IDENTIFITER,-1);
@@ -36,6 +42,8 @@ public class NoteViewActivity extends Activity implements ParcelKeys{
 				}
 			
 			title.setText(note.getTitle());
+			setTitle(note.getTitle()+"-"+note.getDateCreated());
+			
 			content.setText(note.getContent());
 		}
 		else

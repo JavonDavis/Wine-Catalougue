@@ -1,6 +1,10 @@
 package com.jwray.jwraywines.classes;
 
-
+/**
+ * Class structure for a Note
+ * @author Javon Davis
+ *
+ */
 public class Note {
 	
 	private String mTitle,mContent;
