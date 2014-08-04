@@ -8,6 +8,7 @@ Any bugs noticed please place in the issue tracker which can be accessed in the 
 
 * Voice pronunciations added to wines
 * Slight change to some of the home page options
+* Share option removed
 * Minor bug fixes 
 
 ### Initial release v1.3.5 details ###
