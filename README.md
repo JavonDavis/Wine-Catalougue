@@ -39,8 +39,8 @@ Any bugs noticed please place in the issue tracker which can be accessed in the 
 
 ### How do I get set up? ###
 
-Click on the apk in the source and it will download it and then open the apk from your device to install at this point more than likely you will be prompted if you are sure you want to install. 
-When givin the option choose settings and then check the unknown sources box and you should be good to go.
+Click on the apk in the source to download it and then open the apk from your device to install at this point more than likely you will be prompted if you are sure you want to install. 
+When given the option choose settings and then check the unknown sources box and you should be good to go.
 
 ### Contact ###
 
