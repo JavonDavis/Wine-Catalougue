@@ -3,7 +3,14 @@
 ### Contribution guidelines ###
 
 Any bugs noticed please place in the issue tracker which can be accessed in the issues option under navigation
+
 ### Latest release v1.3.5 details ###
+
+* Voice pronunciations added to wines
+* Slight change to some of the home page options
+* Minor bug fixes 
+
+### Initial release v1.3.5 details ###
 
 * Suggestions feature now added when searching 
 * The device back button now controls home page options
