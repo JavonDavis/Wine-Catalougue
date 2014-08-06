@@ -13,8 +13,7 @@
 
 <RelativeLayout
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/background">
+    android:layout_height="fill_parent">
 	<TableLayout 
 	    android:id="@+id/table"
 	    android:layout_width="match_parent"

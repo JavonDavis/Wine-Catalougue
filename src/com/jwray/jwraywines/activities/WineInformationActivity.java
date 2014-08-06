@@ -66,6 +66,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 	private FavoriteManager favObj;
 	private int wineId;
 	private NotesManager notesObj;
+	private MediaPlayer pronunciation;
 	
 	//life cycle helper for facebook share dialog
 	private UiLifecycleHelper uiHelper;
@@ -346,13 +347,23 @@ public class WineInformationActivity extends ActionBarActivity implements
 		}
 		else if(id==R.id.pronounce)
 		{
-			MediaPlayer pronunciation = wine.getVoicePronounciation(this);
+			pronunciation = wine.getVoicePronounciation(this);
 			if(pronunciation!=null)
 				pronunciation.start();
 			else
 				Toast.makeText(this, "No Pronunciation available for this wine", Toast.LENGTH_LONG).show();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	protected void onStop() {
+		if(pronunciation!=null)
+		{
+			pronunciation.release();
+			pronunciation=null;
+		}
+		super.onStop();
 	}
 
 	@Override

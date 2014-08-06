@@ -69,4 +69,5 @@
 	<string name="app_id">J-Wray</string>
 	<string name="menuitem_refresh">refresh</string>
 	<string name="play_sound">Play Pronunciation</string>
+	<string name="favorite_heading">Your Favorite Wines</string>
 </resources>

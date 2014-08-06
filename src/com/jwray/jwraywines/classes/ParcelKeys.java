@@ -60,27 +60,27 @@ public interface ParcelKeys {
 		static final String MEAL_MEAT = "Meat";
 		static final String MEAL_CHEESE = "Cheese";
 		static final String MEAL_FRUIT = "Fruits";
-		static final String MEAL_VEGGIES = "Veggies";
+		static final String MEAL_VEGGIES = "Vegetables";
 		static final String MEAL_SEAFOOD = "Seafood";
 		static final String OCCASION_ALL_TEXT = "All";
 		static final String OCCASION_BDAY_TEXT = "Birthday/Anniversary";
 		static final String OCCASION_COCKTAIL_TEXT = "Cocktails";
 		static final String OCCASION_CHRISTMAS_TEXT = "Christmas";
 		static final String OCCASION_DATE_TEXT = "Wine for a date";
-		static final String DATE_BREAKFAST = "Wine for a Breakfast Date";
-		static final String DATE_LUNCH = "Wine for a Lunch date";
-		static final String DATE_DINNER = "Wine for a Dinner Date";
-		static final String OCCASION_GIFT_TEXT = "Wine as a gift";
-		static final String GIFT_BIRTHDAY = "Birthday Gift";
-		static final String GIFT_ANNIVERSARY = "Anniversary Gift";
+		static final String RED_LIGHT = "Light";
+		static final String RED_MEDIUM = "Medium";
+		static final String RED_DARK = "Dark";
+		static final String WHITE_DRY = "Dry";
+		static final String WHITE_SWEET = "Sweet";
+		static final String WHITE_RICH = "Rich";
 		static final String GIFT_HOLIDAY= "Holiday Gift";
 		static final int START_IDENTIFIER = 0;
 		static final int HOME_IDENTIFIER = 1;
 		static final int MEAL_IDENTIFIER = 2;
 		static final int TYPE_IDENTIFIER = 3;
 		static final int OCCASION_IDENTIFIER = 4;
-		static final int DATE_IDENTIFIER = 5;
-		static final int GIFT_IDENTIFIER = 6;
+		static final int WHITE_IDENTIFIER = 5;
+		static final int RED_IDENTIFIER = 6;
 		static final int MEAT_IDENTIFIER = 7;
 		
 	}

@@ -123,19 +123,19 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				optionSet.add(OCCASION_COCKTAIL_TEXT);
 				setPreviousIdentifier(HOME_IDENTIFIER);
 				break;
-			case OptionNotifiers.DATE_IDENTIFIER:
-				prompt_text.setText("Nice! What kind of date?");
-				optionSet.add(DATE_BREAKFAST);
-				optionSet.add(DATE_LUNCH);		
-				optionSet.add(DATE_DINNER);
-				setPreviousIdentifier(OptionNotifiers.OCCASION_IDENTIFIER);
+			case OptionNotifiers.WHITE_IDENTIFIER:
+				prompt_text.setText("What kind of white?");
+				optionSet.add(WHITE_DRY);
+				optionSet.add(WHITE_RICH);		
+				optionSet.add(WHITE_SWEET);
+				setPreviousIdentifier(OptionNotifiers.TYPE_IDENTIFIER);
 				break;
-			case OptionNotifiers.GIFT_IDENTIFIER:
-				prompt_text.setText("Cool, what kind of gift are you looking for?");
-				optionSet.add(GIFT_BIRTHDAY);
-				optionSet.add(GIFT_ANNIVERSARY);		
-				optionSet.add(GIFT_HOLIDAY);
-				setPreviousIdentifier(OptionNotifiers.OCCASION_IDENTIFIER);
+			case OptionNotifiers.RED_IDENTIFIER:
+				prompt_text.setText("What kind of red?");
+				optionSet.add(RED_LIGHT);		
+				optionSet.add(RED_MEDIUM);
+				optionSet.add(RED_DARK);
+				setPreviousIdentifier(OptionNotifiers.TYPE_IDENTIFIER);
 				break;
 			case OptionNotifiers.MEAT_IDENTIFIER:
 				prompt_text.setText("What kind of meat?");
@@ -174,34 +174,35 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 			
 			SlidingUpPanelLayout slider = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
 			
-			slider.setPanelSlideListener(new PanelSlideListener() {
-
-				@Override
-				public void onPanelSlide(View panel, float slideOffset) {
-				} 
-
-				@Override
-				public void onPanelCollapsed(View panel) {
-					TextView handle = (TextView) rootView.findViewById(R.id.handle);
-					handle.setText(R.string.slideUpText);
-				}
-
-				@Override
-				public void onPanelExpanded(View panel) {
-					TextView handle = (TextView) rootView.findViewById(R.id.handle);
-					handle.setText(R.string.slideDownText);
-				}
-
-				@Override
-				public void onPanelAnchored(View panel) {
-				}
-
-				@Override
-				public void onPanelHidden(View panel) {
-				}
-				
-				
-			});
+			if(slider!=null)
+				slider.setPanelSlideListener(new PanelSlideListener() {
+	
+					@Override
+					public void onPanelSlide(View panel, float slideOffset) {
+					} 
+	
+					@Override
+					public void onPanelCollapsed(View panel) {
+						TextView handle = (TextView) rootView.findViewById(R.id.handle);
+						handle.setText(R.string.slideUpText);
+					}
+	
+					@Override
+					public void onPanelExpanded(View panel) {
+						TextView handle = (TextView) rootView.findViewById(R.id.handle);
+						handle.setText(R.string.slideDownText);
+					}
+	
+					@Override
+					public void onPanelAnchored(View panel) {
+					}
+	
+					@Override
+					public void onPanelHidden(View panel) {
+					}
+					
+					
+				});
 			
 			TextView empty = (TextView) rootView.findViewById(R.id.favoriteEmpty);
 			
@@ -260,11 +261,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 					refreshList(OptionNotifiers.TYPE_IDENTIFIER);
 					break;
 				case TYPE_RED:
-					intent = new Intent(mContext,WineListActivity.class);
-                    
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
-                    
-                    startActivity(intent);
+					refreshList(OptionNotifiers.RED_IDENTIFIER);
 					break;
 				case TYPE_ROSE:
 					intent = new Intent(mContext,WineListActivity.class);
@@ -274,11 +271,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
                     startActivity(intent);
 					break;
 				case TYPE_WHITE:
-					intent = new Intent(mContext,WineListActivity.class);
-                    
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
-                    
-                    startActivity(intent);
+					refreshList(OptionNotifiers.WHITE_IDENTIFIER);
 					break;
 				case TYPE_SPARKLING:
 					intent = new Intent(mContext,WineListActivity.class);
@@ -293,32 +286,47 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case OCCASION_TEXT:
 					refreshList(OptionNotifiers.OCCASION_IDENTIFIER);
 					break;
-				case DATE_BREAKFAST:
+				case RED_DARK:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
                     
-                    //startActivity(intent);
+                    startActivity(intent);
 					break;
-				case DATE_LUNCH:
+				case RED_LIGHT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
                     
-                    //startActivity(intent);
+                    startActivity(intent);
 					break;
-				case DATE_DINNER:
+				case RED_MEDIUM:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
                     
-                    //startActivity(intent);
+                    startActivity(intent);
 					break;
-				case OCCASION_GIFT_TEXT:
-					refreshList(OptionNotifiers.GIFT_IDENTIFIER);
+				case WHITE_DRY:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
+                    
+                    startActivity(intent);
 					break;
-				case OCCASION_DATE_TEXT:
-					refreshList(OptionNotifiers.DATE_IDENTIFIER);
+				case WHITE_RICH:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
+                    
+                    startActivity(intent);
+					break;
+				case WHITE_SWEET:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    
+                    startActivity(intent);
 					break;
 				case MEAL_PASTA:
 					intent = new Intent(mContext,WineListActivity.class);
@@ -390,6 +398,34 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 					intent = new Intent(mContext,WineListActivity.class);
                     
                     intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case OCCASION_ALL_TEXT:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case OCCASION_BDAY_TEXT:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case OCCASION_COCKTAIL_TEXT:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    
+                    startActivity(intent);
+					break;
+				case OCCASION_CHRISTMAS_TEXT:
+					intent = new Intent(mContext,WineListActivity.class);
+                    
+                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;

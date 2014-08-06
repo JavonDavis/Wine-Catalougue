@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background" >
+    
+	<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+		<TableLayout 
+		    android:id="@+id/table"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		     >
+		    <TableRow
+		        android:id="@+id/headingRow"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center" >
+		
+		        <TextView
+		            android:id="@+id/heading"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/home_prompt"
+		            android:textColor="@color/BaseColor"
+		            android:padding="10dp"
+		            android:textSize="24sp" />
+		
+		    </TableRow>
+		
+		    <TableRow
+		        android:id="@+id/contentRow"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1"
+		        android:gravity="center" >
+			
+		        <TextView
+		            android:id="@+id/prompter"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/initial_prompt"
+		            android:textColor="@color/BaseColor"
+		            android:padding="5dp"
+		            android:textSize="16sp" />
+	
+		    </TableRow>  
+		</TableLayout>
+			<ListView
+	            android:id="@+id/optionsList"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:padding="5dp"
+	            android:layout_below="@id/table">
+	        </ListView>
+	
+	</RelativeLayout>
+	
+	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:gravity="center"
+	        android:paddingTop="20dp" >
+			
+			<TextView
+		        android:id="@+id/favHeading"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="18sp"
+		        android:text="@string/favorite_heading"/>
+			
+	        <TextView
+		        android:id="@+id/favoriteEmpty"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/favorite_empty"/>
+	        
+	        <GridView
+		        android:id="@+id/favoriteView"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:numColumns="2">
+	    </GridView>
+	       
+	       
+	   </LinearLayout>
+</LinearLayout>

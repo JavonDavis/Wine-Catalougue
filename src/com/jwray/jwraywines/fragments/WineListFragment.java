@@ -38,7 +38,7 @@ public class WineListFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	private WineManager obj;
-	private String brand,country,name,type,meal;
+	private String brand,country,name,type,meal,occasion;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -52,6 +52,7 @@ public class WineListFragment extends Fragment implements ParcelKeys
 		name = getActivity().getIntent().getStringExtra(NAME_IDENTIFIER);
 		type = getActivity().getIntent().getStringExtra(TYPE_IDENTIFIER);
 		meal = getActivity().getIntent().getStringExtra(MEAL_IDENTIFIER);
+		occasion = getActivity().getIntent().getStringExtra(OCCASION_IDENTIFIER);
 	}
 
 	
@@ -91,6 +92,10 @@ public class WineListFragment extends Fragment implements ParcelKeys
 			else if(meal!=null)
 			{
 				wines = (ArrayList<Wine>) obj.getAllWinesByMeal(meal);
+			}
+			else if(occasion!=null)
+			{
+				wines = (ArrayList<Wine>) obj.getAllWinesByOccasion(occasion);
 			}
 			else
 			{
