@@ -90,7 +90,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 		wine = obj.getWine(getIntent().getIntExtra(WINE_IDENTIFIER,-1));
 		wineId = wine.getId();
 		
-		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
+		getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		
 		mTitle = wine.getName();

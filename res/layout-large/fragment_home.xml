@@ -74,13 +74,16 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="18sp"
-		        android:text="@string/favorite_heading"/>
+		        android:text="@string/favorite_heading"
+		        android:textColor="@color/BaseColor"/>
 			
 	        <TextView
 		        android:id="@+id/favoriteEmpty"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="@string/favorite_empty"/>
+		        android:layout_gravity="center"
+		        android:text="@string/favorite_empty"
+		        android:textColor="@color/BaseColor"/>
 	        
 	        <GridView
 		        android:id="@+id/favoriteView"

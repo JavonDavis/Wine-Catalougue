@@ -35,8 +35,6 @@ public class WineContent
 {	
 	//Lists used to hold the wines and there names separately, the item in the lists must correspond to each other
 	private List<Wine> WINES = new ArrayList<Wine>();
-	private List<String> NAMES = new ArrayList<String>();
-	
 	private Context context;
 	
 	private ThreadControl control;
@@ -83,7 +81,6 @@ public class WineContent
 			obj = new WineManager(context);
 			obj.deleteAllWines();
 			WINES.clear();
-			NAMES.clear();
 			Log.d("soze", "s"+obj.getAllWines().size());
 		}
 		
@@ -95,7 +92,6 @@ public class WineContent
 
 				e2.printStackTrace();
 			}
-			NAMES.clear();
 			
 			InputStream is = null;
 	        StringBuilder sb=null;
@@ -136,7 +132,7 @@ public class WineContent
 	        
 			
 	      //paring data
-	         
+	         int id;
 	         String name= null;
 	    	 String country= null;
 	    	 String description= null;
@@ -161,6 +157,8 @@ public class WineContent
 		         
 		        for(int i=0;i<jArray.length();i++){
 		                json_data = jArray.getJSONObject(i);
+		                
+		                id=json_data.getInt("id");
 		                
 		                name=json_data.getString("name");
 		                country=json_data.getString("country");
@@ -195,7 +193,7 @@ public class WineContent
 		                type = removeBreaks(type);
 		                occasion = removeBreaks(occasion);
 			        	
-			        	Wine wine = new Wine();
+			        	Wine wine = new Wine(id);
 			        	wine.setName(name);
 			        	wine.setCountry(country);
 			        	wine.setDescription(description);
@@ -230,7 +228,6 @@ public class WineContent
 			        	
 			        	
 			        	WINES.add(wine);
-			        	NAMES.add(wine.getName());
 			        	WINE_MAP.put(wine.getName(), wine);
 			        		                
 		        }
@@ -252,9 +249,12 @@ public class WineContent
 		protected void onPostExecute(String result) {
 			//Intent intent = new Intent(context,WineListActivity.class);
 			
+			
 	        for(Wine wine: WINES)
+	        {
+	        	Log.d("ids", wine+"");
 				obj.insert(wine);
-	        
+	        }
 	        for(Wine wine : obj.getAllWines())
 	        	Log.e("wine", wine.toString());
 

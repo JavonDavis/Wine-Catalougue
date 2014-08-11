@@ -19,13 +19,14 @@ import com.jwray.jwraywines.classes.Wine;
  */
 public class WineManager extends SQLiteOpenHelper {
 	
-	private static final int DATABASE_VERSION = 40;
+	private static final int DATABASE_VERSION = 41;
 	private static final String DATABASE_NAME = "wineManagement";
 	
 	private static final String TABLE_NAME = "wines";
 	
 	//column names
-	private static final String KEY_ID ="id";
+	private static final String KEY_ID ="_id";
+	private static final String KEY_WINE_ID ="ID";
 	private static final String KEY_NAME ="name";
 	private static final String KEY_DESCRIPTION ="description";
 	private static final String KEY_ALCOHOL_LEVEL ="alcohol_level";
@@ -60,12 +61,12 @@ public class WineManager extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String createTable = "create table "+TABLE_NAME+" ("
-				+ KEY_ID +" integer primary key,"+ KEY_NAME +" text,"+ KEY_DESCRIPTION +" text,"+ KEY_COUNTRY +" text,"
+				+ KEY_ID +" integer primary key,"+KEY_NAME +" text,"+ KEY_DESCRIPTION +" text,"+ KEY_COUNTRY +" text,"
 				+ KEY_TASTING_NOTES +" text,"+ KEY_MATURATION +" text,"+ KEY_FOOD_PAIRING +" text,"+ KEY_SERVING_SUGGESTION +" text,"
 				+ KEY_WINE_OF_ORIGIN +" text,"+ KEY_CELLARING_POTENTIAL +" text,"+ KEY_WINEMAKER_NOTES +" text,"
 				+ KEY_BRAND +" text,"+ KEY_ALCOHOL_LEVEL +" double,"+ KEY_PRONOUNCIATION +" text,"+ KEY_MEAL +" text,"
-				+ KEY_OCCASION +" text,"+ KEY_TYPE +" text"
-				+");";
+				+ KEY_OCCASION +" text,"+ KEY_TYPE +" text,"
+				+ KEY_WINE_ID +" integer);";
 		
 		db.execSQL(createTable);
 		//db.close();
@@ -86,8 +87,8 @@ public class WineManager extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		
-		//values.put(KEY_ID, wine.getId());
 		values.put(KEY_NAME, wine.getName());
+		values.put(KEY_WINE_ID, wine.getId());
 		values.put(KEY_DESCRIPTION, wine.getDescription());
 		values.put(KEY_WINE_OF_ORIGIN, wine.getWineOfOrigin());
 		values.put(KEY_TASTING_NOTES, wine.getTastingNotes());
@@ -124,8 +125,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -215,8 +215,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -259,8 +258,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -303,8 +301,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -347,8 +344,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -383,7 +379,7 @@ public class WineManager extends SQLiteOpenHelper {
 	public Wine getWine(int id)
 	{
 		//query
-		String query = "select * from "+TABLE_NAME+" where "+KEY_ID+"="+id;
+		String query = "select * from "+TABLE_NAME+" where "+KEY_WINE_ID+"="+id;
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		
@@ -391,8 +387,7 @@ public class WineManager extends SQLiteOpenHelper {
 		
 		if(cursor.moveToFirst())
 		{
-			Wine wine = new Wine();
-			wine.setId(Integer.parseInt(cursor.getString(0)));
+			Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 			wine.setName(cursor.getString(1));
 			wine.setDescription(cursor.getString(2));
 			wine.setCountry(cursor.getString(3));
@@ -440,8 +435,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));
@@ -506,8 +500,7 @@ public class WineManager extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				Wine wine = new Wine();
-				wine.setId(Integer.parseInt(cursor.getString(0)));
+				Wine wine = new Wine(Integer.parseInt(cursor.getString(17)));
 				wine.setName(cursor.getString(1));
 				wine.setDescription(cursor.getString(2));
 				wine.setCountry(cursor.getString(3));

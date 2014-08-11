@@ -48,13 +48,14 @@ public class WinePhotoFragment extends Fragment {
 			rootView = inflater.inflate(R.layout.fragment_wine_pics, container,false);
 			
 			int id = getActivity().getIntent().getIntExtra(WINE_IDENTIFIER,-1);
+			Log.d("id", id+"");
 			
 			Wine aWine = null;
 		    
 			if(id>0)
 			{
 				aWine = obj.getWine(id);
-				
+				Log.d("wine", aWine.toString());
 				ImageView image = (ImageView) rootView.findViewById(R.id.wine_image);
 				image.setImageDrawable(aWine.getPicture(mContext));
 			}

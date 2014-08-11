@@ -38,7 +38,7 @@
     <string name="view_all">View all our wines</string>
     <string name="title_activity_wine_information">WineInformationActivity</string>
     <string name="wine_title1">Details</string>
-    <string name="wine_title2">Pictures</string>
+    <string name="wine_title2">Picture</string>
     <string name="wine_title3">My Notes</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -57,7 +57,8 @@
     <string name="cancel">Cancel</string>
     <string name="pick">Select an option</string>
     <string name="title_text">Title</string>
-    <string name="note_empty">Oh. You don\'t have any notes yet, press the menu button on your device to add a new note</string>
+    <string name="note_empty">Oh no! You don\'t have any notes yet, this section provides a location 
+        for you to place any personal note you\'d like to make regarding this wine.</string>
     <string name="favorite_empty">Your favorite wines come here</string>
     <string name="title_activity_note_view">NoteViewActivity</string>
     <string name="pH">Placeholder text</string>

@@ -14,7 +14,6 @@ import android.util.Log;
  */
 public class Wine extends WineBase
 {
-	private static int idGen=0;
 	private MediaPlayer voicePronounciation;
 	private int id;
 	private Bitmap bitmap; //TODO delete 
@@ -25,10 +24,9 @@ public class Wine extends WineBase
 	private String type;
 	private String meal;
 	
-	public Wine() 
+	public Wine(int wineID) 
 	{
-		idGen++;
-		setId(idGen);
+		setId(wineID);
 	}
 
 	/**
@@ -41,7 +39,7 @@ public class Wine extends WineBase
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	private void setId(int id) {
 		this.id = id;
 	}
 
@@ -90,9 +88,8 @@ public class Wine extends WineBase
 		String name ="name:"+getName();
 		String brand = "brand:"+getBrand();
 		String country = "country:"+getCountry();
-		String image = "picture is null? "+(picture==null ? true:false);
 		
-		return id+"\n"+name+"\n"+brand+"\n"+country+"\n"+image;
+		return id+"\n"+name+"\n"+brand+"\n"+country;
 	}
 
 	/**
