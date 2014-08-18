@@ -2,6 +2,9 @@ package com.jwray.jwraywines.activities;
 
 import java.util.Locale;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +16,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.ThreadControl;
@@ -67,7 +71,7 @@ public class HomeActivity extends ActionBarActivity implements
 		actionBar.setIcon(android.R.color.transparent);
 		
 		if(obj.getAllWines().isEmpty())
-			new WineContent().getWines(this, tControl);
+			refresh(null);
 		
 		// Create the adapter that will return a fragment for each of the four
 		// primary sections of the activity.
@@ -138,13 +142,25 @@ public class HomeActivity extends ActionBarActivity implements
 			super.onBackPressed();
 	}
 
+	private boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+	
 	/**
 	 * Reloads the enter database of wines
 	 * @param item
 	 */
 	public void refresh(MenuItem item)
 	{
-		new WineContent().getWines(this, tControl);
+		if(isNetworkAvailable())
+			new WineContent().getWines(this, tControl);
+		else
+			Toast.makeText(this, "You need an internet connection to retrieve the information on the wines", Toast.LENGTH_LONG).show();
 	}
 	
 	public static void setRefreshActionButtonState(final boolean refreshing) {

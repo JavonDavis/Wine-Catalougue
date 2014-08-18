@@ -212,6 +212,10 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 			favAdapter = new FavoriteAdapter(mContext);
 			
 			favorites = (GridView) rootView.findViewById(R.id.favoriteView);
+			
+			TextView emptyView = (TextView) rootView.findViewById(R.id.favoriteEmpty);
+			emptyView.setText(R.string.favorite_empty);
+			favorites.setEmptyView(emptyView);
 			favorites.setAdapter(favAdapter);
 
 			favorites.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
