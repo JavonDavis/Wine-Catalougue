@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,33 +20,39 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.WineContract;
 
 /**
  * Fragment for the detail page of wine 'x'
  * @author Javon
  *
  */
-public class WineDetailFragment extends Fragment {
+public class WineDetailFragment extends Fragment implements ParcelKeys {
 
 	private Context mContext;
-	private static String WINE_IDENTIFIER = "id";
-	private WineManager obj;
+	private Long _id;
+	
+	private Wine aWine;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
+		_id = getActivity().getIntent().getLongExtra(WINE_IDENTIFIER,-1);
 		
-		obj = new WineManager(mContext);
-
+		Uri uri = Uri.withAppendedPath(WineContract.WINES_URI, "/"+_id);
+		
+		Cursor mCursor = getActivity().getContentResolver().query(uri, allColumns, null, null, null);
+		aWine = WineContract.cursorToWine(getActivity(),mCursor);
 	}
 	
 	public static Fragment newInstance() {
-		
-		return new WineDetailFragment();
+		WineDetailFragment fragment = new WineDetailFragment();
+
+		return fragment;
 	}
 	
 	@Override
@@ -55,9 +63,6 @@ public class WineDetailFragment extends Fragment {
 		try{
 			rootView = inflater.inflate(R.layout.fragment_wine_detail, container,false);
 			
-			int id = getActivity().getIntent().getIntExtra(WINE_IDENTIFIER,-1);
-			
-			Wine aWine = null;
 			TextView view=null;
 			ExpandableListView expView = null;
 			
@@ -65,12 +70,12 @@ public class WineDetailFragment extends Fragment {
 		    HashMap<String, List<String>> contentMap = new HashMap<String , List<String>>();;
 		    expView = (ExpandableListView) rootView.findViewById(R.id.information);
 		    
-			if(id>0)
+			if(_id>-1)
 			{
-				aWine = obj.getWine(id);
 				
 				view = ((TextView) rootView.findViewById(R.id.name));
 				view.setText(aWine.getName());
+				
 				
 				//check for alcohol level
 				if(aWine.getAlcohol_level()!=0)
@@ -193,6 +198,9 @@ public class WineDetailFragment extends Fragment {
 					contentMap.put("Winemaker's Notes", content);
 				}
 				
+				view = ((TextView) rootView.findViewById(R.id.name));
+				view.setSelected(true);
+				
 				WineItemAdapter adapter = new WineItemAdapter(mContext,headers,contentMap);
 				
 				expView.setAdapter(adapter);
@@ -269,6 +277,7 @@ public class WineDetailFragment extends Fragment {
 		public View getGroupView(int groupPosition, boolean isExpanded,
 				View convertView, ViewGroup parent) {
 			String headerTitle = (String) getGroup(groupPosition);
+			Log.d("dsfsdf", this.mContext+"");
 	        if (convertView == null) {
 	            LayoutInflater infalInflater = (LayoutInflater) this.mContext
 	                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

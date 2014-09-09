@@ -3,23 +3,10 @@
  */
 package com.jwray.jwraywines.classes;
 
-import java.util.ArrayList;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.jwray.jwraywines.R;
-import com.jwray.jwraywines.classes.databases.FavoriteManager;
-import com.jwray.jwraywines.classes.databases.WineManager;
 
 /**
  * @author Javon Davis
- * Class used to govern the general keys used throughout the application's life
+ * Class used to govern and transport the general keys used throughout the application's life
  */
 public interface ParcelKeys {
 	static final String NAME_IDENTIFIER ="name";
@@ -30,6 +17,41 @@ public interface ParcelKeys {
 	static final String TYPE_IDENTIFIER = "type";
 	static final String MEAL_IDENTIFIER = "meal";
 	static final String OCCASION_IDENTIFIER = "occasion";
+	static final String COLUMN_IDENTIFIER = "column";
+	static final String COLUMN_ARGUEMENT_IDENTIFIER = "column arguement";
+	static final String COLUMN_ID ="_id";
+	static final String COLUMN_WINE_ID ="ID";
+	static final String COLUMN_NAME ="name";
+	static final String COLUMN_DESCRIPTION ="description";
+	static final String COLUMN_ALCOHOL_LEVEL ="alcohol_level";
+	static final String COLUMN_MATURATION ="maturation";
+	static final String COLUMN_TASTING_NOTES ="tasting_notes";
+	static final String COLUMN_SERVING_SUGGESTION ="serving_suggestion";
+	static final String COLUMN_CELLARING_POTENTIAL ="cellaring_potential";
+	static final String COLUMN_FOOD_PAIRING ="food_pairing";
+	static final String COLUMN_WINE_OF_ORIGIN ="wine_of_origin";
+	static final String COLUMN_COUNTRY ="country";
+	static final String COLUMN_WINEMAKER_NOTES ="winemaker_notes";
+	static final String COLUMN_BRAND = "brand";
+	static final String COLUMN_PRONOUNCIATION = "pronounciation";
+	static final String COLUMN_MEAL = "meal";
+	static final String COLUMN_OCCASION = "occasion";
+	static final String COLUMN_TYPE = "type";
+	
+	static final int WINE_ID_IDENTIFIER = 1;
+	
+	static final String[] allColumns = {COLUMN_ID,COLUMN_NAME,COLUMN_DESCRIPTION,COLUMN_COUNTRY,
+			 COLUMN_TASTING_NOTES, COLUMN_MATURATION, COLUMN_FOOD_PAIRING, COLUMN_SERVING_SUGGESTION,
+			 COLUMN_WINE_OF_ORIGIN, COLUMN_CELLARING_POTENTIAL, COLUMN_WINEMAKER_NOTES,
+			 COLUMN_BRAND, COLUMN_ALCOHOL_LEVEL, COLUMN_PRONOUNCIATION, COLUMN_MEAL,
+			 COLUMN_OCCASION, COLUMN_TYPE,COLUMN_WINE_ID};
+	
+	static final String WINE_TABLE_NAME = "wines";
+
+	static final String PATH_WINE = "wine";
+	static final String PATH_NOTE = "note";
+	static final String PATH_FAVORITE = "favorite";
+	
 	
 	
 	/*============================================ Interfaces =================================================*/
@@ -85,85 +107,4 @@ public interface ParcelKeys {
 		
 	}
 	
-	/**
-	 * Adapter for the facorites grid on homepage
-	 * @author Javon Davis
-	 *
-	 */
-	static class FavoriteAdapter extends BaseAdapter{
-
-		Context mContext;
-		ArrayList<Integer> mWineIds;
-		FavoriteManager favObj;
-		WineManager obj;
-		
-		
-		public FavoriteAdapter(Context context) {
-			mContext = context;
-			favObj = new FavoriteManager(mContext);
-			obj = new WineManager(mContext);
-			mWineIds = (ArrayList<Integer>) favObj.getAllFavorites();
-			
-		}
-		
-		@Override
-		public int getCount() {
-			
-			return mWineIds.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			
-			return mWineIds.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			
-			
-			int id = (int) getItem(position);
-			
-			View view = convertView;
-			
-			if (view == null) {
-
-		        LayoutInflater inflater;
-		        inflater = LayoutInflater.from(mContext);
-		        view = inflater.inflate(R.layout.wine_list_item, parent,false);
-
-		    }
-			
-			try
-			{
-				Wine wine = obj.getWine(id);
-				
-				if(wine!= null)
-				{
-					ImageView wineImage = (ImageView) view.findViewById(R.id.wineView);
-					TextView wineName = (TextView) view.findViewById(R.id.wineName);
-					TextView wineDescription = (TextView) view.findViewById(R.id.wineDescription);
-					
-					wineImage.setVisibility(View.GONE);
-					//TODO delete the imageview or load it in async task
-					
-					wineName.setText(wine.getName());
-					wineDescription.setText("Country:"+wine.getCountry()+"\nBrand:"+wine.getBrand());
-				}
-			}
-			catch(java.lang.NullPointerException e)
-			{
-				
-			}
-			
-			return view;
-		}
-
-	}
 }

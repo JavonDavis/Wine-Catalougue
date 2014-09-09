@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -21,20 +23,25 @@ import android.widget.TextView;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.NotesManager;
+import com.jwray.jwraywines.classes.Wine;
+import com.jwray.jwraywines.classes.WineContract;
+import com.jwray.jwraywines.classes.databases.NoteOpenHelper;
 
-
-public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInterface{
+/**
+ * Fragment for displaying notes for a wine
+ * @author Javon Davis
+ *
+ */
+public class NotesFragment extends Fragment implements ParcelKeys,ParcelKeys.NoteDialogInterface{
 
 	private Context mContext;
-	private static String WINE_IDENTIFIER = "id";
-	private NotesManager notesObj;
+	private NoteOpenHelper notesObj;
 	private NoteAdapter noteAdapter;
 	private static Note note;
 	private ArrayList<Note> notes;
 	private static ListView notesList;
 	private static TextView emptyText;
-	private int id;
+	private Wine wine;
 	
 	
 	@Override
@@ -42,8 +49,13 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		notesObj = new NotesManager(mContext);
-		id = getActivity().getIntent().getIntExtra(WINE_IDENTIFIER,-1);
+		notesObj = new NoteOpenHelper(mContext);
+		Long _id = getActivity().getIntent().getLongExtra(WINE_IDENTIFIER,-1);
+		
+		Uri uri = Uri.withAppendedPath(WineContract.WINES_URI, "/"+_id);
+		
+		Cursor mCursor = getActivity().getContentResolver().query(uri, allColumns, null, null, null);
+		wine = WineContract.cursorToWine(getActivity(),mCursor);
 	}
 	
 	public static Fragment newInstance() {
@@ -67,7 +79,7 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = null;
-		
+		int id = wine.getId();
 		try{
 			rootView = inflater.inflate(R.layout.fragment_wine_notes, container,false);
 			
@@ -116,7 +128,7 @@ public class NotesFragment extends Fragment implements ParcelKeys.NoteDialogInte
 		switch(key)
 		{
 			case "delete":
-				notes = (ArrayList<Note>) notesObj.getNotesByWineId(id);
+				notes = (ArrayList<Note>) notesObj.getNotesByWineId(wine.getId());
 				
 				noteAdapter = new NoteAdapter(mContext,
 						android.R.layout.simple_list_item_2,

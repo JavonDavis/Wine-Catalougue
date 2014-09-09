@@ -17,11 +17,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 
 /**
  * Fragment for the page used to search for a wine by name
@@ -31,24 +32,30 @@ import com.jwray.jwraywines.classes.databases.WineManager;
 public class SearchFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
-	private WineManager obj;
-	
-	@SuppressWarnings("unused")
-	private MultiAutoCompleteTextView wineSearch;
+	private WineOpenHelper wineHelper;
+	private String mColumnName;
+
+	public static SearchFragment newInstance(final String columnName)
+	{
+		SearchFragment fragment = new SearchFragment();
+		Bundle args = new Bundle();
+
+		args.putString(COLUMN_IDENTIFIER, columnName);
+		
+		fragment.setArguments(args);
+		return fragment;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new WineManager(mContext);
+		wineHelper = new WineOpenHelper(mContext);
+		
+		if(savedInstanceState==null)
+			mColumnName = getArguments().getString(COLUMN_IDENTIFIER);
 	}
-
-	public static SearchFragment newInstance()
-	{
-		return new SearchFragment();
-	}
-	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,15 +64,35 @@ public class SearchFragment extends Fragment implements ParcelKeys
 		
 		final View rootView = inflater.inflate(R.layout.fragment_search, container,false);
 
-		ArrayList<String> brands = (ArrayList<String>) obj.getAllWineNames();
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>
-				   (mContext,android.R.layout.simple_list_item_1,brands);
+		ArrayList<String> options; 
 		
 		final MultiAutoCompleteTextView wineSearch = (MultiAutoCompleteTextView) rootView.findViewById
 				   (R.id.tImpl);
 		
-		wineSearch.setHint(R.string.wineSearchHint);
+		switch(mColumnName)
+		{
+			case COLUMN_NAME:
+				options = (ArrayList<String>) wineHelper.getAllWineNames();
+				wineSearch.setHint(R.string.wineSearchHint);
+				break;
+			case COLUMN_BRAND:
+				options = (ArrayList<String>) wineHelper.getAllBrands();
+				wineSearch.setHint(R.string.wineBrandSearchHint);
+				break;
+			case COLUMN_COUNTRY:
+				options = (ArrayList<String>) wineHelper.getAllCountries();
+				wineSearch.setHint(R.string.wineCountrySearchHint);
+				break;
+			default:
+				Toast.makeText(getActivity(), "Invalid column argument; ERROR: 404", Toast.LENGTH_LONG).show();
+				options = (ArrayList<String>) wineHelper.getAllWineNames();
+				break;
+		}
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>
+		   (mContext,android.R.layout.simple_list_item_1,options);
+		
+		
 		
 		wineSearch.setOnTouchListener(new OnTouchListener() {
 			
@@ -85,7 +112,9 @@ public class SearchFragment extends Fragment implements ParcelKeys
 	                	{
 		                    Intent intent = new Intent(mContext,WineListActivity.class);
 		                    
-		                    intent.putExtra(NAME_IDENTIFIER, query);
+		                    //intent.putExtra(NAME_IDENTIFIER, query);
+		                    intent.putExtra(COLUMN_IDENTIFIER, mColumnName);
+		                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, query);
 		                    wineSearch.getText().clear();
 		                    startActivity(intent);
 	                	}
@@ -108,11 +137,13 @@ public class SearchFragment extends Fragment implements ParcelKeys
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				String name = (String) parent.getItemAtPosition(position);
-				
-				Intent intent = new Intent(mContext,WineListActivity.class);
-                  
-                intent.putExtra(NAME_IDENTIFIER, name);
+				String query = (String) parent.getItemAtPosition(position);
+    
+                Intent intent = new Intent(mContext,WineListActivity.class);
+                
+                //intent.putExtra(NAME_IDENTIFIER, query);
+                intent.putExtra(COLUMN_IDENTIFIER, mColumnName);
+                intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, query);
                 wineSearch.getText().clear();
                 startActivity(intent);
 			}

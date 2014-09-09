@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +26,9 @@ import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineInformationActivity;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.FavoriteManager;
+import com.jwray.jwraywines.classes.Wine;
+import com.jwray.jwraywines.classes.databases.FavoriteOpenHelper;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 	private Context mContext;
 	private GridView favorites;
 	private static FavoriteAdapter favAdapter;
-	private FavoriteManager favObj;
+	private WineOpenHelper wineHelper;
 	private ListView options;
 	private HomeOptionAdapter listAdapter;
 	private static List<String> optionSet = new ArrayList<String>();
@@ -70,12 +73,11 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		super.onCreate(savedInstanceState);
 		
 		mContext = getActivity();
-		favObj = new FavoriteManager(mContext);
+		wineHelper = new WineOpenHelper(mContext);
 	}
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		
 		inflater.inflate(R.menu.home, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -203,11 +205,6 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 					
 					
 				});
-			
-			TextView empty = (TextView) rootView.findViewById(R.id.favoriteEmpty);
-			
-			if(!favObj.getAllFavorites().isEmpty())
-				empty.setVisibility(View.GONE);
 			 
 			favAdapter = new FavoriteAdapter(mContext);
 			
@@ -226,7 +223,8 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 					Intent intent = new Intent(mContext,WineInformationActivity.class);
 
 					int ID = (int) favAdapter.getItem(position);
-					intent.putExtra(WINE_IDENTIFIER, ID);
+					long _id = wineHelper.getWine(ID).getColumnId();
+					intent.putExtra(WINE_IDENTIFIER, _id);
 					startActivity(intent);
 				}
 
@@ -270,7 +268,9 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case TYPE_ROSE:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
@@ -280,7 +280,9 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case TYPE_SPARKLING:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
@@ -293,84 +295,107 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case RED_DARK:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_RED);
                     
                     startActivity(intent);
 					break;
 				case RED_LIGHT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
+                    intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_RED);
                     
                     startActivity(intent);
 					break;
 				case RED_MEDIUM:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
-                    
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_RED);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_RED);
                     startActivity(intent);
 					break;
 				case WHITE_DRY:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
-                    
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_WHITE);
+					
                     startActivity(intent);
 					break;
 				case WHITE_RICH:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option+" "+TYPE_WHITE);
+                    intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_WHITE);
                     
                     startActivity(intent);
 					break;
 				case WHITE_SWEET:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.TYPE_IDENTIFIER, option);
+                    intent.putExtra(COLUMN_IDENTIFIER, COLUMN_TYPE);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option+" "+TYPE_WHITE);
                     
                     startActivity(intent);
 					break;
 				case MEAL_PASTA:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_PIZZA:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_CHEESE:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_FRUIT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_VEGGIES:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAL_SEAFOOD:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
@@ -380,56 +405,72 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 				case MEAT_BEEF:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAT_CHICKEN:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAT_PORK:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case MEAT_STEAK:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.MEAL_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_MEAL);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case OCCASION_ALL_TEXT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_OCCASION);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case OCCASION_BDAY_TEXT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_OCCASION);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case OCCASION_COCKTAIL_TEXT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_OCCASION);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
 				case OCCASION_CHRISTMAS_TEXT:
 					intent = new Intent(mContext,WineListActivity.class);
                     
-                    intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+                    //intent.putExtra(ParcelKeys.OCCASION_IDENTIFIER, option);
+					intent.putExtra(COLUMN_IDENTIFIER, COLUMN_OCCASION);
+                    intent.putExtra(COLUMN_ARGUEMENT_IDENTIFIER, option);
                     
                     startActivity(intent);
 					break;
@@ -476,5 +517,84 @@ public class HomeFragment extends Fragment implements ParcelKeys,ParcelKeys.Opti
 		
 	}
 
+	/**
+	 * Adapter for the favorites grid on homepage
+	 * @author Javon Davis
+	 *
+	 */
+	private class FavoriteAdapter extends BaseAdapter{
+
+		private Context mContext;
+		private ArrayList<Integer> mWineIds;
+		private FavoriteOpenHelper favObj;
+		private WineOpenHelper obj;
+		
+		
+		public FavoriteAdapter(Context context) {
+			mContext = context;
+			favObj = new FavoriteOpenHelper(mContext);
+			obj = new WineOpenHelper(mContext);
+			mWineIds = (ArrayList<Integer>) favObj.getAllFavorites();
+			
+		}
+		
+		@Override
+		public int getCount() {
+			
+			return mWineIds.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			
+			return mWineIds.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			
+			
+			int id = (int) getItem(position);
+			
+			View view = convertView;
+			
+			if (view == null) {
+
+		        LayoutInflater inflater;
+		        inflater = LayoutInflater.from(mContext);
+		        view = inflater.inflate(R.layout.wine_list_item, parent,false);
+
+		    }
+			
+			try
+			{
+				Wine wine = obj.getWine(id);
+				
+				if(wine!= null)
+				{
+					TextView wineName = (TextView) view.findViewById(R.id.wineName);
+					TextView wineCountry = (TextView) view.findViewById(R.id.wineCountry);
+					TextView wineBrand = (TextView) view.findViewById(R.id.wineBrand);
+					
+					wineName.setText(wine.getName());
+					wineCountry.setText(wine.getCountry());
+					wineBrand.setText(wine.getBrand());
+				}
+			}
+			catch(java.lang.NullPointerException e)
+			{
+				
+			}
+			
+			return view;
+		}
+
+	}
 }
 

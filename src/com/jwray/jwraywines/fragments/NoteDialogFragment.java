@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.NotesManager;
+import com.jwray.jwraywines.classes.databases.NoteOpenHelper;
 
 /**
  * Dialog for adding a new note
@@ -29,7 +29,7 @@ import com.jwray.jwraywines.classes.databases.NotesManager;
  */
 public class NoteDialogFragment extends DialogFragment implements ParcelKeys{
 
-	private NotesManager notesObj;
+	private NoteOpenHelper notesObj;
 	private static Context context;
 	
 	public NoteDialogFragment()
@@ -55,7 +55,7 @@ public class NoteDialogFragment extends DialogFragment implements ParcelKeys{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.new_note);
         
-        notesObj = new NotesManager(getContext());
+        notesObj = new NoteOpenHelper(getContext());
         //Get the Layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         

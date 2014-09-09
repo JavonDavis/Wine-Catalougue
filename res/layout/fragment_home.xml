@@ -11,92 +11,94 @@
     sothree:shadowHeight="4dp">
 
 
-<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-	<TableLayout 
-	    android:id="@+id/table"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	     >
-	    <TableRow
-	        android:id="@+id/headingRow"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center" >
-	
-	        <TextView
-	            android:id="@+id/heading"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:gravity="center"
-	            android:text="@string/home_prompt"
-	            android:textColor="@color/BaseColor"
-	            android:padding="10dp"
-	            android:textSize="24sp" />
-	
-	    </TableRow>
-	
-	    <TableRow
-	        android:id="@+id/contentRow"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:layout_weight="1"
-	        android:gravity="center" >
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@color/DarkBackground">
+		<TableLayout 
+		    android:id="@+id/table"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		     >
+		    <TableRow
+		        android:id="@+id/headingRow"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center" >
 		
-	        <TextView
-	            android:id="@+id/prompter"
-	            android:layout_width="wrap_content"
+		        <TextView
+		            android:id="@+id/heading"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/home_prompt"
+		            android:textColor="@color/BaseColor"
+		            android:padding="10dp"
+		            android:textSize="24sp" />
+		
+		    </TableRow>
+		
+		    <TableRow
+		        android:id="@+id/contentRow"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1"
+		        android:gravity="center" >
+			
+		        <TextView
+		            android:id="@+id/prompter"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/initial_prompt"
+		            android:textColor="@color/BaseColor"
+		            android:padding="5dp"
+		            android:textSize="16sp" />
+	
+		    </TableRow>  
+		</TableLayout>
+			<ListView
+	            android:id="@+id/optionsList"
+	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:gravity="center"
-	            android:text="@string/initial_prompt"
-	            android:textColor="@color/BaseColor"
+	            android:layout_gravity="center"
 	            android:padding="5dp"
-	            android:textSize="16sp" />
-
-	    </TableRow>  
-	</TableLayout>
-		<ListView
-            android:id="@+id/optionsList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:layout_below="@id/table">
-        </ListView>
-
-</RelativeLayout>
-
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center" >
-        
-        <TextView
-        	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:id="@+id/handle"
-	        android:gravity="center|top"
-	        android:text="@string/slideUpText"
-	        android:padding="30dp"
-	        android:textSize="16sp"
-	        android:textColor="@color/BaseColor" />
-        
-        <TextView
-	        android:id="@+id/favoriteEmpty"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="@color/BaseColor"
-	        android:text="@string/favorite_empty"/>
-        
-        <GridView
-	        android:id="@+id/favoriteView"
+	            android:layout_below="@id/table">
+	        </ListView>
+	
+	</RelativeLayout>
+	
+	<LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        android:numColumns="2">
-    </GridView>
+	        android:orientation="vertical"
+	        android:background="@color/DarkBackground"
+	        android:gravity="center" >
+	        
+	        <TextView
+	        	android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:id="@+id/handle"
+		        android:gravity="center|top"
+		        android:text="@string/slideUpText"
+		        android:padding="30dp"
+		        android:textSize="16sp"
+		        android:textColor="@color/BaseColor" />
+	        
+	        <TextView
+		        android:id="@+id/favoriteEmpty"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/BaseColor"
+		        android:text="@string/favorite_empty"/>
+	        
+	        <GridView
+		        android:id="@+id/favoriteView"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:numColumns="2">
+	    </GridView>
        
        
    </LinearLayout>

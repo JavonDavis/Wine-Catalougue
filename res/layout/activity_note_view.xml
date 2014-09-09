@@ -1,38 +1,40 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background" >
-
-    <TableRow
-        android:id="@+id/noteHeadingRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center" >
-
-            <TextView
-            android:id="@+id/noteTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
-            />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/noteContentRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
-        
-        <TextView
-        android:id="@+id/noteDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/White"
-        android:background="@color/DarkBackground"/>
-    </TableRow>
-
+    android:background="@drawable/background">
     
-
-</TableLayout>
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@color/DarkBackground" >
+	
+	    <TableRow
+	        android:id="@+id/noteHeadingRow"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center" >
+	
+	            <TextView
+	            android:id="@+id/noteTitle"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:layout_gravity="center"
+	            android:textColor="@color/White"
+	            />
+	    </TableRow>
+	
+	    <TableRow
+	        android:id="@+id/noteContentRow"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	        
+	        <TextView
+	        android:id="@+id/noteDetails"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/White"/>
+	    </TableRow>
+	
+	</TableLayout>
+</LinearLayout>

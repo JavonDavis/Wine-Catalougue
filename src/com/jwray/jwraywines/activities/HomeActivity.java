@@ -19,11 +19,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.jwray.jwraywines.R;
+import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.ThreadControl;
 import com.jwray.jwraywines.classes.WineContent;
-import com.jwray.jwraywines.classes.databases.WineManager;
-import com.jwray.jwraywines.fragments.BrandFragment;
-import com.jwray.jwraywines.fragments.CountryFragment;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 import com.jwray.jwraywines.fragments.HomeFragment;
 import com.jwray.jwraywines.fragments.SearchFragment;
 
@@ -33,7 +32,7 @@ import com.jwray.jwraywines.fragments.SearchFragment;
  *
  */
 public class HomeActivity extends ActionBarActivity implements
-		ActionBar.TabListener {
+		ActionBar.TabListener,ParcelKeys {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -49,7 +48,7 @@ public class HomeActivity extends ActionBarActivity implements
 	 */
 	private ViewPager mViewPager;
 	
-	private WineManager obj;
+	private WineOpenHelper obj;
 	private ThreadControl tControl;
 	private static Menu optionsMenu;
 	private boolean homeFragmentIsVisible = true;
@@ -63,7 +62,7 @@ public class HomeActivity extends ActionBarActivity implements
 		setContentView(R.layout.activity_home);
 		
 		tControl = new ThreadControl();
-		obj = new WineManager(this);
+		obj = new WineOpenHelper(this);
 			
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -135,11 +134,19 @@ public class HomeActivity extends ActionBarActivity implements
 	 */
 	@Override
 	public void onBackPressed() {
-		int identifier = home.getPreviousIdentifier();
-		if(isHomeFragmentIsVisible()&&identifier!=0)
-			home.refreshList(identifier);
-		else
-			super.onBackPressed();
+		try
+		{
+			int identifier = home.getPreviousIdentifier();
+			if(isHomeFragmentIsVisible()&&identifier!=0)
+				home.refreshList(identifier);
+			else
+				super.onBackPressed();
+		}
+		catch(java.lang.NullPointerException e)
+		{
+			Toast.makeText(this, "Error handling back button clicked",  Toast.LENGTH_LONG).show();
+		}
+		
 	}
 
 	private boolean isNetworkAvailable() {
@@ -237,13 +244,13 @@ public class HomeActivity extends ActionBarActivity implements
 					home = (HomeFragment) f;
 					break;
 				case 1:
-					f = SearchFragment.newInstance();
+					f = SearchFragment.newInstance(COLUMN_NAME);
 					break;
 				case 2:
-					f = BrandFragment.newInstance();
+					f = SearchFragment.newInstance(COLUMN_BRAND);
 					break;
 				case 3:
-					f = CountryFragment.newInstance();
+					f = SearchFragment.newInstance(COLUMN_COUNTRY);
 					break;
 				default:
 					f = null;

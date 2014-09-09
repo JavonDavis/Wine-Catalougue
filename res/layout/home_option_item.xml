@@ -12,7 +12,6 @@
         android:textColor="@color/BaseColor"
         android:padding="10dp"
         android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@color/DarkBackground"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 </LinearLayout>

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
-    
+    android:gravity="bottom"
+    android:background="@drawable/background"
+    sothree:panelHeight="68dp"
+    sothree:shadowHeight="4dp">
+
+
 	<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@color/DarkBackground">
 		<TableLayout 
 		    android:id="@+id/table"
 		    android:layout_width="match_parent"
@@ -64,36 +71,35 @@
 	
 	<LinearLayout
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
+	        android:layout_height="match_parent"
 	        android:orientation="vertical"
-	        android:gravity="center"
-	        android:paddingTop="20dp" >
-			
-			<TextView
-		        android:id="@+id/favHeading"
-		        android:layout_width="wrap_content"
+	        android:background="@color/DarkBackground"
+	        android:gravity="center" >
+	        
+	        <TextView
+	        	android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:textSize="18sp"
-		        android:background="@color/DarkBackground"
-		        android:text="@string/favorite_heading"
-		        android:textColor="@color/BaseColor"/>
-			
+		        android:id="@+id/handle"
+		        android:gravity="center|top"
+		        android:text="@string/slideUpText"
+		        android:padding="30dp"
+		        android:textSize="16sp"
+		        android:textColor="@color/BaseColor" />
+	        
 	        <TextView
 		        android:id="@+id/favoriteEmpty"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_gravity="center"
-		        android:background="@color/DarkBackground"
-		        android:text="@string/favorite_empty"
-		        android:textColor="@color/BaseColor"/>
+		        android:textColor="@color/BaseColor"
+		        android:text="@string/favorite_empty"/>
 	        
 	        <GridView
 		        android:id="@+id/favoriteView"
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
-		        android:numColumns="2">
+		        android:numColumns="3">
 	    </GridView>
-	       
-	       
-	   </LinearLayout>
-</LinearLayout>
+       
+       
+   </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

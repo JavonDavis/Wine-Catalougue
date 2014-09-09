@@ -14,7 +14,7 @@ import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.NoteViewActivity;
 import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.NotesManager;
+import com.jwray.jwraywines.classes.databases.NoteOpenHelper;
 
 /**
  * Fragment for the Dialog shown for a not click
@@ -24,7 +24,7 @@ import com.jwray.jwraywines.classes.databases.NotesManager;
 public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	
 	private final String[] options = {"View","Delete"};
-	private NotesManager notesObj;
+	private NoteOpenHelper notesObj;
 	private static Context context;
 	private static Note note;
 	
@@ -46,7 +46,7 @@ public class OptionsDialogFragment extends DialogFragment implements ParcelKeys{
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
-		notesObj = new NotesManager(getContext());
+		notesObj = new NoteOpenHelper(getContext());
 		note = getNote();
 		
 	    builder.setTitle(R.string.pick)

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.NotesManager;
+import com.jwray.jwraywines.classes.databases.NoteOpenHelper;
 
 /**
  * Activity for the purpose of viewing a note
@@ -16,14 +16,14 @@ import com.jwray.jwraywines.classes.databases.NotesManager;
  */
 public class NoteViewActivity extends Activity implements ParcelKeys{
 
-	NotesManager notesObj;
+	NoteOpenHelper notesObj;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_note_view);
 
-		notesObj = new NotesManager(this);
+		notesObj = new NoteOpenHelper(this);
 		
 		TextView title = (TextView) findViewById(R.id.noteTitle);
 

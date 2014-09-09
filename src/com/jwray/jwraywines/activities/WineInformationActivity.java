@@ -2,8 +2,9 @@ package com.jwray.jwraywines.activities;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
+import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -20,20 +21,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.Session;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.classes.Note;
 import com.jwray.jwraywines.classes.ParcelKeys;
 import com.jwray.jwraywines.classes.Wine;
-import com.jwray.jwraywines.classes.databases.FavoriteManager;
-import com.jwray.jwraywines.classes.databases.NotesManager;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.WineContract;
+import com.jwray.jwraywines.classes.databases.FavoriteOpenHelper;
+import com.jwray.jwraywines.classes.databases.NoteOpenHelper;
 import com.jwray.jwraywines.fragments.NoteDialogFragment;
 import com.jwray.jwraywines.fragments.NotesFragment;
 import com.jwray.jwraywines.fragments.OptionsDialogFragment;
@@ -61,16 +55,12 @@ public class WineInformationActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-	private WineManager obj;
 	private Wine wine;
-	private FavoriteManager favObj;
-	private int wineId;
-	private NotesManager notesObj;
+	private FavoriteOpenHelper favObj;
+	private NoteOpenHelper notesObj;
 	private MediaPlayer pronunciation;
-	
-	//life cycle helper for facebook share dialog
-	private UiLifecycleHelper uiHelper;
-
+	private Cursor mCursor;
+	private Long _id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +70,15 @@ public class WineInformationActivity extends ActionBarActivity implements
 		mWineDrawerFragment = (WineDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		
-		obj = new WineManager(this);
-		favObj = new FavoriteManager(this);
-		notesObj = new NotesManager(this);
+		favObj = new FavoriteOpenHelper(this);
+		notesObj = new NoteOpenHelper(this);
+
+		_id = getIntent().getLongExtra(WINE_IDENTIFIER,-1);
+		Uri uri = Uri.withAppendedPath(WineContract.WINES_URI, "/"+_id);
 		
-		uiHelper = new UiLifecycleHelper(this, null);
-	    uiHelper.onCreate(savedInstanceState);
-		
-		wine = obj.getWine(getIntent().getIntExtra(WINE_IDENTIFIER,-1));
-		wineId = wine.getId();
+		mCursor = getContentResolver().query(uri, allColumns, null, null, null);
+		wine = WineContract.cursorToWine(this,mCursor);
+		//wine = obj.getWine(getIntent().getIntExtra(WINE_IDENTIFIER,-1));
 		
 		getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE );
 		getSupportActionBar().setIcon(android.R.color.transparent);
@@ -100,47 +90,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 		mWineDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
-	
-	@Override
-	protected void onResume() {
-	    super.onResume();
-	    uiHelper.onResume();
-	}
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-	    super.onSaveInstanceState(outState);
-	    uiHelper.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public void onPause() {
-	    super.onPause();
-	    uiHelper.onPause();
-	}
-
-	@Override
-	public void onDestroy() {
-	    super.onDestroy();
-	    uiHelper.onDestroy();
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    super.onActivityResult(requestCode, resultCode, data);
-
-	    uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
-	        @Override
-	        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
-	            Log.e("Activity", String.format("Error: %s", error.toString()));
-	        }
-
-	        @Override
-	        public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
-	            Log.i("Activity", "Success!");
-	        }
-	    });
-	}
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
@@ -275,57 +225,6 @@ public class WineInformationActivity extends ActionBarActivity implements
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
-	
-	@SuppressWarnings("unused")
-	private void publishFeedDialog() {
-	    Bundle params = new Bundle();
-	    params.putString("name", "Facebook SDK for Android");
-	    params.putString("caption", "Build great social ap"
-	    		+ "ps and get more installs.");
-	    params.putString("description", "The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.");
-	    params.putString("link", "https://developers.facebook.com/android");
-	    params.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
-
-	    WebDialog feedDialog = (
-	        new WebDialog.FeedDialogBuilder(this,
-	            Session.getActiveSession(),
-	            params))
-	        .setOnCompleteListener(new OnCompleteListener() {
-
-	           
-	        	@Override
-				public void onComplete(Bundle values, FacebookException error) {
-	                if (error == null) {
-	                    // When the story is posted, echo the success
-	                    // and the post Id.
-	                    final String postId = values.getString("post_id");
-	                    if (postId != null) {
-	                        Toast.makeText(WineInformationActivity.this,
-	                            "Posted story, id: "+postId,
-	                            Toast.LENGTH_SHORT).show();
-	                    } else {
-	                        // User clicked the Cancel button
-	                        Toast.makeText(WineInformationActivity.this.getApplicationContext(), 
-	                            "Publish cancelled", 
-	                            Toast.LENGTH_SHORT).show();
-	                    }
-	                } else if (error instanceof FacebookOperationCanceledException) {
-	                    // User clicked the "x" button
-	                    Toast.makeText(WineInformationActivity.this.getApplicationContext(), 
-	                        "Publish cancelled", 
-	                        Toast.LENGTH_SHORT).show();
-	                } else {
-	                    // Generic, ex: network error
-	                    Toast.makeText(WineInformationActivity.this.getApplicationContext(), 
-	                        "Error posting story", 
-	                        Toast.LENGTH_SHORT).show();
-	                }
-	            }
-
-	        })
-	        .build();
-	    feedDialog.show();
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -341,7 +240,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 			NoteDialogFragment.setContext(this);
 			DialogFragment dialog = new NoteDialogFragment();
 			Bundle args = new Bundle();
-			args.putInt("id", wineId);
+			args.putInt("id", wine.getId());
 			dialog.setArguments(args);
 			dialog.show(getSupportFragmentManager(), "NoteDialogFragment");
 		}
@@ -368,7 +267,7 @@ public class WineInformationActivity extends ActionBarActivity implements
 
 	@Override
 	public void onNoteSelected(Note mNote, String key) {
-		ArrayList<Note> notes = (ArrayList<Note>) notesObj.getNotesByWineId(wineId);
+		ArrayList<Note> notes = (ArrayList<Note>) notesObj.getNotesByWineId(wine.getId());
 		
 		final NotesFragment.NoteAdapter noteAdapter = new NotesFragment.NoteAdapter(this,
 				android.R.layout.simple_list_item_2,

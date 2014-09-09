@@ -23,7 +23,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.jwray.jwraywines.activities.HomeActivity;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 import com.jwray.jwraywines.fragments.HomeFragment;
 
 /**
@@ -38,7 +38,7 @@ public class WineContent
 	private Context context;
 	
 	private ThreadControl control;
-	private WineManager obj;
+	private WineOpenHelper obj;
 	
 	//hashmap used to match a wines' name to itself 
 	private static Map<String, Wine> WINE_MAP= new HashMap<String,Wine>();
@@ -68,20 +68,11 @@ public class WineContent
 		
 		@Override
 		protected void onPreExecute() {
-			//progressDialog = ProgressDialog.show(context, "Please give me a moment", "Filling up cellar.", true, false);
-			//((Activity) context).requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);  
-			//((Activity) context).setProgressBarIndeterminateVisibility(true);
-			
-			/*progress.setMessage("Fetching all the wines");
-		    progress.setIndeterminate(true);
-		    progress.setCancelable(false);
-		    progress.show();*/
 			
 			HomeActivity.setRefreshActionButtonState(true);
-			obj = new WineManager(context);
+			obj = new WineOpenHelper(context);
 			obj.deleteAllWines();
 			WINES.clear();
-			Log.d("soze", "s"+obj.getAllWines().size());
 		}
 		
 		@Override

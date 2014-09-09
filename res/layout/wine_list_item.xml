@@ -4,38 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     xmlns:app="http://schemas.android.com/apk/res/com.jwray.jwraywines"
-    android:padding="5dp"
-    android:background="@color/DarkBackground">
+    android:padding="5dp">
 
-    <LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
-	    
-        <ImageView
-	        android:id="@+id/wineView"
-	        android:layout_width="50dp"
-	        android:layout_height="50dp"
-	        android:contentDescription="@string/image_content_description"
-	        android:padding="5dp"/>
-
-		<com.jwray.jwraywines.classes.WineTextView
-		    android:id="@+id/wineName"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    app:GlametrixBold="GlametrixBold.otf"
-		    android:layout_margin="5dp"
-		    android:textColor="@color/BaseColor"
-		    android:singleLine="false"
-		    android:textSize="18sp"/>
-	</LinearLayout>                                                  
-	    
 	<com.jwray.jwraywines.classes.WineTextView
-		    android:id="@+id/wineDescription"
+	    android:id="@+id/wineName"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    app:GlametrixBold="GlametrixBold.otf"
+	    android:layout_margin="5dp"
+	    android:textColor="@color/BaseColor"
+	    android:singleLine="true"
+	    android:textSize="18sp"/>
+		
+	<com.jwray.jwraywines.classes.WineTextView
+		    android:id="@+id/wineBrand"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    app:GlametrixLight="GlametrixLight.otf"
 		    android:textSize="16sp"
-		    android:layout_margin="5dp"
+		    android:layout_marginLeft="5dp"
+		    android:textColor="@color/White"
+		    android:text="" />
+	
+	<com.jwray.jwraywines.classes.WineTextView
+		    android:id="@+id/wineCountry"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    app:GlametrixLight="GlametrixLight.otf"
+		    android:textSize="16sp"
 		    android:layout_marginLeft="5dp"
 		    android:textColor="@color/White"
 		    android:text="" />

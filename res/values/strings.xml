@@ -71,4 +71,5 @@
 	<string name="menuitem_refresh">refresh</string>
 	<string name="play_sound">Play Pronunciation</string>
 	<string name="favorite_heading">Your Favorite Wines</string>
+	<string name="outOfMemoryHandlerMessage">ERROR:1212; The application has ran out of memory to load images; please report the error #;</string>
 </resources>

@@ -19,7 +19,7 @@ import android.widget.MultiAutoCompleteTextView;
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 
 /**
  * Fragment for the brand search page
@@ -30,17 +30,14 @@ public class BrandFragment extends Fragment implements ParcelKeys
 {
 	private Context mContext;
 	//private EditText wineSearch;
-	private WineManager obj;
-	
-	@SuppressWarnings("unused")
-	private MultiAutoCompleteTextView wineSearch;
+	private WineOpenHelper obj;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new WineManager(mContext);
+		obj = new WineOpenHelper(mContext);
 	}
 
 	
@@ -58,7 +55,7 @@ public class BrandFragment extends Fragment implements ParcelKeys
 		if(rootView!=null)
 		{
 			
-			ArrayList<String> brands = (ArrayList<String>) obj.getaAllBrands();
+			ArrayList<String> brands = (ArrayList<String>) obj.getAllBrands();
 			
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>
 					   (mContext,android.R.layout.simple_list_item_1,brands);

@@ -4,6 +4,9 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -16,7 +19,7 @@ public class Wine extends WineBase
 {
 	private MediaPlayer voicePronounciation;
 	private int id;
-	private Bitmap bitmap; //TODO delete 
+	private int columnId;
 	private Drawable picture;
 	private boolean favorite = false;
 	private String pronounciation;
@@ -42,25 +45,32 @@ public class Wine extends WineBase
 	private void setId(int id) {
 		this.id = id;
 	}
+	
+	private Bitmap drawableToBitmap (Drawable drawable) {
+	    if (drawable instanceof BitmapDrawable) {
+	        return ((BitmapDrawable)drawable).getBitmap();
+	    }
+	    
+	    Bitmap bitmap;
+	    try
+	    {
+		    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Config.ARGB_8888);
+		    Canvas canvas = new Canvas(bitmap); 
+		    drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		    drawable.draw(canvas);
+	    }
+	    catch(java.lang.NullPointerException e)
+	    {
+	    	return null;
+	    }
 
-	/**
-	 * @return the bitmap
-	 */
-	public Bitmap getBitmap() {
-		return bitmap;
-	}
-
-	/**
-	 * @param bitmap the bitmap to set
-	 */
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+	    return bitmap;
 	}
 
 	/**
 	 * @return the picture
 	 */
-	public Drawable getPicture(Context context) {
+	public Bitmap getPicture(Context context) {
 		
 		String mDrawableName = "id"+getId();
     	int resID = context.getResources().getIdentifier(mDrawableName , "drawable", context.getPackageName());
@@ -76,7 +86,12 @@ public class Wine extends WineBase
     		Log.e("wine name",getName());
     		Log.e("id", resID+"");
     	}
-		return picture;
+    	catch(OutOfMemoryError e)
+    	{
+    		Log.e("application out of memory", "Consider using disk caching");
+    		throw new OutOfMemoryError("Out of memory on image loading");
+    	}
+		return drawableToBitmap(picture);
 		
 	}
 	
@@ -179,6 +194,20 @@ public class Wine extends WineBase
     		return null;
     	}
 		return voicePronounciation;
+	}
+
+	/**
+	 * @return the columnId
+	 */
+	public int getColumnId() {
+		return columnId;
+	}
+
+	/**
+	 * @param columnId the columnId to set
+	 */
+	public void setColumnId(int columnId) {
+		this.columnId = columnId;
 	}
 
 }

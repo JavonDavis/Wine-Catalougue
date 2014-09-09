@@ -1,12 +1,14 @@
 package com.jwray.jwraywines.fragments;
 
 import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,10 +18,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
+
 import com.jwray.jwraywines.R;
 import com.jwray.jwraywines.activities.WineListActivity;
 import com.jwray.jwraywines.classes.ParcelKeys;
-import com.jwray.jwraywines.classes.databases.WineManager;
+import com.jwray.jwraywines.classes.databases.WineOpenHelper;
 
 /**
  * Fragment for the Country search page
@@ -31,17 +34,15 @@ public class CountryFragment extends Fragment implements ParcelKeys
 	private Context mContext;
 	
 	//TODO check countries, i.e california
-	private WineManager obj;
+	private WineOpenHelper obj;
 	
-	@SuppressWarnings("unused")
-	private MultiAutoCompleteTextView wineSearch;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		mContext = getActivity();
-		obj = new WineManager(mContext);
+		obj = new WineOpenHelper(mContext);
 	}
 
 	
@@ -59,7 +60,9 @@ public class CountryFragment extends Fragment implements ParcelKeys
 		if(rootView!=null)
 		{
 			
-			ArrayList<String> countries = (ArrayList<String>) obj.getaAllCountries();
+			ArrayList<String> countries = (ArrayList<String>) obj.getAllCountries();
+			for(String country : countries)
+				Log.i("country", country);
 			
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>
 					   (mContext,android.R.layout.simple_list_item_1,countries);

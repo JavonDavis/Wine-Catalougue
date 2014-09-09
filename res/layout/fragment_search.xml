@@ -3,18 +3,26 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical"
-       android:background="@drawable/background" >
+       android:background="@drawable/background" >   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/DarkBackground" >
         
-    <MultiAutoCompleteTextView
-      android:id="@+id/tImpl"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:inputType="textCapSentences"
-      android:padding="20dp"
-      android:drawableRight="@drawable/arrow_right"
-      android:background="@drawable/rounded_edit"
-      android:ems="10"
-      android:textColor="@color/Black" />
+        <MultiAutoCompleteTextView
+	      android:id="@+id/tImpl"
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_margin="10dp"
+	      android:inputType="textCapSentences"
+	      android:padding="20dp"
+	      android:drawableRight="@drawable/arrow_right"
+	      android:ems="10"
+	      android:textColorHint="@color/WhiteSmoke"
+	      android:textColor="@color/White" />
+        
+    </LinearLayout>
         
 </LinearLayout>
