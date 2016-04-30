@@ -44,5 +44,4 @@ When given the option choose settings and then check the unknown sources box and
 
 ### Contact ###
 
-@JDavis14 
-@alexander_nich
+@JDavis14
