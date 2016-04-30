@@ -1,4 +1,5 @@
 # README #
+Android Wine application
 
 ### Contribution guidelines ###
 
@@ -42,6 +43,3 @@ Any bugs noticed please place in the issue tracker which can be accessed in the 
 Click on the apk in the source to download it and then open the apk from your device to install at this point more than likely you will be prompted if you are sure you want to install. 
 When given the option choose settings and then check the unknown sources box and you should be good to go.
 
-### Contact ###
-
-@JDavis14
